@@ -42,7 +42,7 @@ $router->map('POST', '/cart/add', 'CartControlleur::add', 'ajouter_au_panier');
 $router->map('POST', '/cart/remove/[i:id]', 'CartControlleur::remove', 'supprimer_du_panier');
 
 // Routes d'authentification
-$router->map('GET', '/login', 'AuthControlleur::loginForm', 'connexion');
+$router->map('GET|POST', '/login', 'AuthControlleur::loginForm', 'connexion');
 $router->map('POST', '/login', 'AuthControlleur::login', 'traitement_connexion');
 $router->map('GET', '/register', 'AuthControlleur::registerForm', 'inscription');
 $router->map('POST', '/register', 'AuthControlleur::register', 'traitement_inscription');
@@ -93,8 +93,10 @@ if ($match) {
         $controlleur = "App\\Controlleur\\" . $controlleur;
         if (class_exists($controlleur) && method_exists($controlleur, $method)) {
             var_dump("Classe trouvée : $controlleur, Méthode trouvée : $method");
+            
             $controlleurInstance = new $controlleur();
             call_user_func_array([$controlleurInstance, $method], $match['params']);
+           
         } else {
             http_response_code(404);
             var_dump("Classe ou méthode non trouvée. Classe : $controlleur, Méthode : $method");

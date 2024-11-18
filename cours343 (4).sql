@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `adresse`
 --
-
+CREATE DATABASE cours343;
 CREATE TABLE `adresse` (
   `id_adresse` int(11) NOT NULL,
   `rue` varchar(100) NOT NULL,

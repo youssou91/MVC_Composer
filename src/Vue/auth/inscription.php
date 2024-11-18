@@ -1,12 +1,9 @@
 <?php
 // Inclure la configuration et la connexion à la base de données
-require_once '../../config.php';
-require_once '../../Controlleur/UserControlleur.php';
-
+use app\Controlleur\UserControlleur;
 // Créez une instance de connexion à la base de données
 $dbConnection = getConnection(); // Appel de la fonction getConnection() pour obtenir la connexion PDO
 // Créez une instance du contrôleur avec la connexion à la base de données
-$userController = new UserController($dbConnection);
 // Variable pour stocker les messages
 $message = '';
 $messageType = '';

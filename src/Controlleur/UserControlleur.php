@@ -1,8 +1,10 @@
 <?php
-namespace App\Controlleur;
 
+namespace app\Controlleur;
+use App\Modele\UserModel;
+use Exception;
 // require_once './Model/UserModel.php';
-require_once __DIR__ . '/../Model/UserModel.php';
+// require_once __DIR__ . '/../Model/UserModel.php';
 
 
 class UserControlleur {

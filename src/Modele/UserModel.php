@@ -1,6 +1,8 @@
 <?php
 namespace App\Modele;
-
+use PDO;
+use Exception;
+use DateTime;
 class UserModel {
     private $conn;
 
