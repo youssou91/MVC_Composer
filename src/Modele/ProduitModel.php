@@ -1,17 +1,14 @@
 <?php
-// require_once '../config/database.php';
 namespace App\Modele;
-// require_once '../../config/db.php';
 require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../Classes/Produit.php';
 
-include_once '../Classes/Produit.php';
 class ProduitModel {
     private $conn;
 
     public function __construct($conn) {
         $this->conn = $conn;
     }
-
    // Méthode pour récupérer tous les produits
     public function getAllProduits() {
         $sql = "SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit";

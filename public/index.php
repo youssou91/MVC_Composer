@@ -1,5 +1,6 @@
 <?php
-echo "Fichier db.php inclus !<br>";
+// echo "Fichier db.php inclus !<br>";
+// echo phpinfo();
 require_once '../config/db.php';
 require '../vendor/autoload.php';
 
@@ -23,7 +24,7 @@ $router = new AltoRouter();
 try {
     // Appel à la fonction getConnection pour établir la connexion
     $pdo = getConnection();
-    echo "Connexion réussie!";
+    // echo "Connexion réussie!";
 } catch (\PDOException $e) {
     echo "Erreur de connexion : " . $e->getMessage();
 }
@@ -58,7 +59,6 @@ $router->map('POST', '/admin/produits/delete/[i:id]', 'AdminProduitControlleur::
 $router->map('GET', '/promotions', 'PromotionControlleur::index', 'promotions');
 
 // Recherche de la route correspondante
-// Route matching
 $match = $router->match();
 // Si une route correspond, on l'exécute
 if ($match) {
@@ -68,38 +68,15 @@ if ($match) {
     list($controlleur, $method) = explode('::', $match['target']);
     // Vérification de l'existence du fichier du contrôleur
     $controlleurClass = "../src/controlleur/{$controlleur}.php"; 
-    // var_dump("Vérification de l'existence du fichier du contrôleur : ".$controlleurClass);
     if (file_exists($controlleurClass)) {
         require_once $controlleurClass;
-        // Vérification de la classe et de la méthode
-        // if (class_exists($controlleur) && method_exists($controlleur, $method)) {
-        //     $controlleurInstance = new $controlleur();
-        //     call_user_func_array([$controlleurInstance, $method], $match['params']);
-        // } else {
-        //     // Si la classe ou la méthode n'existe pas
-        //     http_response_code(404);
-        //     var_dump("Vérification de l'existence du fichier 1".$controlleurClass);
-        //     require '../src/vue/errors/404.php';
-        // }
-        // if (class_exists($controlleur) && method_exists($controlleur, $method)) {
-        //     var_dump("Classe trouvée : $controlleur, Méthode trouvée : $method");
-        //     $controlleurInstance = new $controlleur();
-        //     call_user_func_array([$controlleurInstance, $method], $match['params']);
-        // } else {
-        //     http_response_code(404);
-        //     var_dump("Classe ou méthode non trouvée. Classe : $controlleur, Méthode : $method");
-        //     require '../src/vue/errors/404.php';
-        // }
+        
         $controlleur = "App\\Controlleur\\" . $controlleur;
-        if (class_exists($controlleur) && method_exists($controlleur, $method)) {
-            var_dump("Classe trouvée : $controlleur, Méthode trouvée : $method");
-            
+        if (class_exists($controlleur) && method_exists($controlleur, $method)) {            
             $controlleurInstance = new $controlleur();
             call_user_func_array([$controlleurInstance, $method], $match['params']);
-           
         } else {
             http_response_code(404);
-            var_dump("Classe ou méthode non trouvée. Classe : $controlleur, Méthode : $method");
             if (class_exists($controlleur)) {
                 var_dump("Méthodes disponibles : ", get_class_methods($controlleur));
             }
@@ -110,13 +87,9 @@ if ($match) {
         var_dump("Vérification de l'existence du fichier 2".$controlleurClass);
         require '../src/vue/errors/404.php';
     }
-    
-    // Chargement du footer
-    require '../static/footer.php';
+        require '../static/footer.php';
 } else {
-    // Si aucune route ne correspond
     http_response_code(404);
-    var_dump("Vérification de l'existence du fichier 3".$controlleurClass);
     require '../src/vue/errors/404.php';
 }
 
