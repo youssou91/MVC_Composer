@@ -1,15 +1,22 @@
 <?php
 namespace App\Modele;
+use App\Classes\Produit;  // Assurez-vous que ce chemin est correct
+use \PDO;
+
 require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../Classes/Produit.php';
+// require_once __DIR__ . '/../Classes/Produit.php';
 
 class ProduitModel {
     private $conn;
 
     public function __construct($conn) {
+        if (!$conn instanceof \PDO) {
+            throw new \Exception("La connexion doit être une instance de PDO");
+        }
         $this->conn = $conn;
     }
-   // Méthode pour récupérer tous les produits
+
+    // Méthode pour récupérer tous les produits
     public function getAllProduits() {
         $sql = "SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit";
         try {
@@ -17,6 +24,7 @@ class ProduitModel {
             $query->execute();
             $produits = [];
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
                 $produits[] = new Produit(
                     $row['nom'],
                     $row['prix_unitaire'],
@@ -24,7 +32,7 @@ class ProduitModel {
                     $row['courte_description'],
                     $row['quantite'],
                     $row['id_categorie'],
-                    explode(", ", $row['couleurs_prod']),
+                    $couleurs, // Utilisation de la variable modifiée
                     $row['model']
                 );
             }
@@ -50,19 +58,17 @@ class ProduitModel {
         }
     }
 
+    // Méthode d'ajout de produit
     public function ajoutProduit($produit, $data) {
         try {
-            // Préparation de la requête d'insertion
             $sql = "INSERT INTO produits (
                     nom, prix_unitaire, description, courte_description, quantite,
                     id_categorie, model, couleurs_prod) 
                     VALUES (:nom, :prix_unitaire, :description, :courte_description, :quantite, :id_categorie, :model, :couleurs_prod)";
             $query = $this->conn->prepare($sql);
 
-            // Validation des couleurs
             $couleurs_prod = isset($produit['couleurs_prod']) ? implode(", ", $produit['couleurs_prod']) : '';
 
-            // Exécution de la requête pour insérer le produit
             $resultat = $query->execute([
                 ':nom' => $produit['nom'],
                 ':prix_unitaire' => $produit['prix_unitaire'],
@@ -73,6 +79,7 @@ class ProduitModel {
                 ':model' => $produit['model'],
                 ':couleurs_prod' => $couleurs_prod,
             ]);
+            
             if ($resultat) {
                 $id_produit = $this->conn->lastInsertId();
                 echo "Produit ajouté avec succès, ID produit : $id_produit";
@@ -126,44 +133,33 @@ class ProduitModel {
         }
     }
     
+    // Méthode d'ajout de l'image dans la base de données
     public function ajoutImage($imageData) {
         try {
-            // Préparez la requête SQL pour insérer l'image
             $sql = "INSERT INTO images (chemin_image, nom_image, id_produit) 
                     VALUES (:chemin_image, :nom_image, :id_produit)";
             
             // Préparer la requête avec PDO
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
     
-            // Utilisation de bindValue pour lier les valeurs directement
+            // Liaison des valeurs
             $stmt->bindValue(':chemin_image', $imageData['chemin_image'], PDO::PARAM_STR);
             $stmt->bindValue(':nom_image', $imageData['nom_image'], PDO::PARAM_STR);
             $stmt->bindValue(':id_produit', $imageData['id_produit'], PDO::PARAM_INT);
             
-            // Exécuter la requête
+            // Exécution de la requête
             if ($stmt->execute()) {
                 return true; // Si l'insertion réussit
             } else {
-                // Si l'exécution échoue, afficher l'erreur
-                throw new Exception("Erreur lors de l'insertion de l'image dans la base de données.");
+                throw new \Exception("Erreur lors de l'insertion de l'image dans la base de données.");
             }
-        } catch (PDOException $e) {
-            // Si une exception PDO est lancée, l'attraper ici
+        } catch (\PDOException $e) {
             echo "Erreur de base de données : " . $e->getMessage();
             return false;
-        } catch (Exception $e) {
-            // Attraper d'autres exceptions générées par la logique de la fonction
+        } catch (\Exception $e) {
             echo $e->getMessage();
             return false;
         }
-    }
-    
-    
-    
-    
-
-    
+    } 
 }
-
-
 ?>

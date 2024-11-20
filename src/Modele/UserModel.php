@@ -1,13 +1,14 @@
 <?php
 namespace App\Modele;
+
 use PDO;
 use Exception;
 use DateTime;
 class UserModel {
-    private $conn;
+    private $db; // Déclaration de la propriété pour la connexion à la base de données
 
-    public function __construct(PDO $conn) {
-        $this->conn = $conn;
+    public function __construct($db) {
+        $this->db = $db; // Initialisation de la propriété
     }
 
     // Fonction pour ajouter un utilisateur à la base de données
@@ -198,7 +199,7 @@ class UserModel {
                 LEFT JOIN utilisateur_adresse ua ON u.id_utilisateur = ua.id_utilisateur
                 LEFT JOIN adresse a ON ua.id_adresse = a.id_adresse
                 WHERE u.id_utilisateur = :id_utilisateur";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute([':id_utilisateur' => $id_utilisateur]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -216,14 +217,29 @@ class UserModel {
 
     // Vérifier les informations d'identification de l'utilisateur
     public function checkUser($email, $password) {
-        $user = $this->getElementByEmailForLogin($email); // Récupérer l'utilisateur par email
+        $query = "
+            SELECT u.id_utilisateur, u.nom_utilisateur, r.description AS role, u.statut, u.mot_de_pass
+            FROM utilisateur u
+            JOIN role_utilisateur ru ON u.id_utilisateur = ru.id_utilisateur
+            JOIN role r ON ru.id_role = r.id_role
+            WHERE u.couriel = :email
+        ";
+        $stmt = $this->db->prepare($query); // Utilisation de $this->db
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['mot_de_pass'])) {
-            return $user; // L'utilisateur existe et le mot de passe est correct
-        } else {
-            return null; // L'utilisateur ou le mot de passe est incorrect
+            // Supprimer le mot de passe du tableau retourné pour des raisons de sécurité
+            unset($user['mot_de_pass']);
+            return $user; // Utilisateur trouvé et mot de passe vérifié
         }
+
+        return false; // Utilisateur non trouvé ou mot de passe incorrect
     }
+
+    
+    
 
     // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts
     public function getUserCommandWithStatus($userId) {
@@ -246,6 +262,76 @@ class UserModel {
     }
 
 
+    //PROFILE 
+    // Fonction pour récupérer les informations de l'utilisateur
+    // public function getUserInfo($userId) {
+    //     $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = :userId");
+    //     $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
+
+    // Fonction pour mettre à jour les informations personnelles de l'utilisateur
+    public function updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays) {
+        $stmt = $this->db->prepare("
+            UPDATE utilisateurs 
+            SET nom_utilisateur = :nom, prenom = :prenom, couriel = :email, telephone = :telephone, 
+                numero = :adresse, ville = :ville, code_postal = :codePostal, province = :province, pays = :pays 
+            WHERE id_utilisateur = :userId
+        ");
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':telephone', $telephone, PDO::PARAM_STR);
+        $stmt->bindParam(':adresse', $adresse, PDO::PARAM_STR);
+        $stmt->bindParam(':ville', $ville, PDO::PARAM_STR);
+        $stmt->bindParam(':codePostal', $codePostal, PDO::PARAM_STR);
+        $stmt->bindParam(':province', $province, PDO::PARAM_STR);
+        $stmt->bindParam(':pays', $pays, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    // Fonction pour mettre à jour le mot de passe de l'utilisateur
+    public function updatePassword($userId, $ancienMotDePasse, $nouveauMotDePasse) {
+        // Vérifier si l'ancien mot de passe est correct
+        $stmt = $this->db->prepare("SELECT mot_de_passe FROM utilisateurs WHERE id_utilisateur = :userId");
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($ancienMotDePasse, $user['mot_de_passe'])) {
+            // L'ancien mot de passe est correct, on peut mettre à jour avec le nouveau
+            $nouveauMotDePasseHash = password_hash($nouveauMotDePasse, PASSWORD_DEFAULT);
+
+            $stmt = $this->db->prepare("UPDATE utilisateurs SET mot_de_passe = :nouveauMotDePasse WHERE id_utilisateur = :userId");
+            $stmt->bindParam(':nouveauMotDePasse', $nouveauMotDePasseHash, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } else {
+            return false;  // L'ancien mot de passe est incorrect
+        }
+    }
+    //getUserOrders
+    // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts
+    public function getUserOrders($userId) {
+        // Préparer la requête SQL
+        $sql = "SELECT * FROM commande WHERE id_utilisateur = :userId";
+        
+        // Préparer la déclaration PDO
+        $stmt = $this->db->prepare($sql);
+        
+        // Lier les paramètres
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        
+        // Exécuter la requête
+        $stmt->execute();
+        
+        // Récupérer les résultats
+        $commande = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $commande;
+    }
 }
 
 ?>

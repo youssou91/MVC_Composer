@@ -19,8 +19,6 @@ use App\Controlleur\PromotionControlleur;
 // Initialisation du routeur
 $router = new AltoRouter();
 
-// require_once '../config/db.php'; // Assurez-vous que le chemin est correct
-
 try {
     // Appel à la fonction getConnection pour établir la connexion
     $pdo = getConnection();
@@ -54,11 +52,24 @@ $router->map('GET', '/admin', 'AdminControlleur::dashboard', 'admin_dashboard');
 $router->map('GET', '/admin/produits', 'AdminProduitControlleur::index', 'admin_gestion_produits');
 $router->map('POST', '/admin/produits/add', 'AdminProduitControlleur::add', 'admin_ajouter_produit');
 $router->map('POST', '/admin/produits/delete/[i:id]', 'AdminProduitControlleur::delete', 'admin_supprimer_produit');
-
+//profile 
+    $router->map('GET', '/mon_profile', 'ProfileControlleur::index', 'profile');
+    $router->map('GET', '/profile/edit', 'ProfileControlleur::editProfile', 'edit_profile');
+    $router->map('POST', '/profile/edit', 'ProfileControlleur::updateProfile', 'update_profile');
+    $router->map('GET', '/profile/orders', 'ProfileControlleur::orders', 'orders');
+    $router->map('GET', '/profile/orders/[i:id]', 'ProfileControlleur::orderDetail', 'order_detail');
 // Nouvelle route pour les promotions
 $router->map('GET', '/promotions', 'PromotionControlleur::index', 'promotions');
 
+// Routes pour le panier
+$router->map('GET', '/cart', 'CartControlleur::index', 'view_cart');
+$router->map('POST', '/cart/add/[i:id]', 'CartControlleur::add', 'add_to_cart');
+$router->map('POST', '/cart/remove/[i:id]', 'CartControlleur::remove', 'remove_from_cart');
+$router->map('POST', '/cart/clear', 'CartControlleur::clear', 'clear_cart');
+
+
 // Recherche de la route correspondante
+// Route matching
 $match = $router->match();
 // Si une route correspond, on l'exécute
 if ($match) {

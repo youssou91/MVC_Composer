@@ -1,7 +1,53 @@
 <?php
-include '../Head.php';
-include '../../Controlleur/UserControlleur.php'; 
-include '../../config.php'; 
+use App\Controlleur\ProfileControlleur;
+
+// include __DIR__ . '/../Controlleur/ProfileControlleur.php';  // Chemin absolu pour le contrôleur User
+
+// Connexion à la base de données
+$dbConnection = getConnection();  // Implémentez votre méthode pour obtenir la connexion à la DB
+
+// Créer une instance du ProfileControlleur
+$profileControlleur = new ProfileControlleur($dbConnection);
+
+// Récupérer l'ID de l'utilisateur connecté
+$userId = $_SESSION['id_utilisateur'];
+
+// Récupérer les informations de l'utilisateur
+$userInfo = $profileControlleur->getUserInfo($userId);
+
+// Traitement du formulaire de mise à jour du profil
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
+    $nom = $_POST['nom_utilisateur'];
+    $prenom = $_POST['prenom_utilisateur'];
+    $email = $_POST['email_utilisateur'];
+    $telephone = $_POST['telephone_utilisateur'];
+    $adresse = $_POST['adresse_utilisateur'];
+    $ville = $_POST['ville_utilisateur'];
+    $codePostal = $_POST['code_postal_utilisateur'];
+    $province = $_POST['province_utilisateur'];
+    $pays = $_POST['pays_utilisateur'];
+
+    $profileControlleur->updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays);
+    header('Location: profile.php');  // Rediriger après la mise à jour
+    exit;
+}
+
+// Traitement du formulaire de mise à jour du mot de passe
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
+    $ancienMotDePasse = $_POST['ancien_mot_de_passe'];
+    $nouveauMotDePasse = $_POST['nouveau_mot_de_passe'];
+    $confirmationMotDePasse = $_POST['confirmation_mot_de_passe'];
+
+    if ($nouveauMotDePasse === $confirmationMotDePasse) {
+        if ($profileControlleur->updatePassword($userId, $ancienMotDePasse, $nouveauMotDePasse)) {
+            echo "Mot de passe mis à jour avec succès!";
+        } else {
+            echo "L'ancien mot de passe est incorrect.";
+        }
+    } else {
+        echo "Les nouveaux mots de passe ne correspondent pas.";
+    }
+}
 
 if (!isset($_SESSION['id_utilisateur'])) {
     echo '<script>window.location.href = "connexion.php";</script>';
@@ -9,7 +55,7 @@ if (!isset($_SESSION['id_utilisateur'])) {
 }
 
 $dbConnection = getConnection();
-$userController = new UserController($dbConnection);
+$userController = new ProfileControlleur($dbConnection);
 $userId = $_SESSION['id_utilisateur'];
 $userInfo = $userController->getUserInfo($userId);
 $userOrders = $userController->getUserOrders($userId);
@@ -70,7 +116,7 @@ if (isset($_POST['action'])) {
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md lg:w-2/3">
             <h3 class="text-xl text-center font-semibold mb-4">Mes Commandes</h3>
-            <?php if (count($userOrders) > 0): ?>
+            <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-center border border-gray-200">
                         <thead>

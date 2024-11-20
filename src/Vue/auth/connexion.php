@@ -1,15 +1,17 @@
 <?php
-session_start();
+// Démarrer la session pour accéder à $_SESSION
+// session_start();
+
 // Inclure l'autoloader de Composer pour la gestion automatique des classes
-require_once __DIR__ . '/../../../vendor/autoload.php'; // Assurez-vous que ce chemin est correct
+use App\Modele\UserModel;
 
-use App\Model\UserModel; // Utilisation du bon espace de noms
+// Inclure le fichier de connexion ou utiliser votre méthode pour obtenir la connexion PDO
+require_once __DIR__ . '/../../../config/db.php'; // Adaptez le chemin
+$db = getConnection(); // Fonction qui retourne l'objet PDO
 
-// Obtenir la connexion à la base de données
-$db = getConnection();
+// Instancier le modèle en passant $db
+$userModel = new \App\Modele\UserModel($db);
 
-// Instancier UserModel avec la connexion à la base de données
-// $userModel = new UserModel($db);
 $errorMessage = ''; // Initialisation de la variable pour le message d'erreur
 
 if (isset($_POST['btn-connexion'])) {
@@ -26,7 +28,8 @@ if (isset($_POST['btn-connexion'])) {
             $_SESSION['role'] = $user['role'];
             $_SESSION['loggedin'] = true;
 
-            header("Location: ../../index.php");
+            // Redirection après connexion réussie
+            header("Location: " . $router->generate('accueil'));
             exit();
         } else {
             // Message si le compte est désactivé
@@ -38,6 +41,7 @@ if (isset($_POST['btn-connexion'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -76,4 +80,3 @@ if (isset($_POST['btn-connexion'])) {
     </div>
 </body>
 </html>
-

@@ -3,17 +3,15 @@
 namespace app\Controlleur;
 use App\Modele\UserModel;
 use Exception;
-// require_once './Model/UserModel.php';
-// require_once __DIR__ . '/../Model/UserModel.php';
-
 
 class UserControlleur {
     private $userModel;
 
-    // Constructor to initialize the UserModel
+    // Puis instancier le contrôleur avec cette connexion
     public function __construct($dbConnection) {
         $this->userModel = new UserModel($dbConnection);
     }
+    
 
     // Méthode pour enregistrer un nouvel utilisateur
     public function registerUser($user) {
@@ -67,7 +65,7 @@ class UserControlleur {
         $userInfo = $this->userModel->getUserInfo($userId);
 
         // Passer les informations de l'utilisateur à la vue
-        include '../Vue/Users/Profile.php';
+        include '../Vue/Profile.php';
     }
 
     // Method to authenticate user (login)
