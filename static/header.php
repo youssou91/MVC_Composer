@@ -36,7 +36,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="<?= isset($router) ? $router->generate('admin_dashboard') : '#'; ?>" class="text-gray-700 hover:text-blue-600">Dashboard Admin</a>
                     <a href="<?= isset($router) ? $router->generate('admin_dashboard') : '#'; ?>" class="text-gray-700 hover:text-blue-600"> Produits </a>
                     <a href="<?= isset($router) ? $router->generate('admin_dashboard') : '#'; ?>" class="text-gray-700 hover:text-blue-600"> Commandes </a>
-                    <a href="<?= isset($router) ? $router->generate('admin_dashboard') : '#'; ?>" class="text-gray-700 hover:text-blue-600"> Promotions </a>
+                    <a href="<?= isset($router) ? $router->generate('promotions') : '#'; ?>" class="text-gray-700 hover:text-blue-600"> Promotions </a>
                 <?php endif; ?>
             </nav>
 

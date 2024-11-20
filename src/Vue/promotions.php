@@ -1,13 +1,123 @@
+<?php
+// Récupération des promotions avec PDO
+$dsn = "mysql:host=localhost;dbname=cours343";
+$username = "root";
+$password = "";
+
+try {
+    $pdo = new PDO($dsn, $username, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ]);
+
+    // Récupérer les promotions
+    $stmt = $pdo->query("
+        SELECT pp.id_promotion, p.nom AS nom_produit, pr.valeur, pr.date_debut, pr.date_fin 
+        FROM produitpromotion pp 
+        JOIN produits p ON pp.id_produit = p.id_produit
+        JOIN promotions pr ON pp.id_promotion = pr.id_promotion
+    ");
+    $promotions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupérer les produits pour le modal
+    $stmt = $pdo->query("SELECT id_produit, nom AS nom_produit FROM produits");
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+    $promotions = [];
+    $products = [];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promotions</title>
+    <title>Gestion des promotions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Nos Promotions Actuelles</h1>
-    <p>Découvrez nos offres spéciales et réductions !</p>
-    <!-- Ici, tu peux ajouter une liste de promotions dynamiques ou des informations spécifiques -->
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold text-center mb-6">Gestion des promotions</h2>
+        <button 
+            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+            onclick="document.getElementById('addPromotionModal').classList.remove('hidden')">
+            Ajouter une promotion
+        </button>
+
+        <div id="addPromotionModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+            <div class="bg-white p-6 rounded-lg w-96 shadow-lg">
+                <h3 class="text-lg font-semibold mb-4">Ajouter une promotion</h3>
+                <form action="add_promotion.php" method="POST">
+                    <div class="mb-4">
+                        <label for="product" class="block text-sm font-medium text-gray-700">Produit</label>
+                        <select name="product_id" id="product" class="w-full border-gray-300 rounded mt-1">
+                            <?php foreach ($products as $product): ?>
+                                <option value="<?= htmlspecialchars($product['id_produit']) ?>">
+                                    <?= htmlspecialchars($product['nom_produit']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="reduction" class="block text-sm font-medium text-gray-700">Réduction (%)</label>
+                        <input type="number" name="reduction" id="reduction" class="w-full border-gray-300 rounded mt-1" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="start_date" class="block text-sm font-medium text-gray-700">Date de début</label>
+                        <input type="date" name="start_date" id="start_date" class="w-full border-gray-300 rounded mt-1" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="end_date" class="block text-sm font-medium text-gray-700">Date de fin</label>
+                        <input type="date" name="end_date" id="end_date" class="w-full border-gray-300 rounded mt-1" required>
+                    </div>
+                    <div class="flex justify-between">
+                        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Ajouter</button>
+                        <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600" onclick="document.getElementById('addPromotionModal').classList.add('hidden')">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+            <table class="min-w-full border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-700">
+                        <th class="py-2 px-4 border">Produit</th>
+                        <th class="py-2 px-4 border">Réduction</th>
+                        <th class="py-2 px-4 border">Date de début</th>
+                        <th class="py-2 px-4 border">Date de fin</th>
+                        <th class="py-2 px-4 border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($promotions)): ?>
+                        <?php foreach ($promotions as $promotion): ?>
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="py-2 px-4"><?= htmlspecialchars($promotion['nom_produit']) ?></td>
+                                <td class="py-2 px-4"><?= htmlspecialchars($promotion['valeur']) ?>%</td>
+                                <td class="py-2 px-4"><?= htmlspecialchars($promotion['date_debut']) ?></td>
+                                <td class="py-2 px-4"><?= htmlspecialchars($promotion['date_fin']) ?></td>
+                                <td class="py-2 px-4 space-x-2">
+                                    <a href='admin_edit_promo.php?id=<?= htmlspecialchars($promotion['id_promotion']) ?>' 
+                                       class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 transition">
+                                        Modifier
+                                    </a>
+                                    <a href='admin_delete_promo.php?id=<?= htmlspecialchars($promotion['id_promotion']) ?>' 
+                                       class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition">
+                                        Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="text-center py-4">Aucune promotion disponible.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
