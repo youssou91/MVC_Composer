@@ -1,36 +1,93 @@
 <?php
 namespace App\Controlleur;
 
-class CartControlleur
-{
-    public function add($params)
+use App\Modele\ProduitModel;
+
+class CartControlleur {
+    // Afficher le panier
+    public static function index() {
+        $panier = $_SESSION['panier'] ?? [];
+        require 'vue/home.php'; // Afficher une vue spécifique pour le panier
+    }
+
+    // Ajouter un produit au panier
+    public function ajouter()
     {
         session_start();
-        $idProduit = $params['id']; // Récupération de l'ID du produit
-        $nomProduit = $_POST['nom'];
-        $prixUnitaire = (float) $_POST['prix_unitaire'];
-        $quantite = (int) $_POST['quantite'];
 
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
+        $productId = $_POST['id'] ?? null;
+        $price = $_POST['price'] ?? null;
 
-        $itemIndex = array_search($idProduit, array_column($_SESSION['cart'], 'id_produit'));
+        if ($productId && $price) {
+            if (!isset($_SESSION['panier'])) {
+                $_SESSION['panier'] = [];
+            }
 
-        if ($itemIndex !== false) {
-            // Mise à jour de la quantité
-            $_SESSION['cart'][$itemIndex]['quantite'] += $quantite;
+            // Ajouter ou mettre à jour le produit dans le panier
+            if (isset($_SESSION['panier'][$productId])) {
+                $_SESSION['panier'][$productId]['quantity'] += 1;
+            } else {
+                $_SESSION['panier'][$productId] = [
+                    'id' => $productId,
+                    'price' => $price,
+                    'quantity' => 1,
+                ];
+            }
+
+            $total = 0;
+            $cartHtml = '';
+            foreach ($_SESSION['panier'] as $item) {
+                $cartHtml .= '<li>Produit ' . $item['id'] . ' - ' . $item['quantity'] . ' x ' . $item['price'] . ' €</li>';
+                $total += $item['price'] * $item['quantity'];
+            }
+
+            echo json_encode([
+                'success' => true,
+                'cartHtml' => $cartHtml,
+                'total' => $total,
+            ]);
         } else {
-            // Ajout d'un nouvel article
-            $_SESSION['cart'][] = [
-                'id_produit' => $idProduit,
-                'nom' => $nomProduit,
-                'prix_unitaire' => $prixUnitaire,
-                'quantite' => $quantite,
-            ];
+            echo json_encode([
+                'success' => false,
+                'message' => 'Données invalides',
+            ]);
+        }
+    }
+
+    // Mettre à jour la quantité d'un produit dans le panier
+    public function mettreAJour() {
+        if (isset($_POST['idProduit'], $_POST['quantite'])) {
+            $idProduit = $_POST['idProduit'];
+            $quantite = $_POST['quantite'];
+
+            if ($quantite > 0) {
+                $_SESSION['cart'][$idProduit]['quantite'] = $quantite;
+            }
         }
 
-        header('Location: /cart'); // Redirection vers la page du panier
+        // Rediriger vers la page du panier
+        header('Location: ' . $router->generate('panier'));
+        exit;
+    }
+
+    // Supprimer un produit du panier
+    public function supprimer() {
+        if (isset($_POST['idProduit'])) {
+            $idProduit = $_POST['idProduit'];
+            unset($_SESSION['cart'][$idProduit]);
+        }
+
+        // Rediriger vers la page du panier
+        header('Location: ' . $router->generate('panier'));
+        exit;
+    }
+
+    // Vider le panier
+    public function vider() {
+        unset($_SESSION['cart']);
+
+        // Rediriger vers la page du panier
+        header('Location: ' . $router->generate('panier'));
         exit;
     }
 }

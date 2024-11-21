@@ -1,8 +1,6 @@
 <?php
 use App\Controlleur\ProfileControlleur;
 
-// include __DIR__ . '/../Controlleur/ProfileControlleur.php';  // Chemin absolu pour le contrôleur User
-
 // Connexion à la base de données
 $dbConnection = getConnection();  // Implémentez votre méthode pour obtenir la connexion à la DB
 

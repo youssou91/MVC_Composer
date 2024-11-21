@@ -1,7 +1,7 @@
 <?php
 namespace App\Modele;
 
-include '../Classes/Categorie.php';
+use App\Classes\Categorie;
 
 class CategorieModel {
     private $conn;

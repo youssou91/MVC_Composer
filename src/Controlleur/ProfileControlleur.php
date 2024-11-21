@@ -10,9 +10,7 @@ class ProfileControlleur {
     }
 
     public function index() {
-        // $produitModel = new ProduitModel($this->db);
-        // $products = $produitModel->getAllProduits(); 
-        require_once '../src/vue/Profile.php';
+        require_once __DIR__ . '/../Vue/Profile.php';
     }
     
     public function updateProfile($data) {

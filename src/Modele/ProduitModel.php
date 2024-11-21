@@ -1,52 +1,82 @@
 <?php
 namespace App\Modele;
-use App\Classes\Produit;  // Assurez-vous que ce chemin est correct
+use App\Classes\Produit; 
 use \PDO;
 
-require_once __DIR__ . '/../../config/db.php';
-// require_once __DIR__ . '/../Classes/Produit.php';
 
 class ProduitModel {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn) {
-        if (!$conn instanceof \PDO) {
-            throw new \Exception("La connexion doit être une instance de PDO");
-        }
-        $this->conn = $conn;
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
     }
 
     // Méthode pour récupérer tous les produits
     public function getAllProduits() {
-        $sql = "SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit";
-        try {
-            $query = $this->conn->prepare($sql);
-            $query->execute();
-            $produits = [];
-            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
-                $produits[] = new Produit(
-                    $row['nom'],
-                    $row['prix_unitaire'],
-                    $row['description'],
-                    $row['courte_description'],
-                    $row['quantite'],
-                    $row['id_categorie'],
-                    $couleurs, // Utilisation de la variable modifiée
-                    $row['model']
-                );
-            }
-            return $produits;
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage();
-        }
+        // $sql = "SELECT * FROM produits";
+        $stmt = $this->pdo->prepare("SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit;");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // try {
+        //     // Préparation de la requête
+        //     $query = $this->pdo->prepare($sql);
+        //     $query->execute();
+        //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // $produits = [];
+            // while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            //     // Traitement des couleurs
+            //     $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
+                
+            //     // Création d'un objet Produit
+            //     $produits[] = new Produit(
+            //         $row['nom'],
+            //         $row['prix_unitaire'],
+            //         $row['description'],
+            //         $row['courte_description'],
+            //         $row['quantite'],
+            //         $row['id_categorie'],
+            //         $couleurs,
+            //         $row['model']
+            //     );
+            // }
+        //     return $produits;
+        // } catch (PDOException $e) {
+        //     // Gestion des erreurs
+        //     echo "Erreur : " . $e->getMessage();
+        //     return [];
+        // }
     }
+    
+    // public function getAllProduits() {
+    //     $sql = "SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit";
+    //     try {
+    //         $query = $this->pdo->prepare($sql);
+    //         $query->execute();
+    //         $produits = [];
+    //         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    //             $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
+    //             $produits[] = new Produit(
+    //                 $row['nom'],
+    //                 $row['prix_unitaire'],
+    //                 $row['description'],
+    //                 $row['courte_description'],
+    //                 $row['quantite'],
+    //                 $row['id_categorie'],
+    //                 $couleurs, // Utilisation de la variable modifiée
+    //                 $row['model']
+    //             );
+    //         }
+    //         return $produits;
+    //     } catch (PDOException $e) {
+    //         echo "Erreur : " . $e->getMessage();
+    //     }
+    // }
 
     // Méthode pour récupérer toutes les catégories
     public function getAllCategories() {
         $sql = "SELECT * FROM categorie";
         try {
-            $query = $this->conn->prepare($sql);
+            $query = $this->pdo->prepare($sql);
             $query->execute();
             $categories = [];
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -65,7 +95,7 @@ class ProduitModel {
                     nom, prix_unitaire, description, courte_description, quantite,
                     id_categorie, model, couleurs_prod) 
                     VALUES (:nom, :prix_unitaire, :description, :courte_description, :quantite, :id_categorie, :model, :couleurs_prod)";
-            $query = $this->conn->prepare($sql);
+            $query = $this->pdo->prepare($sql);
 
             $couleurs_prod = isset($produit['couleurs_prod']) ? implode(", ", $produit['couleurs_prod']) : '';
 
@@ -81,7 +111,7 @@ class ProduitModel {
             ]);
             
             if ($resultat) {
-                $id_produit = $this->conn->lastInsertId();
+                $id_produit = $this->pdo->lastInsertId();
                 echo "Produit ajouté avec succès, ID produit : $id_produit";
 
                 // Appel à la méthode pour télécharger l'image
@@ -140,7 +170,7 @@ class ProduitModel {
                     VALUES (:chemin_image, :nom_image, :id_produit)";
             
             // Préparer la requête avec PDO
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
     
             // Liaison des valeurs
             $stmt->bindValue(':chemin_image', $imageData['chemin_image'], PDO::PARAM_STR);
