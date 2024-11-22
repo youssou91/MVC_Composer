@@ -1,8 +1,12 @@
 <?php
+// require '/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
+
+
 use App\Controlleur\ProfileControlleur;
 
 // Connexion à la base de données
-$dbConnection = getConnection();  // Implémentez votre méthode pour obtenir la connexion à la DB
+$dbConnection = getConnection();  
 
 // Créer une instance du ProfileControlleur
 $profileControlleur = new ProfileControlleur($dbConnection);
@@ -24,13 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     $codePostal = $_POST['code_postal_utilisateur'];
     $province = $_POST['province_utilisateur'];
     $pays = $_POST['pays_utilisateur'];
-
     $profileControlleur->updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays);
-    header('Location: profile.php');  // Rediriger après la mise à jour
+    header('Location: profile.php');  
     exit;
 }
 
-// Traitement du formulaire de mise à jour du mot de passe
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
     $ancienMotDePasse = $_POST['ancien_mot_de_passe'];
     $nouveauMotDePasse = $_POST['nouveau_mot_de_passe'];
@@ -83,37 +85,36 @@ if (isset($_POST['action'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Profil</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
 <div class="container mx-auto p-8">
-    <h1 class="text-3xl text-center font-semibold mb-5">Mon Profil</h1>
+    <h1 class="text-3xl text-center text-blue-600 font-semibold mb-5">Mon Profil</h1>
     <div class="flex flex-col lg:flex-row gap-5">
         <div class="bg-white p-6 rounded-lg shadow-md lg:w-1/3">
-            <h3 class="text-xl text-center font-semibold mb-4">Informations personnelles</h3>
+            <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Informations personnelles</h3>
             <p><span class="font-semibold">Nom:</span> <?= htmlspecialchars($userInfo['nom_utilisateur']) ?></p>
             <p><span class="font-semibold">Prénom:</span> <?= htmlspecialchars($userInfo['prenom']) ?></p>
             <p><span class="font-semibold">Email:</span> <?= htmlspecialchars($userInfo['couriel']) ?></p>
             <p><span class="font-semibold">Téléphone:</span> <?= htmlspecialchars($userInfo['telephone']) ?></p>
-            <h4 class="text-lg font-semibold mt-4">Adresse</h4>
+            <h4 class="text-lg font-semibold text-blue-600 mt-4">Adresse</h4>
             <p><span class="font-semibold">Rue:</span> <?= htmlspecialchars($userInfo['numero']).' '.htmlspecialchars($userInfo['rue']) ?></p>
             <p><span class="font-semibold">Code Postal:</span> <?= htmlspecialchars($userInfo['code_postal']) ?></p>
             <p><span class="font-semibold">Ville:</span> <?= htmlspecialchars($userInfo['ville']).', '.htmlspecialchars($userInfo['province']) ?></p>
             <p><span class="font-semibold">Pays:</span> <?= htmlspecialchars($userInfo['pays']) ?></p>
-
             <div class="mt-6 flex gap-4">
-                <!-- Bouton Modifier les informations avec icône FontAwesome -->
                 <button class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600" data-modal-target="#modalModifierProfil">
-                    <i class="fas fa-user-edit"></i> Modifier infos
+                    <i class="fas fa-user-edit"></i>
                 </button>
-    
-                <!-- Bouton Modifier le mot de passe avec icône FontAwesome -->
                 <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" data-modal-target="#modalModifierMotDePasse">
-                    <i class="fas fa-key"></i> Modifier mot de passe
+                    <i class="fas fa-key"></i>
                 </button>
             </div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md lg:w-2/3">
-            <h3 class="text-xl text-center font-semibold mb-4">Mes Commandes</h3>
+            <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Mes Commandes</h3>
             <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-center border border-gray-200">
@@ -123,9 +124,7 @@ if (isset($_POST['action'])) {
                                 <th class="py-2 px-4 border-b">Date</th>
                                 <th class="py-2 px-4 border-b">Montant</th>
                                 <th class="py-2 px-4 border-b">Statut</th>
-                                <th class="py-2 px-4 border-b">Détails</th>
-                                <th class="py-2 px-4 border-b">Annuler</th>
-                                <th class="py-2 px-4 border-b">Paiement</th>
+                                <th class="py-2 px-4 border-b">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -136,112 +135,35 @@ if (isset($_POST['action'])) {
                                     <td class="py-2 px-4"><?= htmlspecialchars($order['date_commande']) ?></td>
                                     <td class="py-2 px-4">$ <?= htmlspecialchars($order['prix_total']) ?></td>
                                     <td class="py-2 px-4"><?= htmlspecialchars($order['statut']) ?></td>
-                                    <td class="py-2 px-4">
-                                        <a href="details_commande.php?id_commande=<?= htmlspecialchars($order['id_commande']) ?>" class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Détails</a>
-                                    </td>
-                                    <td class="py-2 px-4">
-                                        <button type="button" class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600" data-modal-target="#modalAnnulerCommande<?= htmlspecialchars($order['id_commande']) ?>">Annuler</button>
-                                        <div id="modalAnnulerCommande<?= htmlspecialchars($order['id_commande']) ?>" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-                                            <div class="bg-white rounded-lg p-6 w-96">
-                                                <h5 class="text-lg font-semibold mb-4">Annulation de commande</h5>
-                                                <p class="mb-4">Voulez-vous vraiment annuler cette commande ?</p>
-                                                <form method="post" class="flex justify-between">
-                                                    <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['id_commande']) ?>">
-                                                    <button type="submit" name="action" value="annuler" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Confirmer l'annulation</button>
-                                                    <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600" onclick="document.getElementById('modalAnnulerCommande<?= htmlspecialchars($order['id_commande']) ?>').classList.add('hidden')">Fermer</button>
-                                                </form>
-                                            </div>
+                                    <td>
+                                        <div class="flex space-x-2"> 
+                                            <a href="details_commande.php?id_commande=<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            <a href="paiement.php?id_commande=<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                                <i class="fas fa-credit-card"></i>
+                                            </a>
+                                            <a href="details_commande.php?id_commande=<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+                                                <i class="fas fa-times"></i>
+                                            </a>
                                         </div>
-                                    </td>
-                                    <td class="py-2 px-4">
-                                        <form action="paiement_commande.php" method="post">
-                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
-                                            <button type="submit" class="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600" <?= ($order['statut'] == 'Annulee') ? 'disabled' : '' ?>>Payer</button>
-                                        </form>
-                                    </td>
+                                    </td> 
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
             <?php else: ?>
-                <p class="text-center">Aucune commande trouvée.</p>
+                <p>Aucune commande trouvée.</p>
             <?php endif; ?>
         </div>
     </div>
 </div>
 <script>
-    // Toggle modal visibility
     document.querySelectorAll('[data-modal-target]').forEach(button => {
         button.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal-target');
-            document.querySelector(modalId).classList.remove('hidden');
-        });
-    });
-</script>
-<!-- Modal Modifier les informations -->
-<div id="modalModifierProfil" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-    <div class="bg-white rounded-lg p-6 w-96">
-        <h5 class="text-lg font-semibold mb-4">Modifier les informations</h5>
-        <form method="post" action="modifier_profil.php">
-            <!-- Ajouter ici vos champs de formulaire pour modifier les informations -->
-            <div class="mb-4">
-                <label for="nom_utilisateur" class="block font-semibold">Nom</label>
-                <input type="text" id="nom_utilisateur" name="nom_utilisateur" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="prenom_utilisateur" class="block font-semibold">Prénom</label>
-                <input type="text" id="prenom_utilisateur" name="prenom_utilisateur" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="email_utilisateur" class="block font-semibold">Email</label>
-                <input type="email" id="email_utilisateur" name="email_utilisateur" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="flex justify-between">
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Enregistrer</button>
-                <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600" onclick="toggleModal('modalModifierProfil')">Fermer</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Modal Modifier le mot de passe -->
-<div id="modalModifierMotDePasse" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-    <div class="bg-white rounded-lg p-6 w-96">
-        <h5 class="text-lg font-semibold mb-4">Modifier le mot de passe</h5>
-        <form method="post" action="modifier_mot_de_passe.php">
-            <div class="mb-4">
-                <label for="ancien_mot_de_passe" class="block font-semibold">Ancien mot de passe</label>
-                <input type="password" id="ancien_mot_de_passe" name="ancien_mot_de_passe" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="nouveau_mot_de_passe" class="block font-semibold">Nouveau mot de passe</label>
-                <input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="mb-4">
-                <label for="confirmation_mot_de_passe" class="block font-semibold">Confirmer le nouveau mot de passe</label>
-                <input type="password" id="confirmation_mot_de_passe" name="confirmation_mot_de_passe" class="w-full border-gray-300 border p-2 rounded" required>
-            </div>
-            <div class="flex justify-between">
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Modifier</button>
-                <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600" onclick="toggleModal('modalModifierMotDePasse')">Fermer</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    // Fonction pour afficher et masquer les modals
-    function toggleModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.classList.toggle('hidden');
-    }
-
-    // Ajouter l'événement pour ouvrir les modals
-    document.querySelectorAll('[data-modal-target]').forEach(button => {
-        button.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal-target');
-            toggleModal(modalId);
+            const modalId = button.getAttribute('data-modal-target');
+            document.querySelector(modalId).classList.toggle('hidden');
         });
     });
 </script>

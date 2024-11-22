@@ -9,7 +9,7 @@
 <body class="bg-gray-100 font-sans">
     <section class="contact py-8">
         <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Contact Us</h2>
+            <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center">Contactez nous !</h2>
             <form action="/submit" method="post" class="space-y-4">
                 <!-- Name -->
                 <div>

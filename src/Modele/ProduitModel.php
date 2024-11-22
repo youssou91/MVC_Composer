@@ -17,60 +17,8 @@ class ProduitModel {
         $stmt = $this->pdo->prepare("SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit;");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // try {
-        //     // Préparation de la requête
-        //     $query = $this->pdo->prepare($sql);
-        //     $query->execute();
-        //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // $produits = [];
-            // while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-            //     // Traitement des couleurs
-            //     $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
-                
-            //     // Création d'un objet Produit
-            //     $produits[] = new Produit(
-            //         $row['nom'],
-            //         $row['prix_unitaire'],
-            //         $row['description'],
-            //         $row['courte_description'],
-            //         $row['quantite'],
-            //         $row['id_categorie'],
-            //         $couleurs,
-            //         $row['model']
-            //     );
-            // }
-        //     return $produits;
-        // } catch (PDOException $e) {
-        //     // Gestion des erreurs
-        //     echo "Erreur : " . $e->getMessage();
-        //     return [];
-        // }
     }
     
-    // public function getAllProduits() {
-    //     $sql = "SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit";
-    //     try {
-    //         $query = $this->pdo->prepare($sql);
-    //         $query->execute();
-    //         $produits = [];
-    //         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-    //             $couleurs = !empty($row['couleurs_prod']) ? explode(',', $row['couleurs_prod']) : [];
-    //             $produits[] = new Produit(
-    //                 $row['nom'],
-    //                 $row['prix_unitaire'],
-    //                 $row['description'],
-    //                 $row['courte_description'],
-    //                 $row['quantite'],
-    //                 $row['id_categorie'],
-    //                 $couleurs, // Utilisation de la variable modifiée
-    //                 $row['model']
-    //             );
-    //         }
-    //         return $produits;
-    //     } catch (PDOException $e) {
-    //         echo "Erreur : " . $e->getMessage();
-    //     }
-    // }
 
     // Méthode pour récupérer toutes les catégories
     public function getAllCategories() {

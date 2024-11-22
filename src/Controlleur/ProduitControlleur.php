@@ -27,6 +27,7 @@ class ProduitControlleur {
     }
 
     public function ajouterProduit($produit) {
+        require __DIR__ . '/../vue/ajout.php';
         $data = [
             'image' => $_FILES['image']
         ];

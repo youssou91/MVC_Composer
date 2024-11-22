@@ -126,17 +126,17 @@ foreach ($_SESSION['cart'] as $produit) {
 </head>
 <body class="bg-gray-200 m-5">
     <div class="container mx-auto">
-        <h2 class="text-center text-2xl font-bold my-4">Ma boutique</h2>
+        <h2 class="text-center text-2xl text-blue-600 font-bold my-4">Ma boutique</h2>
 
         <!-- Section du Panier -->
         <div class="bg-white rounded shadow-md p-4 mb-4">
-            <h3 class="text-2xl font-bold text-center mb-4">Mon Panier</h3>
+            <h3 class="text-2xl font-bold text-blue-600 text-center mb-4">Mon Panier</h3>
             <?php if (count($_SESSION['cart']) > 0): ?>
                 <ul class="list-disc pl-5">
                     <?php foreach ($_SESSION['cart'] as $idProduit => $produit): ?>
                         <div class="produit">
                             <h3><?= htmlspecialchars($produit['nom']) ?></h3>
-                            <p>Prix : <?= number_format($produit['prix_unitaire'], 2) ?> €</p>
+                            <p>Prix : <?= number_format($produit['prix_unitaire'], 2) ?> $</p>
                             <p>Quantité : <?= $produit['quantite'] ?></p>
                             <form method="post">
                                 <input type="hidden" name="id_produit" value="<?= $idProduit; ?>">
@@ -146,7 +146,7 @@ foreach ($_SESSION['cart'] as $produit) {
                     <?php endforeach; ?>
                 </ul>
                 <div class="mt-4 flex justify-between items-center">
-                    <span class="font-bold text-lg">Total: <?= number_format($somme, 2); ?>€</span>
+                    <span class="font-bold text-lg">Total: <?= number_format($somme, 2); ?> $</span>
                     <form method="post">
                         <button type="submit" name="empty_cart" class="text-red-500 hover:text-red-700">Vider le panier</button>
                     </form>

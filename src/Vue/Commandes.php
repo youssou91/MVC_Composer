@@ -46,15 +46,6 @@ $index = 1;
     <body class="bg-gray-50 font-sans">
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Liste des produits</h1>
-            <!-- Barre de recherche -->
-            <!-- <div class="mb-6 flex justify-between items-center">
-                <div class="flex items-center">
-                    <label for="search" class="mr-2 text-gray-700">Recherche : </label>
-                    <input type="text" id="search" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Rechercher par utilisateur...">
-                </div>
-            </div> -->
-
-            <!-- Table des commandes -->
             <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
                 <table id="ordersTable" class="min-w-full">
                     <thead class="bg-blue-100 text-gray-700">
@@ -73,9 +64,9 @@ $index = 1;
                                 <td class="px-4 py-2"><?php echo $index + 1; ?></td>
                                 <td class="px-4 py-2"><?php echo htmlspecialchars($order['prenom'] . ' ' . $order['nom_utilisateur']); ?></td>
                                 <td class="px-4 py-2"><?php echo htmlspecialchars($order['date_commande']); ?></td>
-                                <td class="px-4 py-2"><?php echo htmlspecialchars($order['prix_total']); ?> €</td>
+                                <td class="px-4 py-2"><?php echo htmlspecialchars($order['prix_total']); ?> $</td>
                                 <td class="px-4 py-2">
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-full 
+                                    <span class="px-2 py-1 rounded-full 
                                         <?php echo ($order['statut'] == 'En attente') ? 'bg-yellow-200 text-yellow-800' : ''; ?>
                                         <?php echo ($order['statut'] == 'Expédiée') ? 'bg-green-200 text-green-800' : ''; ?>
                                         <?php echo ($order['statut'] == 'Annulée') ? 'bg-red-200 text-red-800' : ''; ?>">
@@ -85,8 +76,6 @@ $index = 1;
                                 <td class="px-4 py-2 flex space-x-2">
                                     <form method="post" class="space-x-2">
                                         <input type="hidden" name="order_id" value="<?php echo $order['id_commande']; ?>">
-
-                                        <!-- Boutons d'action -->
                                         <button type="submit" name="action" value="traiter" class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
                                             Traiter
                                         </button>
