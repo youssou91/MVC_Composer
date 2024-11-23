@@ -2,37 +2,14 @@
 use App\Controlleur\ProduitControlleur;
 use App\Modele\ProduitModel; 
 use App\Modele\CategorieModel;
-
+use AltoRouter\Router;
 $db = getConnection(); 
 $produitModel = new ProduitModel($db); 
 $categorieModel = new CategorieModel($db);
 $produitsController = new ProduitControlleur($produitModel, $categorieModel);
 $produits = $produitsController->afficherProduits();
 $index = 1;
-$db = null;  
-if(isset($_GET['id'])) {
-    $db = getConnection();
-    $produitModel = new ProduitModel($db);
-    $idProduit = intval($_GET['id']);
-    try{
-        $stmt = $db->prepare("DELETE FROM produits WHERE id_produit = :id");
-        $stmt->bindParam(':id', $idProduit, PDO::PARAM_INT);
-        if($stmt->execute()) {
-            $imageStmt = $db->prepare("SELECT chemin_image FROM images WHERE id_produit = :id");
-            $imageStmt->bindParam(':id', $idProduit, PDO::PARAM_INT);
-            $imageStmt->execute();
-            $image = $imageStmt->fetch(PDO::FETCH_ASSOC);
-            if($image && file_exists($image['chemin_image'])) {
-                unlink($image['chemin_image']);
-            }
-            header("Location: produits.php?success=supprimé");
-        }else{
-            echo "Erreur lors de la suppression.";
-        }
-    }catch(PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
-    }
-}
+$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -50,10 +27,10 @@ if(isset($_GET['id'])) {
         <div class="container mx-auto px-4 py-6">
             <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Liste des produits</h1>
             <div class="flex justify-end mb-4">
-                <a href="<?= isset($router) ? $router->generate('ajout') : '#'; ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
-                    <i class="fas fa-plus mr-2"></i>
-                    Ajouter un nouveau produit
-                </a>
+            <a href="/produits/ajout" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+                <i class="fas fa-plus mr-2"></i>
+                Ajouter un nouveau produit
+            </a>
             </div>
             <div class="overflow-x-auto">
                 <table id="dataTable" class="min-w-full table-auto border border-gray-200 shadow rounded-lg">
@@ -125,4 +102,3 @@ if(isset($_GET['id'])) {
         </script>
     </body>
 </html>
-

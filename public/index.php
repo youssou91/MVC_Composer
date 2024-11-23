@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/db.php';
 require '../vendor/autoload.php';
 
-use AltoRouter\Router; 
+use AltoRouter\Router;
 use App\Controlleur\HomeControlleur;
 use App\Controlleur\ContactControlleur;
 use App\Controlleur\CommandeControlleur;
@@ -16,27 +16,20 @@ use App\Controlleur\PromotionControlleur;
 use App\Modele\ProduitModel;
 use App\Modele\CategorieModel;
 use App\Modele\CommandeModel;
-use Controleur\CartController;
+use App\Modele\CartModel;
 
 $pdo = getConnection();
-// Création des instances
+// Création des instances des modèles
 $commandeModel = new CommandeModel($pdo);
 $commandeController = new CommandeControlleur($commandeModel);
 $produitModel = new ProduitModel($pdo);
 $categorieModel = new CategorieModel($pdo);
 $produitControlleur = new ProduitControlleur($produitModel, $categorieModel);
-$produitControlleur->afficherProduits();
+$cartModel = new CartModel($pdo);
+$cartController = new CartControlleur($cartModel);
 
-$cartModel = new \App\Modele\CartModel($pdo);
-$cartController = new \App\Controlleur\CartControlleur($cartModel);
-
+// Routeur AltoRouter
 $router = new AltoRouter();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'ajouter_au_panier') {
-    $cartController = new CartController();
-    $cartController->ajouter();
-    exit;
-}
 
 // Routes principales
 $router->map('GET', '/', 'HomeControlleur::index', 'accueil');
@@ -45,8 +38,8 @@ $router->map('GET', '/contact', 'ContactControlleur::index', 'contacter');
 // Routes pour les produits
 $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_detail');
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
-$router->map('GET', '/produits/ajout', 'ProduitControlleur::ajouterProduit', 'ajout');
-$urlAjout = $router->generate('ajout');
+$router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
+$router->map('POST', '/produit/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
 
@@ -68,20 +61,10 @@ $router->map('POST', '/admin/produits/add', 'AdminProduitControlleur::add', 'adm
 $router->map('POST', '/admin/produits/delete/[i:id]', 'AdminProduitControlleur::delete', 'admin_supprimer_produit');
 
 // Routes pour le profil utilisateur
-$router->map('GET', '/mon_profile', 'ProfileControlleur::index', 'profile');
+$router->map('GET', '/mon_profile', 'ProfilControlleur::index', 'profile');
 $router->map('GET', '/profile/edit', 'ProfilControlleur::editProfile', 'edit_profile');
 $router->map('POST', '/profile/edit', 'ProfilControlleur::updateProfile', 'update_profile');
 $router->map('GET', '/profile/orders', 'ProfilControlleur::orders', 'orders');
-//paiement commandes
-
-$router->map('GET', '/profile/orders/payer/[i:id]', 'ProfilControlleur::payerOrder', 'payer_order');
-$router->map('GET', '/profile/orders/annuler/[i:id]', 'ProfilControlleur::annulerOrder', 'annuler_order');
-$router->map('GET', '/profile/orders/valider/[i:id]', 'ProfilControlleur::validerOrder', 'valider_order');
-$router->map('GET', '/profile/orders/refuser/[i:id]', 'ProfilControlleur::refuserOrder', 'refuser_order');
-$router->map('GET', '/profile/orders/en_cours/[i:id]', 'ProfilControlleur::enCoursOrder', 'en_cours_order');
-$router->map('GET', '/profile/orders/[i:id]', 'ProfilControlleur::orderDetail', 'order_detail');
-
-
 
 // Routes pour les promotions
 $router->map('GET', '/promotions', 'PromotionControlleur::index', 'promotions');
@@ -91,72 +74,71 @@ $router->map('GET', '/promotion/add', 'PromotionControlleur::addForm', 'admin_fo
 $router->map('POST', '/promotion/delete/[i:id]', 'PromotionControlleur::delete', 'admin_supprimer_promotion');
 $router->map('POST', '/promotion/edit/[i:id]', 'PromotionControlleur::edit', 'admin_editer_promotion');
 
-// Recherche de la route correspondante
+// Vérification des routes
 $match = $router->match();
 
-// Débogage pour vérifier ce que renvoie $match
-if($match) {
-    // var_dump($match); 
-    require '../static/header.php'; 
+$match = $router->match();
+
+if ($match) {
+    require '../static/header.php';
 
     list($controlleur, $method) = explode('::', $match['target']);
     $controlleurClass = "../src/controlleur/{$controlleur}.php";
-
-    // Vérification si le fichier du contrôleur existe
-    if(file_exists($controlleurClass)) {
+    if (file_exists($controlleurClass)) {
         require_once $controlleurClass;
         $controlleur = "App\\Controlleur\\" . $controlleur;
-        // Vérification de la classe et de la méthode
-        if (class_exists($controlleur) && method_exists($controlleur, $method)) {
-            
-            // Injection des dépendances manuellement pour des contrôleurs spécifiques
-            if ($controlleur === "App\\Controlleur\\ProduitControlleur") {
-                // Instanciation spécifique pour ProduitControlleur
-                $produitModel = new ProduitModel($pdo);
-                $categorieModel = new CategorieModel($pdo);
-                $controlleurInstance = new $controlleur($produitModel, $categorieModel);
-            } elseif ($controlleur === "App\\Controlleur\\CommandeControlleur") {
-                // Instanciation spécifique pour CommandeControlleur
-                $commandeModel = new CommandeModel($pdo);
-                $controlleurInstance = new $controlleur($commandeModel);
-            } elseif     ($controlleur === "App\\Controlleur\\") {
-                // Instanciation spécifique pour CartControlleur
-                $produitModel = new ProduitModel($pdo);
-                $categorieModel = new CategorieModel($pdo);
-                $controlleurInstance = new $controlleur($produitModel, $categorieModel);
 
-            } elseif ($controlleur === "App\\Controlleur\\CartControlleur") {
-                $cartController = new $controlleur($cartModel);
-                call_user_func_array([$cartController, $method], $match['params']);
-            } else {
-                // Gestion générique pour les autres contrôleurs
-                $controlleurInstance = new $controlleur();
-                call_user_func_array([$controlleurInstance, $method], $match['params']);
+        if (class_exists($controlleur)) {
+            switch ($controlleur) {
+                case "App\\Controlleur\\ProduitControlleur":
+                    $produitModel = new ProduitModel($pdo);
+                    $categorieModel = new CategorieModel($pdo);
+                    $controlleurInstance = new $controlleur($produitModel, $categorieModel);
+                    break;
+                case "App\\Controlleur\\CommandeControlleur":
+                    $commandeModel = new CommandeModel($pdo);
+                    $controlleurInstance = new $controlleur($commandeModel);
+                    break;
+                case "App\\Controlleur\\CartControlleur":
+                    $cartModel = new CartModel($pdo);
+                    $controlleurInstance = new $controlleur($cartModel);
+                    break;
+                default:
+                    $controlleurInstance = new $controlleur();
+                    break;
             }
-            // Appel de la méthode du contrôleur
-            call_user_func_array([$controlleurInstance, $method], $match['params']);
+
+            if (method_exists($controlleurInstance, $method)) {
+                // Ajouter les données POST/GET aux paramètres
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $match['params'] = array_merge($match['params'], [$_POST]);
+                }
+                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                    $match['params'] = array_merge($match['params'], [$_GET]);
+                }
+
+                // Validation des paramètres requis
+                $reflection = new ReflectionMethod($controlleurInstance, $method);
+                $parameters = $reflection->getParameters();
+                if (count($parameters) > count($match['params'])) {
+                    handleError("Nombre de paramètres insuffisants pour appeler la méthode : $method", 400);
+                }
+
+                // Appel de la méthode
+                call_user_func_array([$controlleurInstance, $method], $match['params']);
+            } else {
+                handleError("Méthode non trouvée : " . $method);
+            }
         } else {
-            // Débogage pour voir quel contrôleur ou méthode est manquant
-            var_dump($match); 
-            echo "Classe ou méthode non trouvée : " . $controlleur . "::" . $method;
-            http_response_code(404);
-            require '../src/vue/errors/404.php';
+            handleError("Classe non trouvée : " . $controlleur);
         }
     } else {
-        // Débogage pour afficher le chemin du fichier qui n'existe pas
-        var_dump($match); 
-        echo "Fichier du contrôleur introuvable : " . $controlleurClass;
-        http_response_code(404);
-        require '../src/vue/errors/404.php';
+        handleError("Fichier du contrôleur introuvable : " . $controlleurClass);
     }
-    require '../static/footer.php'; 
-} else {
-    // Si aucune route ne correspond
-    var_dump($match); 
-    echo "Aucune route correspondante trouvée."; 
-    http_response_code(404);
-    require '../src/vue/errors/404.php';
-}
 
+    require '../static/footer.php';
+} else {
+    handleError("Aucune route correspondante trouvée.");
+}
 
 ?>

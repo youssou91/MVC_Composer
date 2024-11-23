@@ -8,19 +8,15 @@ use App\Modele\CategorieModel;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 // Connexion à la base de données
-$pdo = new PDO('mysql:host=localhost;dbname=cours343', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-]);
-
+$pdo = getConnection(); 
 // Initialisation du contrôleur
-$controller = new PromotionControlleur($pdo);
-
-// Initialisation du contrôleur
-
-// $controllerProduit = new ProduitControlleur($pdo);
 $produitModel = new ProduitModel($pdo); 
 $categorieModel = new CategorieModel($pdo);
 $produitsController = new ProduitControlleur($produitModel, $categorieModel);
+// Initialisation du contrôleur
+$controller = new PromotionControlleur($pdo);
+
+
 // Récupérer les données depuis le contrôleur
 $promotions = $controller->getPromotions(); // Promotions associées aux produits
 $produits = $produitsController->afficherProduits(); // Produits pour le modal
@@ -37,13 +33,11 @@ $produits = $produitsController->afficherProduits(); // Produits pour le modal
     <body class="bg-gray-100">
         <div class="container mx-auto p-6">
             <h2 class="text-2xl font-bold text-blue-600 mb-4 text-center"> Gestion des promotion </h2>
-
             <button 
                 class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
                 onclick="document.getElementById('addPromotionModal').classList.remove('hidden')">
                 Ajouter une promotion
             </button>
-
             <!-- Modal pour ajouter une promotion -->
             <div id="addPromotionModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
                 <div class="bg-white p-6 rounded-lg w-96 shadow-lg">

@@ -1,19 +1,19 @@
 <?php
 namespace App\Modele;
-
+use PDO;
 use App\Classes\Categorie;
 
 class CategorieModel {
-    private $conn;
+    private $pdo;
 
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct( PDO $pdo) {
+        $this->pdo = $pdo;
     }
     // Méthode pour récupérer toutes les catégories
     public function getAllCategories() {
         $sql = "SELECT * FROM categorie";
         try {
-            $query = $this->conn->prepare($sql);
+            $query = $this->pdo->prepare($sql);
             $query->execute();
             $categories = [];
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) {

@@ -1,8 +1,7 @@
 <?php
 namespace App\Modele;
-use App\Classes\Produit; 
-use \PDO;
 
+use PDO;
 
 class ProduitModel {
     private $pdo;
@@ -11,133 +10,121 @@ class ProduitModel {
         $this->pdo = $pdo;
     }
 
-    // Méthode pour récupérer tous les produits
     public function getAllProduits() {
-        // $sql = "SELECT * FROM produits";
-        $stmt = $this->pdo->prepare("SELECT p.*, i.chemin_image FROM produits p LEFT JOIN image i ON p.id_produit = i.id_produit;");
+        $stmt = $this->pdo->prepare("SELECT * FROM produits ;");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 
-    // Méthode pour récupérer toutes les catégories
     public function getAllCategories() {
-        $sql = "SELECT * FROM categorie";
         try {
-            $query = $this->pdo->prepare($sql);
-            $query->execute();
-            $categories = [];
-            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                $categories[] = new Categorie($row['id_categorie'], $row['nom_categorie']);
-            }
-            return $categories;
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage();
+            $stmt = $this->pdo->prepare("SELECT * FROM categorie");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new \Exception("Erreur lors de la récupération des catégories : " . $e->getMessage());
         }
     }
 
-    // Méthode d'ajout de produit
-    public function ajoutProduit($produit, $data) {
+    public function ajouterProduit($nom, $prix, $quantite, $id_categorie, $model, $courteDescription, $longueDescription, $couleurs, $chemin_image) {
         try {
-            $sql = "INSERT INTO produits (
-                    nom, prix_unitaire, description, courte_description, quantite,
-                    id_categorie, model, couleurs_prod) 
-                    VALUES (:nom, :prix_unitaire, :description, :courte_description, :quantite, :id_categorie, :model, :couleurs_prod)";
-            $query = $this->pdo->prepare($sql);
-
-            $couleurs_prod = isset($produit['couleurs_prod']) ? implode(", ", $produit['couleurs_prod']) : '';
-
-            $resultat = $query->execute([
-                ':nom' => $produit['nom'],
-                ':prix_unitaire' => $produit['prix_unitaire'],
-                ':description' => $produit['description'],
-                ':courte_description' => $produit['courte_description'],
-                ':quantite' => $produit['quantite'],
-                ':id_categorie' => $produit['id_categorie'],
-                ':model' => $produit['model'],
-                ':couleurs_prod' => $couleurs_prod,
-            ]);
-            
-            if ($resultat) {
-                $id_produit = $this->pdo->lastInsertId();
-                echo "Produit ajouté avec succès, ID produit : $id_produit";
-
-                // Appel à la méthode pour télécharger l'image
-                return $this->uploadImage($data, $id_produit);
-            } else {
-                echo "Erreur lors de l'insertion du produit : " . implode(", ", $query->errorInfo());
-            }
-        } catch (PDOException $e) {
-            echo 'Erreur : ' . $e->getMessage();
-            return false;
-        }
-    }
-
-    // Méthode d'upload d'image
-    public function uploadImage($data, $id_produit) {
-        if (isset($data['image']) && $data['image']['error'] === UPLOAD_ERR_OK) {
-            $image_name = time() . '_' . basename($data['image']['name']);
-            $image_destination = '../images/' . $image_name;
-            $from = $data['image']['tmp_name'];
-            $image_type = strtolower(pathinfo($image_destination, PATHINFO_EXTENSION));
-
-            // Vérification du type d'image
-            $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
-            if (in_array($image_type, $allowed_types)) {
-                if ($data['image']['size'] < 5 * 1024 * 1024) { // Taille limite de 5MB
-                    if (move_uploaded_file($from, $image_destination)) {
-                        echo "Image déplacée avec succès!";
-                        // Appel à la méthode d'ajout de l'image dans la base de données
-                        return $this->ajoutImage([
-                            'chemin_image' => $image_destination,
-                            'nom_image' => $image_name,
-                            'id_produit' => $id_produit
-                        ]);
-                    } else {
-                        echo "Erreur lors du déplacement de l'image.";
-                        return false;
-                    }
-                } else {
-                    echo "La taille de l'image dépasse la limite autorisée (5MB).";
-                    return false;
-                }
-            } else {
-                echo "Type de fichier non autorisé.";
-                return false;
-            }
-        } else {
-            echo "Erreur lors de l'upload de l'image. Code d'erreur : " . $data['image']['error'];
-            return false;
-        }
-    }
+            $sql = "INSERT INTO produits (nom, prix_unitaire, quantite, id_categorie, model, courte_description, description";
+            $params = [
+                ':nom' => $nom,
+                ':prix' => $prix,
+                ':quantite' => $quantite,
+                ':id_categorie' => $id_categorie,
+                ':model' => $model,
+                ':courteDescription' => $courteDescription,
+                ':longueDescription' => $longueDescription,
+            ];
     
-    // Méthode d'ajout de l'image dans la base de données
+            // Inclure `couleurs` si fourni
+            if ($couleurs !== null) {
+                $sql .= ", couleurs";
+                $params[':couleurs'] = is_array($couleurs) ? json_encode($couleurs) : $couleurs;
+            }
+    
+            // Ajouter `chemin_image` seulement si elle est fournie, sinon attribuer une valeur par défaut
+            if ($chemin_image !== null) {
+                $sql .= ", chemin_image";
+                $params[':chemin_image'] = $chemin_image;
+            } else {
+                // Vous pouvez ajouter un chemin d'image par défaut si aucune image n'est fournie
+                $sql .= ", chemin_image";
+                $params[':chemin_image'] = 'default_image_path.jpg'; // ou une autre image par défaut
+            }
+    
+            $sql .= ") VALUES (:nom, :prix, :quantite, :id_categorie, :model, :courteDescription, :longueDescription";
+    
+            if ($couleurs !== null) {
+                $sql .= ", :couleurs";
+            }
+    
+            $sql .= ", :chemin_image)";  // Fermeture de la requête SQL
+    
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+    
+            return $this->pdo->lastInsertId();
+        } catch (\PDOException $e) {
+            throw new \Exception("Erreur lors de l'ajout du produit : " . $e->getMessage());
+        }
+    }
+
     public function ajoutImage($imageData) {
         try {
-            $sql = "INSERT INTO images (chemin_image, nom_image, id_produit) 
-                    VALUES (:chemin_image, :nom_image, :id_produit)";
-            
-            // Préparer la requête avec PDO
-            $stmt = $this->pdo->prepare($sql);
-    
-            // Liaison des valeurs
-            $stmt->bindValue(':chemin_image', $imageData['chemin_image'], PDO::PARAM_STR);
-            $stmt->bindValue(':nom_image', $imageData['nom_image'], PDO::PARAM_STR);
-            $stmt->bindValue(':id_produit', $imageData['id_produit'], PDO::PARAM_INT);
-            
-            // Exécution de la requête
-            if ($stmt->execute()) {
-                return true; // Si l'insertion réussit
-            } else {
-                throw new \Exception("Erreur lors de l'insertion de l'image dans la base de données.");
-            }
+            $stmt = $this->pdo->prepare("INSERT INTO images (chemin_image, nom_image, id_produit) VALUES (:chemin_image, :nom_image, :id_produit)");
+            $stmt->execute([
+                ':chemin_image' => $imageData['chemin_image'],
+                ':nom_image' => $imageData['nom_image'],
+                ':id_produit' => $imageData['id_produit'],
+            ]);
+            return true;
         } catch (\PDOException $e) {
-            echo "Erreur de base de données : " . $e->getMessage();
-            return false;
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            return false;
+            throw new \Exception("Erreur lors de l'ajout de l'image : " . $e->getMessage());
         }
-    } 
+    }
+
+    public function uploadImage($file) {
+        // Vérifiez si l'image est bien présente
+        if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
+            // Vérification du type d'image
+            $imageInfo = getimagesize($file['tmp_name']);
+            
+            // Si getimagesize échoue, cela signifie que ce n'est pas une image
+            if ($imageInfo === false) {
+                throw new \Exception("Le fichier téléchargé n'est pas une image valide.");
+            }
+    
+            // Vérification de l'extension de l'image
+            $imageExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+            $validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+    
+            if (!in_array($imageExtension, $validExtensions)) {
+                throw new \Exception("Format d'image non supporté. Extensions autorisées : jpg, jpeg, png, gif, bmp, webp.");
+            }
+    
+            // Créer un nom unique pour l'image
+            $image_name = time() . '_' . basename($file['name']);
+            
+            // Nouveau chemin pour le dossier 'uploads' dans le répertoire public
+            $image_destination = __DIR__ . '/../public/uploads/' . $image_name;  // Chemin relatif vers le dossier 'uploads' dans 'public'
+    
+            // Déplacer l'image téléchargée dans le dossier approprié
+            if (move_uploaded_file($file['tmp_name'], $image_destination)) {
+                // Retourner le chemin relatif de l'image dans le répertoire public
+                return 'uploads/' . $image_name;
+            } else {
+                throw new \Exception("Erreur lors du téléchargement de l'image.");
+            }
+        } else {
+            // Déboguer le problème d'erreur si l'image n'a pas été envoyée
+            var_dump($file);
+            throw new \Exception("Aucune image ou une erreur est survenue.");
+        }
+    }
+    
+    
+    
 }
-?>
