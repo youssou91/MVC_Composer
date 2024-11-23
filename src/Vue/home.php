@@ -155,14 +155,12 @@ foreach ($_SESSION['cart'] as $produit) {
                 <p class="text-center">Aucun produit dans le panier.</p>
             <?php endif; ?>
         </div>
-
         <!-- Section des Produits -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <?php
             $query = "
-                SELECT p.*, i.chemin_image, pr.valeur AS promo_valeur, pr.type AS promo_type
+                SELECT p.*, pr.valeur AS promo_valeur, pr.type AS promo_type
                 FROM Produits p
-                LEFT JOIN image i ON p.id_produit = i.id_produit
                 LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
                 LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
                 WHERE p.quantite > 0
@@ -177,7 +175,7 @@ foreach ($_SESSION['cart'] as $produit) {
                     $idProduit = $produit['id_produit'];
                     $nom = htmlspecialchars($produit['nom']);
                     $prix = $produit['prix_unitaire'];
-                    $cheminImage = !empty($produit['chemin_image']) ? htmlspecialchars($produit['chemin_image']) : 'images/default-product.jpg';
+                    $cheminImage = !empty($produit['chemin_image']) ? htmlspecialchars($produit['chemin_image']) : 'public/uploads/1732401040_react.png';  // Corrected image path
                     $promoType = $produit['promo_type'];
                     $promoValeur = $produit['promo_valeur'];
                     $prixReduit = $prix;
@@ -186,20 +184,20 @@ foreach ($_SESSION['cart'] as $produit) {
                     } elseif ($promoType === 'fixe') {
                         $prixReduit = max(0, $prix - $promoValeur);
                     }
-            ?>
+                    ?>
                     <div class="border rounded shadow-lg p-4 bg-white">
-                        <img src="<?= $cheminImage ?>" alt="<?= $nom ?>" class="w-full h-48 object-cover mb-4">
+                        <img src="/public/<?= htmlspecialchars($produit['chemin_image']); ?>" class="w-full h-48 object-cover mb-4"> <!-- Display image -->
                         <h3 class="text-xl font-bold"><?= $nom ?></h3>
                         <p class="text-gray-600">Prix : <?= number_format($prixReduit, 2) ?> €</p>
                         <form method="post" class="mt-2">
-                            <input type="hidden" name="id_produit" value="<?= $idProduit ?>">
-                            <input type="number" name="quantite" value="1" min="1" class="border p-1 mb-2">
-                            <input type="hidden" name="nom" value="<?= $nom ?>">
-                            <input type="hidden" name="prix_unitaire" value="<?= $prixReduit ?>">
-                            <button type="submit" name="add" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter au panier</button>
+                            <input type="hidden" name="nom" value="<?= $nom; ?>">
+                            <input type="hidden" name="prix_unitaire" value="<?= $prixReduit; ?>">
+                            <input type="number" name="quantite" min="1" value="1" class="border p-2 rounded">
+                            <button type="submit" name="add" class="bg-blue-600 text-white p-2 rounded mt-2 w-full">Ajouter au panier</button>
                         </form>
                     </div>
-            <?php endforeach; endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </body>

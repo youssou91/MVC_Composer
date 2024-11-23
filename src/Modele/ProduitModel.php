@@ -9,13 +9,11 @@ class ProduitModel {
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
-
     public function getAllProduits() {
-        $stmt = $this->pdo->prepare("SELECT * FROM produits ;");
+        $stmt = $this->pdo->prepare("SELECT * FROM produits;");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function getAllCategories() {
         try {
             $stmt = $this->pdo->prepare("SELECT * FROM categorie");
@@ -26,9 +24,22 @@ class ProduitModel {
         }
     }
 
-    public function ajouterProduit($nom, $prix, $quantite, $id_categorie, $model, $courteDescription, $longueDescription, $couleurs, $chemin_image) {
+    public function ajouterProduit($nom, $prix, $quantite, $id_categorie, $model, $courteDescription, $longueDescription, $couleurs, $file) {
         try {
-            $sql = "INSERT INTO produits (nom, prix_unitaire, quantite, id_categorie, model, courte_description, description";
+            // Si un fichier image est téléchargé, appeler la fonction uploadImage
+            if (isset($_FILES['chemin_image']) && $_FILES['chemin_image']['error'] === UPLOAD_ERR_OK) {
+                $file = $_FILES['chemin_image']; // Récupérer le fichier téléchargé
+                // Appeler la méthode uploadImage via $this et récupérer le chemin relatif de l'image
+                $chemin_image = $this->uploadImage($file); // Utilisation de $this pour appeler la méthode
+            }
+            
+            // Si le chemin image n'est toujours pas défini, définir une image par défaut
+            if (empty($chemin_image)) {
+                $chemin_image = 'default_image_path.jpg';
+            }
+    
+            // Préparer la requête SQL pour l'insertion du produit
+            $sql = "INSERT INTO produits (nom, prix_unitaire, quantite, id_categorie, model, courte_description, description, chemin_image";
             $params = [
                 ':nom' => $nom,
                 ':prix' => $prix,
@@ -37,94 +48,87 @@ class ProduitModel {
                 ':model' => $model,
                 ':courteDescription' => $courteDescription,
                 ':longueDescription' => $longueDescription,
+                ':chemin_image' => $chemin_image,
             ];
     
-            // Inclure `couleurs` si fourni
+            // Si des couleurs sont spécifiées, ajouter à la requête SQL
             if ($couleurs !== null) {
                 $sql .= ", couleurs";
                 $params[':couleurs'] = is_array($couleurs) ? json_encode($couleurs) : $couleurs;
             }
     
-            // Ajouter `chemin_image` seulement si elle est fournie, sinon attribuer une valeur par défaut
-            if ($chemin_image !== null) {
-                $sql .= ", chemin_image";
-                $params[':chemin_image'] = $chemin_image;
-            } else {
-                // Vous pouvez ajouter un chemin d'image par défaut si aucune image n'est fournie
-                $sql .= ", chemin_image";
-                $params[':chemin_image'] = 'default_image_path.jpg'; // ou une autre image par défaut
-            }
-    
-            $sql .= ") VALUES (:nom, :prix, :quantite, :id_categorie, :model, :courteDescription, :longueDescription";
-    
+            // Finaliser la requête SQL avec les valeurs
+            $sql .= ") VALUES (:nom, :prix, :quantite, :id_categorie, :model, :courteDescription, :longueDescription, :chemin_image";
             if ($couleurs !== null) {
                 $sql .= ", :couleurs";
             }
+            $sql .= ")";
     
-            $sql .= ", :chemin_image)";  // Fermeture de la requête SQL
-    
+            // Exécution de la requête SQL
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
     
-            return $this->pdo->lastInsertId();
+            return $this->pdo->lastInsertId(); // Retourner l'ID du produit ajouté
         } catch (\PDOException $e) {
+            // Gestion des erreurs en cas de problème avec l'insertion ou la requête SQL
             throw new \Exception("Erreur lors de l'ajout du produit : " . $e->getMessage());
         }
     }
-
-    public function ajoutImage($imageData) {
-        try {
-            $stmt = $this->pdo->prepare("INSERT INTO images (chemin_image, nom_image, id_produit) VALUES (:chemin_image, :nom_image, :id_produit)");
-            $stmt->execute([
-                ':chemin_image' => $imageData['chemin_image'],
-                ':nom_image' => $imageData['nom_image'],
-                ':id_produit' => $imageData['id_produit'],
-            ]);
-            return true;
-        } catch (\PDOException $e) {
-            throw new \Exception("Erreur lors de l'ajout de l'image : " . $e->getMessage());
+    
+    public function uploadImage($file, $uploadDir = 'public/uploads/') {
+        $errors = [];
+    
+        // Vérification de l'existence du répertoire de destination
+        if (!is_dir($uploadDir)) {
+            // Essayer de créer le répertoire si il n'existe pas
+            if (!mkdir($uploadDir, 0777, true)) {
+                $errors[] = "Impossible de créer le répertoire 'uploads'.";
+            }
         }
-    }
-
-    public function uploadImage($file) {
-        // Vérifiez si l'image est bien présente
-        if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
-            // Vérification du type d'image
-            $imageInfo = getimagesize($file['tmp_name']);
-            
-            // Si getimagesize échoue, cela signifie que ce n'est pas une image
-            if ($imageInfo === false) {
-                throw new \Exception("Le fichier téléchargé n'est pas une image valide.");
-            }
     
-            // Vérification de l'extension de l'image
-            $imageExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-            $validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
-    
-            if (!in_array($imageExtension, $validExtensions)) {
-                throw new \Exception("Format d'image non supporté. Extensions autorisées : jpg, jpeg, png, gif, bmp, webp.");
-            }
-    
-            // Créer un nom unique pour l'image
-            $image_name = time() . '_' . basename($file['name']);
-            
-            // Nouveau chemin pour le dossier 'uploads' dans le répertoire public
-            $image_destination = __DIR__ . '/../public/uploads/' . $image_name;  // Chemin relatif vers le dossier 'uploads' dans 'public'
-    
-            // Déplacer l'image téléchargée dans le dossier approprié
-            if (move_uploaded_file($file['tmp_name'], $image_destination)) {
-                // Retourner le chemin relatif de l'image dans le répertoire public
-                return 'uploads/' . $image_name;
-            } else {
-                throw new \Exception("Erreur lors du téléchargement de l'image.");
-            }
+        // Vérification si le fichier a été téléchargé sans erreur
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            $errors[] = "Erreur lors du téléchargement de l'image.";
         } else {
-            // Déboguer le problème d'erreur si l'image n'a pas été envoyée
-            var_dump($file);
-            throw new \Exception("Aucune image ou une erreur est survenue.");
-        }
-    }
+            // Générer un nom unique pour le fichier
+            $fileName = time() . '_' . basename($file['name']);
+            $filePath = $uploadDir . $fileName;
     
+            // Récupérer l'extension du fichier et la convertir en minuscule
+            $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    
+            // Extensions autorisées pour l'image
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    
+            // Vérification de l'extension du fichier
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                $errors[] = "Extension non valide. Formats acceptés : jpg, jpeg, png, gif.";
+            }
+    
+            // Vérification de la taille du fichier (limite 5 Mo)
+            if ($file['size'] > 5 * 1024 * 1024) {
+                $errors[] = "Fichier trop volumineux. Taille max : 5 Mo.";
+            }
+    
+            // Si pas d'erreurs, déplacer le fichier téléchargé
+            if (empty($errors)) {
+                if (move_uploaded_file($file['tmp_name'], $filePath)) {
+                    // Retourner le chemin relatif pour l'utilisation en base de données
+                    return 'uploads/' . $fileName;
+                } else {
+                    $errors[] = "Impossible de déplacer le fichier téléchargé. Vérifiez les permissions du répertoire.";
+                }
+            }
+        }
+    
+        // Si des erreurs existent, afficher les erreurs et retourner null
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo $error . "<br>";
+            }
+        }
+        return null; // Retourne null en cas d'échec
+    }
     
     
 }

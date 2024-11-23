@@ -20,78 +20,63 @@ $message = '';
 $messageType = '';
 
 // Traitement du formulaire lorsqu'il est soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données du formulaire
-    $data = [
-        'nom' => trim($_POST['nom'] ?? ''),
-        'prix_unitaire' => trim($_POST['prix_unitaire'] ?? ''),
-        'quantite' => trim($_POST['quantite'] ?? ''),
-        'id_categorie' => trim($_POST['id_categorie'] ?? ''),
-        'model' => trim($_POST['model'] ?? ''),
-        'courte_description' => trim($_POST['courte_description'] ?? ''),
-        'description' => trim($_POST['description'] ?? ''),
-        'couleurs_prod' => $_POST['couleurs_prod'] ?? [],
-        'image' => $_FILES['image']['name'] ?? 'images/placeholder.jpeg'
-    ];
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['chemin_image'])) {
+//     // Variables d'upload
+//     $file = $_FILES['chemin_image'];
+//     $uploadDir = __DIR__ . '/../../public/uploads/';
+//     $errors = [];
 
-    // Validation des données
-    if (empty($data['nom']) || empty($data['prix_unitaire']) || empty($data['quantite']) || empty($data['id_categorie'])) {
-        $message = "<p class='text-red-500'>Tous les champs doivent être remplis.</p>";
-        $messageType = 'error';
-    } else {
-        // Traitement de l'image
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $image_tmp = $_FILES['image']['tmp_name'];
-            $image_name = $_FILES['image']['name'];
-        
-            // Utiliser getimagesize pour obtenir le type MIME
-            $image_info = getimagesize($image_tmp);
-            $image_type = $image_info['mime'];
-        
-            // Vérification du type de fichier (JPEG ou PNG uniquement)
-            if (in_array($image_type, ['image/jpeg', 'image/png'])) {
-                $image_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . uniqid() . '_' . basename($image_name);
-                // Déplacer le fichier dans le dossier final
-                if (move_uploaded_file($image_tmp, $image_path)) {
-                    $message = "<p class='text-green-500'>Image téléchargée avec succès.</p>";
-                } else {
-                    $message = "<p class='text-red-500'>Erreur lors du téléchargement de l'image.</p>";
-                    $messageType = 'error';
-                }
-            } else {
-                $message = "<p class='text-red-500'>L'image doit être au format JPEG ou PNG.</p>";
-                $messageType = 'error';
-            }
-        } else {
-            $message = "<p class='text-red-500'>Aucune image téléchargée ou une erreur est survenue.</p>";
-            $messageType = 'error';
-        }
+//     // Vérifications sur le fichier uploadé
+//     if ($file['error'] !== UPLOAD_ERR_OK) {
+//         $errors[] = "Erreur lors du téléchargement de l'image.";
+//     } else {
+//         $fileName = time() . '_' . basename($file['name']); // Préfix avec timestamp pour éviter doublons
+//         $filePath = $uploadDir . $fileName;
+//         $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+//         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
-        // Si aucune erreur, on insère le produit dans la base de données
-        if ($messageType !== 'error') {
-            $produit = new Produit(
-                $data['nom'],
-                $data['prix_unitaire'],
-                $data['quantite'],
-                $data['courte_description'],
-                $data['longue_description'],
-                $data['id_categorie'],
-                implode(', ', $data['couleurs_prod']), // Convertir les couleurs en chaîne
-                $data['model'], // Vous devez récupérer cette valeur, peut-être d'un champ de formulaire
-                $image_path // La variable $image_path contient maintenant le chemin de l'image
-            );
-            
+//         if (!in_array($fileExtension, $allowedExtensions)) {
+//             $errors[] = "Extension non valide. Formats acceptés : jpg, jpeg, png, gif.";
+//         }
 
-            if ($produitModel->ajouterProduit($produit)) {
-                $message = "<p class='text-green-500'>Produit ajouté avec succès.</p>";
-                $messageType = 'success';
-            } else {
-                $message = "<p class='text-red-500'>Erreur lors de l'ajout du produit.</p>";
-                $messageType = 'error';
-            }
-        }
-    }
-}
+//         if ($file['size'] > 5 * 1024 * 1024) { // Taille limite de 5 Mo
+//             $errors[] = "Fichier trop volumineux. Taille max : 5 Mo.";
+//         }
+
+//         if (empty($errors)) {
+//             // Tentative de déplacement du fichier uploadé
+//             if (move_uploaded_file($file['tmp_name'], $filePath)) {
+//                 // Construire le chemin relatif pour stockage en base de données
+//                 $cheminImage = 'uploads/' . $fileName;
+
+//                 // Insertion du produit avec chemin de l'image
+//                 $stmt = $pdo->prepare("INSERT INTO produits (nom, prix_unitaire, quantite, id_categorie, chemin_image) 
+//                                        VALUES (:nom, :prix, :quantite, :id_categorie, :chemin_image)");
+//                 $stmt->execute([
+//                     ':nom' => $_POST['nom'],  // Récupéré depuis le formulaire
+//                     ':prix' => $_POST['prix_unitaire'],
+//                     ':quantite' => $_POST['quantite'],
+//                     ':id_categorie' => $_POST['id_categorie'],
+//                     ':chemin_image' => $cheminImage,
+//                 ]);
+
+//                 echo "Produit et image ajoutés avec succès.";
+//             } else {
+//                 $errors[] = "Impossible de déplacer le fichier téléchargé.";
+//             }
+//         }
+//     }
+
+//     // Afficher les erreurs s'il y en a
+//     if (!empty($errors)) {
+//         foreach ($errors as $error) {
+//             echo $error . "<br>";
+//         }
+//     }
+// } else {
+//     echo "Aucune image téléchargée ou formulaire non soumis.";
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -104,7 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 min-h-screen flex items-center justify-center">
 
         <div class="container mx-auto max-w-3xl bg-white p-8 shadow-lg rounded-lg my-8">
-            <!-- Afficher le message de succès ou d'erreur -->
             <?php if (!empty($message)): ?>
                 <div class="p-4 mb-4 text-sm font-semibold 
                             <?php echo $messageType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'; ?> 
@@ -157,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <!-- Image et autres options -->
                 <div class="bg-gray-50 p-6 rounded-lg shadow-md">
                     <h2 class="text-lg font-semibold mb-4 text-blue-500">Autres informations</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

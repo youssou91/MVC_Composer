@@ -75,7 +75,11 @@ $router->map('POST', '/promotion/delete/[i:id]', 'PromotionControlleur::delete',
 $router->map('POST', '/promotion/edit/[i:id]', 'PromotionControlleur::edit', 'admin_editer_promotion');
 
 // Vérification des routes
-$match = $router->match();
+
+
+// Active l'affichage des erreurs en mode développement
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $match = $router->match();
 
@@ -84,10 +88,13 @@ if ($match) {
 
     list($controlleur, $method) = explode('::', $match['target']);
     $controlleurClass = "../src/controlleur/{$controlleur}.php";
+
+    // Vérifier si le fichier du contrôleur existe
     if (file_exists($controlleurClass)) {
         require_once $controlleurClass;
         $controlleur = "App\\Controlleur\\" . $controlleur;
 
+        // Vérifier si la classe du contrôleur existe
         if (class_exists($controlleur)) {
             switch ($controlleur) {
                 case "App\\Controlleur\\ProduitControlleur":
@@ -108,6 +115,7 @@ if ($match) {
                     break;
             }
 
+            // Vérifier si la méthode existe dans le contrôleur
             if (method_exists($controlleurInstance, $method)) {
                 // Ajouter les données POST/GET aux paramètres
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -120,25 +128,49 @@ if ($match) {
                 // Validation des paramètres requis
                 $reflection = new ReflectionMethod($controlleurInstance, $method);
                 $parameters = $reflection->getParameters();
+
+                // Vérifier si le nombre de paramètres est suffisant
                 if (count($parameters) > count($match['params'])) {
                     handleError("Nombre de paramètres insuffisants pour appeler la méthode : $method", 400);
                 }
 
-                // Appel de la méthode
+                // Appeler la méthode du contrôleur avec les paramètres
                 call_user_func_array([$controlleurInstance, $method], $match['params']);
             } else {
-                handleError("Méthode non trouvée : " . $method);
+                handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
             }
         } else {
-            handleError("Classe non trouvée : " . $controlleur);
+            handleError("Classe non trouvée : $controlleur");
         }
     } else {
-        handleError("Fichier du contrôleur introuvable : " . $controlleurClass);
+        handleError("Fichier du contrôleur introuvable : $controlleurClass");
     }
 
     require '../static/footer.php';
 } else {
     handleError("Aucune route correspondante trouvée.");
 }
+
+
+// Fonction pour gérer les erreurs et afficher un message générique
+function handleError($errstr, $errno = 500, $errfile = '', $errline = 0) {
+    // Générer un identifiant unique pour l'erreur
+    $errorId = uniqid('error_', true);
+
+    // Enregistrer l'erreur dans le log avec tous les détails
+    error_log("Erreur [$errno] : $errstr dans $errfile à la ligne $errline | ID : $errorId");
+
+    // Afficher le message générique à l'utilisateur avec l'ID de l'erreur
+    echo "Une erreur interne est survenue. Veuillez réessayer plus tard. Si l'erreur persiste, veuillez citer le code d'erreur : $errorId.";
+    
+    exit;
+}
+
+// Définir cette fonction pour intercepter toutes les erreurs
+set_error_handler("handleError");
+
+
+?>
+
 
 ?>

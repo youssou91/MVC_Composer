@@ -50,8 +50,8 @@ $db = null;
                                 <tr class="hover:bg-gray-100 even:bg-gray-50">
                                     <td class="px-4 py-2 text-left border"><?= $index++; ?></td>
                                     <td class="px-4 py-2 text-center border">
-                                        <img src="<?= isset($produit['chemin_image']) && !empty($produit['chemin_image']) ? htmlspecialchars($produit['chemin_image']) : 'images/Image001.jpeg'; ?>" 
-                                            alt="Image produit" class="w-12 h-12 object-cover rounded-full mx-auto">
+                                    <img src="/public/<?= htmlspecialchars($produit['chemin_image']); ?>" alt="Image produit" class="w-12 h-12 object-cover rounded-full mx-auto">
+
                                     </td>
                                     <td class="px-4 py-2 text-left border"><?= htmlspecialchars($produit['nom']); ?></td>
                                     <td class="px-4 py-2 text-center border"><?= htmlspecialchars($produit['quantite']); ?></td>
