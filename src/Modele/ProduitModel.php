@@ -130,5 +130,22 @@ class ProduitModel {
         return null; // Retourne null en cas d'échec
     }
     
+    public  function getTousLesProduitsAvecPromotions() {
+        global $connect; // Connexion PDO
+        
+        $query = "
+            SELECT p.*, pr.valeur AS promo_valeur, pr.type AS promo_type
+            FROM Produits p
+            LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
+            LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
+            WHERE p.quantite > 0
+            AND (pr.date_debut IS NULL OR pr.date_debut <= CURDATE())
+            AND (pr.date_fin IS NULL OR pr.date_fin >= CURDATE());
+        ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    }
     
 }

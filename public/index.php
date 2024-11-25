@@ -17,6 +17,8 @@ use App\Modele\ProduitModel;
 use App\Modele\CategorieModel;
 use App\Modele\CommandeModel;
 use App\Modele\CartModel;
+use App\Modele\PanierModele;
+
 
 $pdo = getConnection();
 // Création des instances des modèles
@@ -40,6 +42,9 @@ $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_det
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
 $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
 $router->map('POST', '/produit/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
+// Définir le routage pour l'action d'ajout de produit au panier
+$router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
+
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
 
@@ -168,9 +173,6 @@ function handleError($errstr, $errno = 500, $errfile = '', $errline = 0) {
 
 // Définir cette fonction pour intercepter toutes les erreurs
 set_error_handler("handleError");
-
-
-?>
 
 
 ?>
