@@ -2,15 +2,15 @@
 // Vérification de la connexion
 $utilisateurEstConnecte = isset($_SESSION['utilisateur_id']) && !empty($_SESSION['utilisateur_id']);
 
-$totalPanier = 0; // Initialisez le total du panier avant de l'utiliser
+$totalPanier = 0; 
 
 // Regroupement des produits par ID et addition des quantités
 $panierRegroupe = [];
 foreach ($panier as $id => $quantite) {
     if (isset($panierRegroupe[$id])) {
-        $panierRegroupe[$id] += $quantite;  // Ajout de la quantité si le produit existe déjà
+        $panierRegroupe[$id] += $quantite;  
     } else {
-        $panierRegroupe[$id] = $quantite;  // Sinon, ajout du produit avec sa quantité
+        $panierRegroupe[$id] = $quantite;  
     }
 }
 
@@ -75,10 +75,12 @@ foreach ($panier as $id => $quantite) {
                                 <td class="border px-4 py-2"><?= number_format($prixReduit, 2) ?> €</td>
                                 <td class="border px-4 py-2"><?= number_format($prixTotalProduit, 2) ?> €</td>
                                 <td class="border px-4 py-2">
-                                    <form method="POST" action="">
+                                    <form method="POST" action="/produits/supprimer/<?= $id ?>">
                                         <input type="hidden" name="id_produit" value="<?= $id ?>">
                                         <input type="hidden" name="action" value="supprimer">
-                                        <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">Supprimer</button>
+                                        <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -97,19 +99,25 @@ foreach ($panier as $id => $quantite) {
                 </table>
 
                 <!-- Bouton Vider le panier -->
-                <form method="POST" action="" class="mt-4">
+                <form method="POST" action="/produits/supprimer">
                     <input type="hidden" name="action" value="vider">
-                    <button type="submit" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md w-full">Vider le panier</button>
+                    <button type="submit" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md w-full flex items-center justify-center">
+                        <i class="fas fa-trash mr-2"></i> 
+                    </button>
                 </form>
 
                 <!-- Vérification de l'état de connexion -->
                 <?php if ($utilisateurEstConnecte): ?>
                     <form method="POST" action="/commande" class="mt-4">
-                        <button type="submit" class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md w-full">Commander</button>
+                        <button type="submit" class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md w-full flex items-center justify-center">
+                            <i class="fas fa-shopping-cart mr-2"></i> 
+                        </button>
                     </form>
                 <?php else: ?>
                     <form method="GET" action="/connexion" class="mt-4">
-                        <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md w-full">Se connecter</button>
+                        <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md w-full flex items-center justify-center">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                        </button>
                     </form>
                 <?php endif; ?>
 
@@ -149,15 +157,16 @@ foreach ($panier as $id => $quantite) {
                         <?php endif; ?>
                     </p>
                     <form method="POST" action="/produits/panier">
-    <input type="hidden" name="id_produit" value="<?= $id ?>">
-    <input type="hidden" name="action" value="ajouter">
+                        <input type="hidden" name="id_produit" value="<?= $id ?>">
+                        <input type="hidden" name="action" value="ajouter">
 
-    <!-- Champ de saisie pour la quantité -->
-    <label for="quantite" class="block text-sm font-medium text-gray-700">Quantité</label>
-    <input type="number" name="quantite" id="quantite" value="1" min="1" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-
-    <button type="submit" class="mt-4 w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md">Ajouter au panier</button>
-</form>
+                        <!-- Champ de saisie pour la quantité -->
+                        <label for="quantite" class="block text-sm font-medium text-gray-700">Quantité</label>
+                        <input type="number" name="quantite" id="quantite" value="1" min="1" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <button type="submit" class="mt-4 w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center">
+                            <i class="fas fa-cart-plus mr-2"></i> 
+                        </button>
+                    </form>
 
                 </div>
             <?php endforeach; ?>

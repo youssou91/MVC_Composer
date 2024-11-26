@@ -44,6 +44,12 @@ $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout
 $router->map('POST', '/produit/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 // Définir le routage pour l'action d'ajout de produit au panier
 $router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
+$router->map('POST', '/produits/supprimer/[i:id]', function($id) {
+    (new HomeControlleur())->gererPanier($id);
+}, 'supprimerProduitPanier');
+$router->map('POST', '/produits/supprimer', function() {
+    (new HomeControlleur())->gererPanier();
+}, 'viderPanier');
 
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
@@ -87,72 +93,84 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $match = $router->match();
+// Vérification des routes
+$match = $router->match();
 
 if ($match) {
+    // Inclure l'en-tête
     require '../static/header.php';
 
-    list($controlleur, $method) = explode('::', $match['target']);
-    $controlleurClass = "../src/controlleur/{$controlleur}.php";
+    // Vérifier si la cible est une fonction anonyme ou une méthode de classe
+    if (is_callable($match['target'])) {
+        call_user_func_array($match['target'], $match['params']);
+    } else {
+        // Extraire le contrôleur et la méthode
+        list($controlleur, $method) = explode('::', $match['target']);
+        $controlleurClass = "../src/controlleur/{$controlleur}.php";
 
-    // Vérifier si le fichier du contrôleur existe
-    if (file_exists($controlleurClass)) {
-        require_once $controlleurClass;
-        $controlleur = "App\\Controlleur\\" . $controlleur;
+        // Vérifier si le fichier du contrôleur existe
+        if (file_exists($controlleurClass)) {
+            require_once $controlleurClass;
+            $controlleur = "App\\Controlleur\\" . $controlleur;
 
-        // Vérifier si la classe du contrôleur existe
-        if (class_exists($controlleur)) {
-            switch ($controlleur) {
-                case "App\\Controlleur\\ProduitControlleur":
-                    $produitModel = new ProduitModel($pdo);
-                    $categorieModel = new CategorieModel($pdo);
-                    $controlleurInstance = new $controlleur($produitModel, $categorieModel);
-                    break;
-                case "App\\Controlleur\\CommandeControlleur":
-                    $commandeModel = new CommandeModel($pdo);
-                    $controlleurInstance = new $controlleur($commandeModel);
-                    break;
-                case "App\\Controlleur\\CartControlleur":
-                    $cartModel = new CartModel($pdo);
-                    $controlleurInstance = new $controlleur($cartModel);
-                    break;
-                default:
-                    $controlleurInstance = new $controlleur();
-                    break;
-            }
-
-            // Vérifier si la méthode existe dans le contrôleur
-            if (method_exists($controlleurInstance, $method)) {
-                // Ajouter les données POST/GET aux paramètres
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $match['params'] = array_merge($match['params'], [$_POST]);
-                }
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                    $match['params'] = array_merge($match['params'], [$_GET]);
+            // Vérifier si la classe du contrôleur existe
+            if (class_exists($controlleur)) {
+                // Instancier la classe du contrôleur en fonction de ses dépendances
+                switch ($controlleur) {
+                    case "App\\Controlleur\\ProduitControlleur":
+                        $produitModel = new ProduitModel($pdo);
+                        $categorieModel = new CategorieModel($pdo);
+                        $controlleurInstance = new $controlleur($produitModel, $categorieModel);
+                        break;
+                    case "App\\Controlleur\\CommandeControlleur":
+                        $commandeModel = new CommandeModel($pdo);
+                        $controlleurInstance = new $controlleur($commandeModel);
+                        break;
+                    case "App\\Controlleur\\CartControlleur":
+                        $cartModel = new CartModel($pdo);
+                        $controlleurInstance = new $controlleur($cartModel);
+                        break;
+                    default:
+                        $controlleurInstance = new $controlleur();
+                        break;
                 }
 
-                // Validation des paramètres requis
-                $reflection = new ReflectionMethod($controlleurInstance, $method);
-                $parameters = $reflection->getParameters();
+                // Vérifier si la méthode existe dans le contrôleur
+                if (method_exists($controlleurInstance, $method)) {
+                    // Ajouter les données POST/GET aux paramètres
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $match['params'] = array_merge($match['params'], [$_POST]);
+                    }
+                    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                        $match['params'] = array_merge($match['params'], [$_GET]);
+                    }
 
-                // Vérifier si le nombre de paramètres est suffisant
-                if (count($parameters) > count($match['params'])) {
-                    handleError("Nombre de paramètres insuffisants pour appeler la méthode : $method", 400);
+                    // Validation des paramètres requis
+                    $reflection = new ReflectionMethod($controlleurInstance, $method);
+                    $parameters = $reflection->getParameters();
+
+                    // Vérifier si le nombre de paramètres est suffisant
+                    if (count($parameters) > count($match['params'])) {
+                        handleError("Nombre de paramètres insuffisants pour appeler la méthode : $method", 400);
+                    }
+
+                    // Appeler la méthode du contrôleur avec les paramètres
+                    call_user_func_array([$controlleurInstance, $method], $match['params']);
+                } else {
+                    handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
                 }
-
-                // Appeler la méthode du contrôleur avec les paramètres
-                call_user_func_array([$controlleurInstance, $method], $match['params']);
             } else {
-                handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
+                handleError("Classe non trouvée : $controlleur");
             }
         } else {
-            handleError("Classe non trouvée : $controlleur");
+            handleError("Fichier du contrôleur introuvable : $controlleurClass");
         }
-    } else {
-        handleError("Fichier du contrôleur introuvable : $controlleurClass");
     }
 
+    // Inclure le pied de page
     require '../static/footer.php';
 } else {
+    // Gestion des erreurs si aucune route ne correspond
     handleError("Aucune route correspondante trouvée.");
 }
 
