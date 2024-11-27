@@ -9,11 +9,13 @@ class ProduitModel {
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
+    
     public function getAllProduits() {
         $stmt = $this->pdo->prepare("SELECT * FROM produits;");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function getAllCategories() {
         try {
             $stmt = $this->pdo->prepare("SELECT * FROM categorie");
@@ -26,19 +28,13 @@ class ProduitModel {
 
     public function ajouterProduit($nom, $prix, $quantite, $id_categorie, $model, $courteDescription, $longueDescription, $couleurs, $file) {
         try {
-            // Si un fichier image est téléchargé, appeler la fonction uploadImage
             if (isset($_FILES['chemin_image']) && $_FILES['chemin_image']['error'] === UPLOAD_ERR_OK) {
-                $file = $_FILES['chemin_image']; // Récupérer le fichier téléchargé
-                // Appeler la méthode uploadImage via $this et récupérer le chemin relatif de l'image
-                $chemin_image = $this->uploadImage($file); // Utilisation de $this pour appeler la méthode
-            }
-            
-            // Si le chemin image n'est toujours pas défini, définir une image par défaut
+                $file = $_FILES['chemin_image']; 
+                $chemin_image = $this->uploadImage($file); 
+            }            
             if (empty($chemin_image)) {
                 $chemin_image = 'default_image_path.jpg';
             }
-    
-            // Préparer la requête SQL pour l'insertion du produit
             $sql = "INSERT INTO produits (nom, prix_unitaire, quantite, id_categorie, model, courte_description, description, chemin_image";
             $params = [
                 ':nom' => $nom,
@@ -50,14 +46,11 @@ class ProduitModel {
                 ':longueDescription' => $longueDescription,
                 ':chemin_image' => $chemin_image,
             ];
-    
             // Si des couleurs sont spécifiées, ajouter à la requête SQL
             if ($couleurs !== null) {
                 $sql .= ", couleurs";
                 $params[':couleurs'] = is_array($couleurs) ? json_encode($couleurs) : $couleurs;
             }
-    
-            // Finaliser la requête SQL avec les valeurs
             $sql .= ") VALUES (:nom, :prix, :quantite, :id_categorie, :model, :courteDescription, :longueDescription, :chemin_image";
             if ($couleurs !== null) {
                 $sql .= ", :couleurs";
@@ -68,9 +61,8 @@ class ProduitModel {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
     
-            return $this->pdo->lastInsertId(); // Retourner l'ID du produit ajouté
+            return $this->pdo->lastInsertId(); 
         } catch (\PDOException $e) {
-            // Gestion des erreurs en cas de problème avec l'insertion ou la requête SQL
             throw new \Exception("Erreur lors de l'ajout du produit : " . $e->getMessage());
         }
     }
@@ -131,16 +123,20 @@ class ProduitModel {
     }
     
     public  function getTousLesProduitsAvecPromotions() {
-        global $connect; // Connexion PDO
-        
+        global $connect; 
         $query = "
-            SELECT p.*, pr.valeur AS promo_valeur, pr.type AS promo_type
-            FROM Produits p
-            LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
-            LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
-            WHERE p.quantite > 0
-            AND (pr.date_debut IS NULL OR pr.date_debut <= CURDATE())
-            AND (pr.date_fin IS NULL OR pr.date_fin >= CURDATE());
+            SELECT 
+            p.*, 
+            pr.valeur AS promo_valeur, 
+            pr.type AS promo_type
+        FROM Produits p
+        LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
+        LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
+        WHERE p.quantite > 0
+        AND (
+            pr.id_promotion IS NULL OR 
+            (pr.date_debut <= CURDATE() AND pr.date_fin >= CURDATE())
+        )
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();

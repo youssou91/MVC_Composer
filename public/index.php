@@ -11,7 +11,7 @@ use App\Controlleur\CartControlleur;
 use App\Controlleur\AuthControlleur;
 use App\Controlleur\AdminControlleur;
 use App\Controlleur\AdminProduitControlleur;
-use App\Controlleur\ProfilControlleur;
+use App\Controlleur\ProfileControlleur;
 use App\Controlleur\PromotionControlleur;
 use App\Modele\ProduitModel;
 use App\Modele\CategorieModel;
@@ -53,6 +53,8 @@ $router->map('POST', '/produits/supprimer', function() {
 
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
+$router->map('POST', '/commande', 'CommandeControlleur::ajouterCommande', 'commande');
+
 
 // Routes pour le panier
 $router->map('POST', '/cart/ajouter', 'CartControlleur::ajouter');
@@ -72,10 +74,10 @@ $router->map('POST', '/admin/produits/add', 'AdminProduitControlleur::add', 'adm
 $router->map('POST', '/admin/produits/delete/[i:id]', 'AdminProduitControlleur::delete', 'admin_supprimer_produit');
 
 // Routes pour le profil utilisateur
-$router->map('GET', '/mon_profile', 'ProfilControlleur::index', 'profile');
-$router->map('GET', '/profile/edit', 'ProfilControlleur::editProfile', 'edit_profile');
-$router->map('POST', '/profile/edit', 'ProfilControlleur::updateProfile', 'update_profile');
-$router->map('GET', '/profile/orders', 'ProfilControlleur::orders', 'orders');
+$router->map('GET', '/mon_profile', 'ProfileControlleur::index', 'profile');
+$router->map('GET', '/profile/edit', 'ProfileControlleur::editProfile', 'edit_profile');
+$router->map('POST', '/profile/edit', 'ProfileControlleur::updateProfile', 'update_profile');
+$router->map('GET', '/profile/orders', 'ProfileControlleur::orders', 'orders');
 
 // Routes pour les promotions
 $router->map('GET', '/promotions', 'PromotionControlleur::index', 'promotions');
@@ -92,12 +94,10 @@ $router->map('POST', '/promotion/edit/[i:id]', 'PromotionControlleur::edit', 'ad
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$match = $router->match();
 // Vérification des routes
 $match = $router->match();
 
 if ($match) {
-    // Inclure l'en-tête
     require '../static/header.php';
 
     // Vérifier si la cible est une fonction anonyme ou une méthode de classe
@@ -135,9 +135,7 @@ if ($match) {
                         break;
                 }
 
-                // Vérifier si la méthode existe dans le contrôleur
                 if (method_exists($controlleurInstance, $method)) {
-                    // Ajouter les données POST/GET aux paramètres
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $match['params'] = array_merge($match['params'], [$_POST]);
                     }

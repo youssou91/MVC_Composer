@@ -41,10 +41,9 @@ class AuthControlleur {
     }
 
     public function logout() {
-        // Déconnecter l'utilisateur
-        // Rediriger vers la page d'accueil
+        session_unset();
         session_destroy();
-        require_once __DIR__ . '/../Vue/auth/deconnexion.php'; 
+        header('Location: /login'); 
     }
 }
 ?>
