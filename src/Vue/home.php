@@ -1,20 +1,10 @@
 <?php
 // Vérification de la connexion
 $utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
-
-// $totalPanier = 0; 
-$produits = $produits ?? [];
+$produits = $produits ?? []; 
 
 // Regroupement des produits par ID et addition des quantités
-$panierRegroupe = [];
-foreach ($panier as $id => $quantite) {
-    if (isset($panierRegroupe[$id])) {
-        $panierRegroupe[$id] += $quantite;  
-    } else {
-        $panierRegroupe[$id] = $quantite;  
-    }
-}
-
+$panierRegroupe = $_SESSION['panier'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -33,129 +23,141 @@ foreach ($panier as $id => $quantite) {
 
         <!-- Section du Panier -->
         <div class="bg-white rounded shadow-md p-4 mb-8">
-            <h3 class="text-2xl font-bold text-blue-600 text-center mb-4">Mon Panier</h3>
-            <?php if (!empty($panierRegroupe)): ?>
-                <table class="w-full table-auto border-collapse">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border px-4 py-2 text-left">Nom</th>
-                            <th class="border px-4 py-2 text-left">Quantité</th>
-                            <th class="border px-4 py-2 text-left">Prix Unitaire</th>
-                            <th class="border px-4 py-2 text-left">Prix Total</th>
-                            <th class="border px-4 py-2 text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        $totalPanier = 0;
-                        $quantiteTotale = 0;
-                        foreach ($panierRegroupe as $id => $quantite): 
-                            if (isset($produits[$id])) {
-                                $produit = $produits[$id];
-                                $prixUnitaireProduit = $produit['prix_unitaire'] ?? 0;
-                                $promoType = $produit['promo_type'] ?? null; 
-                                $promoValeur = $produit['promo_valeur'] ?? null; 
-                                $prixReduit = $prixUnitaireProduit;
-                                
-                                // Calcul du prix réduit en fonction de la promotion
-                                if ($promoType === 'pourcentage' && $promoValeur !== null) {
-                                    $prixReduit = $prixUnitaireProduit - ($prixUnitaireProduit * $promoValeur / 100);
-                                } elseif ($promoType === 'fixe' && $promoValeur !== null) {
-                                    $prixReduit = max(0, $prixUnitaireProduit - $promoValeur);
-                                }
+    <h3 class="text-2xl font-bold text-blue-600 text-center mb-4">Mon Panier</h3>
+    <?php if (!empty($_SESSION['panier'])): ?>
+        <table class="w-full table-auto border-collapse">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border px-4 py-2 text-left">Nom</th>
+                    <th class="border px-4 py-2 text-left">Quantité</th>
+                    <th class="border px-4 py-2 text-left">Prix Unitaire</th>
+                    <th class="border px-4 py-2 text-left">Prix Total</th>
+                    <th class="border px-4 py-2 text-left">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    $totalPanier = 0; 
+                    $quantiteTotale = 0;
+                    foreach ($_SESSION['panier'] as $id => $produit): 
+                        // Vérification si $produit est un tableau et contient les indices attendus
+                        if (is_array($produit) && isset($produit['prix_unitaire'], $produit['promo_type'], $produit['promo_valeur'], $produit['quantite'])):
+                            // Récupération des informations du produit
+                            $prixUnitaireProduit = $produit['prix_unitaire'];
+                            $promoType = $produit['promo_type'];
+                            $promoValeur = $produit['promo_valeur'];
+                            $quantite = $produit['quantite'];
 
-                                $prixTotalProduit = $quantite * $prixReduit;
-                                $totalPanier += $prixTotalProduit;
-                                $quantiteTotale += $quantite;
+                            // Calcul du prix réduit
+                            $prixReduit = $prixUnitaireProduit;
+                            if ($promoType === 'pourcentage' && $promoValeur !== null) {
+                                $prixReduit = $prixUnitaireProduit - ($prixUnitaireProduit * $promoValeur / 100);
+                            } elseif ($promoType === 'fixe' && $promoValeur !== null) {
+                                $prixReduit = max(0, $prixUnitaireProduit - $promoValeur);
                             }
-                        ?>
-                            <tr>
-                                <td class="border px-4 py-2"><?= htmlspecialchars($produit['nom'] ?? 'Nom indisponible') ?></td>
-                                <td class="border px-4 py-2"><?= htmlspecialchars($quantite) ?></td>
-                                <td class="border px-4 py-2"><?= number_format($prixReduit, 2) ?> €</td>
-                                <td class="border px-4 py-2"><?= number_format($prixTotalProduit, 2) ?> €</td>
-                                <td class="border px-4 py-2">
-                                    <form method="POST" action="/produits/supprimer/<?= $id ?>">
-                                        <input type="hidden" name="id_produit" value="<?= $produitId ?>">
-                                        <input type="hidden" name="action" value="supprimer">
-                                        <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                    <tfoot>
-                        <tr class="bg-gray-200">
-                            <th colspan="3" class="border px-4 py-2 text-left">Total</th>
-                            <th colspan="2" class="border px-4 py-2"><?= number_format($totalPanier, 2) ?> €</th>
-                        </tr>
-                        <tr class="bg-gray-100">
-                            <th colspan="3" class="border px-4 py-2 text-left">Quantité Totale</th>
-                            <th colspan="2" class="border px-4 py-2"><?= $quantiteTotale ?> article(s)</th>
-                        </tr>
-                    </tfoot>
-                </table>
 
-                <!-- Boutons Vider le panier et Connexion/Commande -->
-                <div class="flex justify-between space-x-4 mt-4">
-                    <form method="POST" action="/produits/supprimer" class="w-1/4">
-                        <input type="hidden" name="action" value="vider">
-                        <button type="submit" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
-                            <i class="fas fa-trash mr-2"></i> 
-                        </button>
-                    </form>
-                    <?php if ($utilisateurEstConnecte): 
-                        // Récupérer l'ID de l'utilisateur connecté depuis la session
-                        $utilisateurId = $_SESSION['id_utilisateur']; 
-                        // Récupérer l'ID du produit depuis la session
-                        $produitId = $_SESSION['id_produit'];
-    
-                        ?>
-                        <form method="POST" action="/commande" class="w-1/4">
-                            <!-- Données du panier -->
-                            <input type="hidden" name="id_utilisateur" value="<?= $utilisateurId ?? '' ?>">
-                            <input type="hidden" name="prix_total" value="<?= $totalPanier ?>">
-                            <?php foreach ($panierRegroupe as $id => $quantite): ?>
-                                
-                                <input type="hidden" name="produits[<?= $id ?>][id_produit]" value="<?= $produitId ?>">
-                                <input type="hidden" name="produits[<?= $id ?>][quantite]" value="<?= $quantite ?>">
-                            <?php endforeach; ?>
+                            // Calcul du prix total du produit
+                            $prixTotalProduit = $quantite * $prixReduit;
 
-                            <button type="submit" class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
-                                <i class="fas fa-shopping-cart mr-2"></i> Commander
-                            </button>
-                        </form>
-                    <?php else: ?>
-                        <form method="GET" action="/login" class="w-1/4">
-                            <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
-                                <i class="fas fa-sign-in-alt mr-2"></i> 
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </div>
+                            // Ajout aux totaux
+                            $totalPanier += $prixTotalProduit;
+                            $quantiteTotale += $quantite;
+                ?>
+                    <tr>
+                        <td class="border px-4 py-2"><?= htmlspecialchars($produit['nom'] ?? 'Nom indisponible') ?></td>
+                        <td class="border px-4 py-2"><?= htmlspecialchars($quantite) ?></td>
+                        <td class="border px-4 py-2"><?= number_format(floatval($prixReduit), 2) ?> €</td>
+                        <td class="border px-4 py-2"><?= number_format(floatval($prixTotalProduit), 2) ?> €</td>
+                        <td class="border px-4 py-2">
+                            <form method="POST" action="/produits/supprimer/<?= $id ?>">
+                                <input type="hidden" name="id_produit" value="<?= $id ?>"> 
+                                <input type="hidden" name="action" value="supprimer">
+                                <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endif; endforeach; ?>
+            </tbody>
+            <tfoot>
+                <tr class="bg-gray-200">
+                    <th colspan="3" class="border px-4 py-2 text-left">Total</th>
+                    <th colspan="2" class="border px-4 py-2"><?= number_format($totalPanier, 2) ?> €</th>
+                </tr>
+                <tr class="bg-gray-100">
+                    <th colspan="3" class="border px-4 py-2 text-left">Quantité Totale</th>
+                    <th colspan="2" class="border px-4 py-2"><?= $quantiteTotale ?> article(s)</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- Boutons Vider le panier et Connexion/Commande -->
+        <div class="flex justify-between space-x-4 mt-4">
+            <form method="POST" action="/produits/supprimer" class="w-1/4">
+                <input type="hidden" name="action" value="vider">
+                <button type="submit" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
+                    <i class="fas fa-trash mr-2"></i> 
+                </button>
+            </form>
+            <?php if ($utilisateurEstConnecte): 
+                // Récupérer l'ID de l'utilisateur connecté depuis la session
+                $utilisateurId = $_SESSION['id_utilisateur']; 
+                
+
+            ?>
+                <form method="POST" action="/commande" class="w-1/4">
+    <!-- Données du panier -->
+    <input type="hidden" name="id_utilisateur" value="<?= $utilisateurId ?? '' ?>">
+    <input type="hidden" name="prix_total" value="<?= $totalPanier ?>">
+
+    <?php foreach ($_SESSION['panier'] as $id => $produit): ?>
+        <input type="hidden" name="produits[<?= $id ?>][id_produit]" value="<?= $id ?>">
+
+        <!-- Ajouter la quantité -->
+        <input type="hidden" name="produits[<?= $id ?>][quantite]" value="<?= $produit['quantite'] ?>">
+
+        <!-- Affichage optionnel de la quantité -->
+        <input type="number" name="produits[<?= $id ?>][quantite]" value="<?= $produit['quantite'] ?>" min="1" />
+
+    <?php endforeach; ?>
+
+    <button type="submit" class="py-2 px-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> 
+    </button>
+</form>
+
             <?php else: ?>
-                <p class="text-center text-gray-600">Votre panier est vide.</p>
+                <form method="GET" action="/login" class="w-1/4">
+                    <button type="submit" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> 
+                    </button>
+                </form>
             <?php endif; ?>
         </div>
+    <?php else: ?>
+        <p class="text-center text-gray-600">Votre panier est vide.</p>
+    <?php endif; ?>
+</div>
+
         <!-- Section des Produits -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <?php
                 if ($produits):
-                    foreach ($produits as $id => $produit):
-                        // echo "ID Produit: " . htmlspecialchars($id) . "<br>";
-                        $nom = htmlspecialchars($produit['nom'] ?? 'Nom indisponible');
-                        $prix = $produit['prix_unitaire'] ?? 0;
-                        $cheminImage = htmlspecialchars($produit['chemin_image'] ?? 'public/uploads/default_image.png');
-                        $promoType = $produit['promo_type'] ?? null;
-                        $promoValeur = $produit['promo_valeur'] ?? null;
-                        $prixReduit = $prix;
-                        if ($promoType === 'pourcentage') {
-                            $prixReduit = $prix - ($prix * $promoValeur / 100);
-                        } elseif ($promoType === 'fixe') {
-                            $prixReduit = max(0, $prix - $promoValeur);
-                        }
+                    foreach ($produits as $produit): ?>
+                        <?php
+                            $idProduit = $produit['id_produit']; // Récupérer l'id du produit
+                            $nom = htmlspecialchars($produit['nom'] ?? 'Nom indisponible');
+                            $prix = $produit['prix_unitaire'] ?? 0;
+                            $cheminImage = htmlspecialchars($produit['chemin_image'] ?? 'public/uploads/default_image.png');
+                            $promoType = $produit['promo_type'] ?? null;
+                            $promoValeur = $produit['promo_valeur'] ?? null;
+                            $prixReduit = $prix;
+                            if ($promoType === 'pourcentage') {
+                                $prixReduit = $prix - ($prix * $promoValeur / 100);
+                            } elseif ($promoType === 'fixe') {
+                                $prixReduit = max(0, $prix - $promoValeur);
+                            }
                         ?>
                         <div class="border rounded shadow-lg p-4 bg-white">
                             <img src="/public/<?= $cheminImage ?>" class="w-full h-48 object-cover mb-4">
@@ -168,8 +170,12 @@ foreach ($panier as $id => $quantite) {
                                     <?= number_format($prix, 2) ?> €
                                 <?php endif; ?>
                             </p>
+                    
+                            <!-- Affichage de l'id_produit -->
+                            <!-- <p>Produit ID: <?= $idProduit ?></p> -->
+                    
                             <form method="POST" action="/produits/panier">
-                                <input type="hidden" name="id_produit" value="<?= $id ?>">
+                                <input type="hidden" name="id_produit" value="<?= $idProduit ?>"> <!-- Passer l'id_produit -->
                                 <input type="hidden" name="action" value="ajouter">
                                 <label for="quantite" class="block text-sm font-medium text-gray-700">Quantité</label>
                                 <input type="number" name="quantite" id="quantite" value="1" min="1" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>

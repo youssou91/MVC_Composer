@@ -2,7 +2,7 @@
 namespace App\Modele;
 use PDO;
 use App\Classes\Commande;  
-use Exception;
+use PDOException;
 
 class CommandeModel {
     private $pdo;
@@ -12,33 +12,42 @@ class CommandeModel {
     }
 
     public function getAllCommandes() {
-        $stmt = $this->pdo->prepare("SELECT 
-            commande.id_commande, 
-            commande.id_utilisateur, 
-            commande.date_commande, 
-            commande.prix_total, 
-            utilisateur.nom_utilisateur, 
-            utilisateur.prenom,
-            commande.statut
-        FROM 
-            commande
-        INNER JOIN  utilisateur ON commande.id_utilisateur = utilisateur.id_utilisateur;");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $stmt = $this->pdo->prepare("SELECT 
+                commande.id_commande, 
+                commande.id_utilisateur, 
+                commande.date_commande, 
+                commande.prix_total, 
+                utilisateur.nom_utilisateur, 
+                utilisateur.prenom,
+                commande.statut
+            FROM 
+                commande
+            INNER JOIN  utilisateur ON commande.id_utilisateur = utilisateur.id_utilisateur;");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new PDOException("Erreur lors de la récupération des commandes : " . $e->getMessage());
+        }
     }
-
+    
     public function getCommandeById($id_commande) {
-        $stmt = $this->pdo->prepare("SELECT * FROM commandes WHERE id_commande = :id_commande");
-        $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM commande WHERE id_commande = :id_commande");
+            $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new PDOException("Erreur lors de la récupération de la commande avec ID $id_commande : " . $e->getMessage());
+        }
     }
+    
     function addCommande($commande) {
         echo '<pre>';
         print_r($commande);
         echo '</pre>';
         if (!isset($commande['id_utilisateur']) || !isset($commande['prix_total'])) {
-            throw new Exception("Les informations requises pour ajouter une commande sont manquantes.");
+            throw new PDOException("Les informations requises pour ajouter une commande sont manquantes.");
         }
     
         $id_utilisateur = $commande['id_utilisateur'];
@@ -63,16 +72,16 @@ class CommandeModel {
             // Insertion des produits de la commande
             foreach ($commande['produits'] as $produit) {
                 if (!$this->addProduitCommande($id_commande, $produit)) {
-                    throw new Exception("Erreur lors de l'ajout d'un produit à la commande.");
+                    throw new PDOException("Erreur lors de l'ajout d'un produit à la commande.");
                 }
             }
     
             // Validation de la transaction
             $this->pdo->commit();
             return $id_commande;
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             $this->pdo->rollBack();
-            throw new Exception("Erreur lors de l'ajout de la commande : " . $e->getMessage());
+            throw new PDOException("Erreur lors de l'ajout de la commande : " . $e->getMessage());
         }
     }
     
@@ -86,29 +95,49 @@ class CommandeModel {
             $stmtCheckProduit->execute([':id_produit' => $id_produit]);
     
             if ($stmtCheckProduit->rowCount() > 0) {
-                // Insertion dans produit_commande
-                $stmtProduitCommande = $this->pdo->prepare(
-                    "INSERT INTO produit_commande (id_commande, id_produit, quantite) VALUES (:id_commande, :id_produit, :quantite)"
-                );
-                $stmtProduitCommande->execute([
+                // Vérifier si le produit est déjà ajouté à cette commande
+                $stmtCheckProduitCommande = $this->pdo->prepare("SELECT * FROM produit_commande WHERE id_commande = :id_commande AND id_produit = :id_produit");
+                $stmtCheckProduitCommande->execute([
                     ':id_commande' => $id_commande,
-                    ':id_produit' => $id_produit,
-                    ':quantite' => $quantite
+                    ':id_produit' => $id_produit
                 ]);
     
-                // Mise à jour de la quantité
+                if ($stmtCheckProduitCommande->rowCount() > 0) {
+                    // Si le produit est déjà présent, mettez à jour la quantité
+                    $stmtUpdateQuantite = $this->pdo->prepare(
+                        "UPDATE produit_commande SET quantite = quantite + :quantite WHERE id_commande = :id_commande AND id_produit = :id_produit"
+                    );
+                    $stmtUpdateQuantite->execute([
+                        ':quantite' => $quantite,
+                        ':id_commande' => $id_commande,
+                        ':id_produit' => $id_produit
+                    ]);
+                } else {
+                    // Insertion dans produit_commande si ce n'est pas déjà ajouté
+                    $stmtProduitCommande = $this->pdo->prepare(
+                        "INSERT INTO produit_commande (id_commande, id_produit, quantite) VALUES (:id_commande, :id_produit, :quantite)"
+                    );
+                    $stmtProduitCommande->execute([
+                        ':id_commande' => $id_commande,
+                        ':id_produit' => $id_produit,
+                        ':quantite' => $quantite
+                    ]);
+                }
+    
+                // Mise à jour de la quantité du produit
                 if (!$this->miseAJourQuantiteProduit($id_produit, $quantite)) {
-                    throw new Exception("Erreur lors de la mise à jour de la quantité du produit.");
+                    throw new \PDOException("Erreur lors de la mise à jour de la quantité du produit.");
                 }
             } else {
-                throw new Exception("Le produit avec l'ID $id_produit n'existe pas.");
+                throw new \PDOException("Le produit avec l'ID $id_produit n'existe pas.");
             }
     
             return true;
-        } catch (Exception $e) {
-            throw new Exception("Erreur dans addProduitCommande : " . $e->getMessage());
+        } catch (\PDOException $e) {
+            throw new \PDOException("Erreur dans addProduitCommande : " . $e->getMessage());
         }
-    }
+    }    
+    
     
     function miseAJourQuantiteProduit($id_produit, $quantite) {
         try {
@@ -119,8 +148,8 @@ class CommandeModel {
                 ':id_produit' => $id_produit
             ]);
             return true;
-        } catch (Exception $e) {
-            throw new Exception("Erreur dans miseAJourQuantiteProduit : " . $e->getMessage());
+        } catch (PDOException $e) {
+            throw new PDOException("Erreur dans miseAJourQuantiteProduit : " . $e->getMessage());
         }
     }
     

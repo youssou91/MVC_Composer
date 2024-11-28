@@ -20,13 +20,13 @@ class HomeControlleur {
         $this->panier->init();
         $produitModel = new ProduitModel($this->db);
         $produits = $produitModel->getTousLesProduitsAvecPromotions();
-        foreach ($produits as &$produit) {
-            $produit['prix_reduit'] = $this->calculerPrixReduit(
-                $produit['prix_unitaire'],
-                $produit['promo_type'],
-                $produit['promo_valeur']
-            );
-        }
+        // foreach ($produits as &$produit) {
+        //     $produit['prix_reduit'] = $this->calculerPrixReduit(
+        //         $produit['prix_unitaire'],
+        //         $produit['promo_type'],
+        //         $produit['promo_valeur']
+        //     );
+        // }
         $panier = $this->panier->getContenu();
         require_once '../src/vue/home.php';
     }
@@ -35,15 +35,24 @@ class HomeControlleur {
         // Vérifier si les données ont été envoyées via POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $idProduit = $_POST['id_produit'];
-            $quantite = (int)$_POST['quantite']; 
-            // Ajouter l'ID du produit à la session
-            session_start(); 
-            $_SESSION['id_produit'] = $idProduit;  
-            $this->panier->ajouter($idProduit, $quantite);
+            
+            $quantite = (int)$_POST['quantite'];
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!isset($_SESSION['panier'])) {
+                $_SESSION['panier'] = [];
+            }
+            if (isset($_SESSION['panier'][$idProduit])) {
+                $_SESSION['panier'][$idProduit] += $quantite; 
+            } else {
+                $_SESSION['panier'][$idProduit] = $quantite; 
+            }
             header('Location: /');  
             exit;
         }
     }
+    
 
     public function gererPanier($idProduit = null) {
         // Vérifier si la méthode HTTP est POST

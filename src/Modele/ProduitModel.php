@@ -126,17 +126,20 @@ class ProduitModel {
         global $connect; 
         $query = "
             SELECT 
-            p.*, 
-            pr.valeur AS promo_valeur, 
-            pr.type AS promo_type
-        FROM Produits p
-        LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
-        LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
-        WHERE p.quantite > 0
-        AND (
-            pr.id_promotion IS NULL OR 
-            (pr.date_debut <= CURDATE() AND pr.date_fin >= CURDATE())
-        )
+                p.id_produit,
+                p.nom,
+                p.prix_unitaire,
+                p.quantite,
+                p.chemin_image,
+                MAX(pr.valeur) AS promo_valeur, -- Prendre la valeur maximale de la promotion
+                MAX(pr.type) AS promo_type      -- Prendre le type de promotion correspondant
+            FROM Produits p
+            LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
+            LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
+            WHERE p.quantite > 0
+            AND (pr.id_promotion IS NULL OR (pr.date_debut <= CURDATE() AND pr.date_fin >= CURDATE()))
+            GROUP BY p.id_produit, p.nom, p.prix_unitaire, p.quantite;
+
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
