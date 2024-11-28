@@ -42,6 +42,12 @@ $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_det
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
 $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
 $router->map('POST', '/produit/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
+//
+$router->map('GET', '/produits/modifierProduit=[i:id]', 'ProduitControlleur::recupererProduit', 'modifier');
+$router->map('GET', '/produits/editerProduit=[i:id]', 'ProduitControlleur::updateProduit', 'editer');
+$router->map('GET', '/produits/supprimer=[i:id]', 'ProduitControlleur::supprimerProduit', 'supprimer');
+
+
 // Définir le routage pour l'action d'ajout de produit au panier
 $router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
 $router->map('POST', '/produits/supprimer/[i:id]', function($id) {
@@ -96,7 +102,7 @@ ini_set('display_errors', 1);
 
 // Vérification des routes
 $match = $router->match();
-
+// Vérifier si une route correspond
 if ($match) {
     require '../static/header.php';
 
@@ -136,12 +142,19 @@ if ($match) {
                 }
 
                 if (method_exists($controlleurInstance, $method)) {
+                    // Récupérer les paramètres de l'URL
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $match['params'] = array_merge($match['params'], [$_POST]);
                     }
                     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                        $match['params'] = array_merge($match['params'], [$_GET]);
+                        // Vérifier si un paramètre est passé via l'URL sous forme "nom=valeur"
+                        $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+                        if ($queryString) { // Vérifier si une chaîne de requête existe
+                            parse_str($queryString, $queryParams);
+                            $match['params'] = array_merge($match['params'], $queryParams);
+                        }
                     }
+                    
 
                     // Validation des paramètres requis
                     $reflection = new ReflectionMethod($controlleurInstance, $method);
@@ -171,7 +184,6 @@ if ($match) {
     // Gestion des erreurs si aucune route ne correspond
     handleError("Aucune route correspondante trouvée.");
 }
-
 
 // Fonction pour gérer les erreurs et afficher un message générique
 function handleError($errstr, $errno = 500, $errfile = '', $errline = 0) {

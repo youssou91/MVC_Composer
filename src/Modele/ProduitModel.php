@@ -15,6 +15,12 @@ class ProduitModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getProduitById($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM produits WHERE id_produit = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function getAllCategories() {
         try {
@@ -145,6 +151,93 @@ class ProduitModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    }
+    
+    // function deleteProduit($idProduit) {
+    //     try {
+    //         // Commencer une transaction
+    //         $pdo->beginTransaction();
+    //         // Supprimer les enregistrements associés dans produitpromotion
+    //         if (!deleteProduitPromotion($idProduit)) {
+    //             $pdo->rollBack();
+    //             return false;
+    //         }
+    //         // Ensuite, supprimer l'enregistrement du produit
+    //         $queryDeleteProduit = "DELETE FROM produits WHERE id_produit = ?";
+    //         $stmt = $pdo->prepare($queryDeleteProduit);
+    //         $stmt->execute([$idProduit]);
+    
+    //         // Valider la transaction
+    //         $pdo->commit();
+    //         return true;
+    //     } catch (Exception $e) {
+    //         // Annuler la transaction en cas d'erreur
+    //         $pdo->rollBack();
+    //         return false;
+    //     }
+    // }
+    
+    // function updateProduit($produit) {
+    //     $id = $produit['id_produit'];
+    //     $nom = $produit['nom'];
+    //     $prix = $produit['prix_unitaire'];
+    //     $description = $produit['description'];
+    //     $courte_description = $produit['courte_description'];
+    //     $quantite = $produit['quantite'];
+    //     $chemin_image = $produit['chemin_image'];
+    //     $model = $produit['model'];
+    //     $sql = "UPDATE produits 
+    //             SET nom = ?, prix_unitaire = ?, description = ?, courte_description = ?, quantite = ?, chemin_image=?, model =?
+    //             WHERE id_produit = ?";
+    //     // $conn = connexionDB();
+    //     try {
+    //         $stmt = $conn->prepare($sql);
+    //         return $stmt->execute([$nom, $prix, $description, $courte_description, $quantite, $id, $chemin_image, $model]);
+    //     } catch (Exception $e) {
+    //         return false;
+    //     }
+    // }
+
+    // function deleteProduitPromotion($idProduit) {
+    //     $conn = connexionDB();
+    
+    //     try {
+    //         $sql = "DELETE FROM produitpromotion WHERE id_produit = ?";
+    //         $stmt = $conn->prepare($sql);
+    //         $stmt->execute([$idProduit]);
+    //         return true;
+    //     } catch (Exception $e) {
+    //         return false;
+    //     }
+    // }
+
+    public function deleteProduitPromotion($id) {
+        $sql = "DELETE FROM produitpromotion WHERE id_produit = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+    }
+    public function updateProduit($id, $nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description = null, $couleurs = null, $chemin_image = null) {
+        $sql = "UPDATE produits 
+                SET nom = ?, prix_unitaire = ?, quantite = ?, id_categorie = ?, model = ?, courte_description = ?, longue_description = ?, couleurs = ?, chemin_image = ?
+                WHERE id_produit = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description, $couleurs, $chemin_image, $id]);
+        return true;
+    }
+
+    public function deleteProduit($id) {
+        try {
+            $this->pdo->beginTransaction();
+            $this->deleteProduitPromotion($id);
+            $sql = "DELETE FROM produits WHERE id_produit = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$id]);
+            $this->pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            return false;
+        }
     }
     
 }
