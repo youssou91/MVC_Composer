@@ -41,7 +41,7 @@ $messageType = '';
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="/produit/ajouterProduit"  enctype="multipart/form-data" class="space-y-8">
+            <form method="POST" action="/produits/ajouterProduit"  enctype="multipart/form-data" class="space-y-8">
                 <div class="bg-gray-50 p-6 rounded-lg shadow-md">
                     <h2 class="text-lg font-semibold mb-4 text-blue-500">Détails du produit</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

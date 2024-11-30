@@ -3,81 +3,73 @@
 namespace App\Controlleur;
 
 use App\Modele\ProduitModel;
-use App\Modele\PanierModel;
 
 require_once __DIR__ . '/../../config/db.php';
 
 class HomeControlleur {
     private $db;
-    private $panier;
 
     public function __construct() {
         $this->db = getConnection();
-        $this->panier = new PanierModel(); 
     }
 
     public function index() {
-        $this->panier->init();
         $produitModel = new ProduitModel($this->db);
         $produits = $produitModel->getTousLesProduitsAvecPromotions();
-        // foreach ($produits as &$produit) {
-        //     $produit['prix_reduit'] = $this->calculerPrixReduit(
-        //         $produit['prix_unitaire'],
-        //         $produit['promo_type'],
-        //         $produit['promo_valeur']
-        //     );
-        // }
-        $panier = $this->panier->getContenu();
+        $panier = $_SESSION['panier'] ?? [];
         require_once '../src/vue/home.php';
     }
 
     public function ajouterProduit() {
-        // Vérifier si les données ont été envoyées via POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $idProduit = $_POST['id_produit'];
-            
-            $quantite = (int)$_POST['quantite'];
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
+            $idProduit = $_POST['id_produit'] ?? null;
+            $quantite = (int)($_POST['quantite'] ?? 1);
+            // Prix réduit envoyé depuis le formulaire
+            $prixReduit = $_POST['prix_reduit'] ?? null; 
+    
+            if (!$idProduit || $quantite <= 0) {
+                // Redirection en cas d'erreur
+                header('Location: /'); 
+                exit;
             }
+    
             if (!isset($_SESSION['panier'])) {
                 $_SESSION['panier'] = [];
             }
+    
             if (isset($_SESSION['panier'][$idProduit])) {
-                $_SESSION['panier'][$idProduit] += $quantite; 
+                // Mise à jour de la quantité si le produit existe déjà dans le panier
+                $_SESSION['panier'][$idProduit]['quantite'] += $quantite;
             } else {
-                $_SESSION['panier'][$idProduit] = $quantite; 
+                // Ajout du produit avec les informations nécessaires
+                $_SESSION['panier'][$idProduit] = [
+                    'quantite' => $quantite,
+                    // Priorité au prix réduit
+                    'prix_unitaire' => $prixReduit ? $prixReduit : $_POST['prix_unitaire'], 
+                    'nom' => $_POST['nom'],
+                    'promo_type' => $_POST['promo_type'] ?? null,
+                    'promo_valeur' => $_POST['promo_valeur'] ?? null,
+                ];
             }
-            header('Location: /');  
+    
+            header('Location: /');
             exit;
         }
     }
-    
 
-    public function gererPanier($idProduit = null) {
-        // Vérifier si la méthode HTTP est POST
+    public function gererPanier() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($idProduit !== null) {
+            $idProduit = $_POST['id_produit'] ?? null;
+            $action = $_POST['action'] ?? null;
+
+            if ($action === 'supprimer' && $idProduit !== null) {
                 unset($_SESSION['panier'][$idProduit]);
-            } else {
+            } elseif ($action === 'vider') {
                 $_SESSION['panier'] = [];
             }
-            header('Location: /'); 
+
+            header('Location: /');
             exit;
         }
     }
-    
-    function calculerPrixReduit($prixUnitaire, $promoType, $promoValeur) {
-        if ($promoValeur === null || $promoValeur <= 0) {
-            return $prixUnitaire; 
-        }
-        if ($promoType === 'pourcentage') {
-            return $prixUnitaire - ($prixUnitaire * $promoValeur / 100);
-        } elseif ($promoType === 'fixe') {
-            return max(0, $prixUnitaire - $promoValeur);
-        }
-        return $prixUnitaire;
-    }
-
-    
 }

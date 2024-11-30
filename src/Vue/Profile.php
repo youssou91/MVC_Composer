@@ -54,7 +54,6 @@ if (!isset($_SESSION['id_utilisateur'])) {
     exit;
 }
 
-$dbConnection = getConnection();
 $userController = new ProfileControlleur($dbConnection);
 $userId = $_SESSION['id_utilisateur'];
 $userInfo = $userController->getUserInfo($userId);
@@ -137,13 +136,14 @@ if (isset($_POST['action'])) {
                                     <td class="py-2 px-4"><?= htmlspecialchars($order['statut']) ?></td>
                                     <td>
                                         <div class="flex space-x-2"> 
-                                            <a href="details_commande.php?id_commande=<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                            <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
-                                            <a href="paiement.php?id_commande=<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                            <a href="/profile/paiement/<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
                                                 <i class="fas fa-credit-card"></i>
                                             </a>
-                                            <a href="details_commande.php?id_commande=<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+
+                                            <a href="/profile/annuler/<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
                                                 <i class="fas fa-times"></i>
                                             </a>
                                         </div>

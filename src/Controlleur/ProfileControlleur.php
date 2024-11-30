@@ -41,28 +41,41 @@ class ProfileControlleur {
             header('Location: /dashboard/profile?error=User not found');
         }
     }
-
-    //getuserinfos
+    
+    public function getUserOrders($orderId) {
+        $userModel = new UserModel($this->db);
+        $orders = $userModel->getUserOrders($orderId);
+        return $orders;
+    }
+    
     public function getUserInfo($id) {
         $userModel = new UserModel($this->db);
         $user = $userModel->getUserInfo($id);
-        
         if ($user) {
             return $user;
         } else {
             return null;
         }
     }
-    //getUserOrders
-    public function getUserOrders($userId) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //fonction pour appaler la page de paiement
+    
+    public function payOrder($id_commande) {
         $userModel = new UserModel($this->db);
-        $orders = $userModel->getUserOrders($userId);
+        require_once __DIR__ . '/../Vue/Paiement.php'; // Chemin vers la vue Paiement
         
-        if ($orders) {
-            return $orders;
-        } else {
-            return null;
-        }
     }
+    //detailsOrder
+    public function getOrderDetails($id_commande) {
+        $userModel = new UserModel($this->db);
+        require_once __DIR__ . '/../Vue/details_commande.php'; // Chemin vers la vue Paiement
+    }
+    //fonction pour changer le status de la commande
+    public function changeOrderStatus($id_commande, $status) {
+        $userModel = new UserModel($this->db);
+        $userModel->changeOrderStatus($id_commande, $status);
+    }
+    
+    
 }
 ?>

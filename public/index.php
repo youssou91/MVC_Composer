@@ -41,7 +41,7 @@ $router->map('GET', '/contact', 'ContactControlleur::index', 'contacter');
 $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_detail');
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
 $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
-$router->map('POST', '/produit/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
+$router->map('POST', '/produits/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 //
 $router->map('GET', '/produits/modifierProduit=[i:id]', 'ProduitControlleur::recupererProduit', 'modifier');
 $router->map('GET', '/produits/editerProduit=[i:id]', 'ProduitControlleur::updateProduit', 'editer');
@@ -83,7 +83,11 @@ $router->map('POST', '/admin/produits/delete/[i:id]', 'AdminProduitControlleur::
 $router->map('GET', '/mon_profile', 'ProfileControlleur::index', 'profile');
 $router->map('GET', '/profile/edit', 'ProfileControlleur::editProfile', 'edit_profile');
 $router->map('POST', '/profile/edit', 'ProfileControlleur::updateProfile', 'update_profile');
-$router->map('GET', '/profile/orders', 'ProfileControlleur::orders', 'orders');
+///
+$router->map('GET', '/profile/paiement/[i:id_commande]', 'ProfileControlleur::payOrder', 'paiement');
+$router->map('GET', '/profile/details/[i:id_commande]', 'ProfileControlleur::getOrderDetails', 'details');
+$router->map('GET', '/profile/annuler/[i:id_commande]', 'ProfileControlleur::changeOrderStatus', 'annuler');
+
 
 // Routes pour les promotions
 $router->map('GET', '/promotions', 'PromotionControlleur::index', 'promotions');

@@ -72,9 +72,7 @@ class ProduitControlleur {
     
     public function recupererProduit($id) {
         $produit = $this->produitModel->getProduitById($id);
-        // Rediriger vers le formulaire de modification
         require __DIR__. '/../vue/modifierProduit.php';
-        // header('Location: /produits/modifier');
 
     }
     

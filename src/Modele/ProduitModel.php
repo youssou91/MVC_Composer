@@ -137,6 +137,8 @@ class ProduitModel {
                 p.prix_unitaire,
                 p.quantite,
                 p.chemin_image,
+                p.description,
+                p.couleurs,
                 MAX(pr.valeur) AS promo_valeur, -- Prendre la valeur maximale de la promotion
                 MAX(pr.type) AS promo_type      -- Prendre le type de promotion correspondant
             FROM Produits p
@@ -152,65 +154,8 @@ class ProduitModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     }
-    
-    // function deleteProduit($idProduit) {
-    //     try {
-    //         // Commencer une transaction
-    //         $pdo->beginTransaction();
-    //         // Supprimer les enregistrements associés dans produitpromotion
-    //         if (!deleteProduitPromotion($idProduit)) {
-    //             $pdo->rollBack();
-    //             return false;
-    //         }
-    //         // Ensuite, supprimer l'enregistrement du produit
-    //         $queryDeleteProduit = "DELETE FROM produits WHERE id_produit = ?";
-    //         $stmt = $pdo->prepare($queryDeleteProduit);
-    //         $stmt->execute([$idProduit]);
-    
-    //         // Valider la transaction
-    //         $pdo->commit();
-    //         return true;
-    //     } catch (Exception $e) {
-    //         // Annuler la transaction en cas d'erreur
-    //         $pdo->rollBack();
-    //         return false;
-    //     }
-    // }
-    
-    // function updateProduit($produit) {
-    //     $id = $produit['id_produit'];
-    //     $nom = $produit['nom'];
-    //     $prix = $produit['prix_unitaire'];
-    //     $description = $produit['description'];
-    //     $courte_description = $produit['courte_description'];
-    //     $quantite = $produit['quantite'];
-    //     $chemin_image = $produit['chemin_image'];
-    //     $model = $produit['model'];
-    //     $sql = "UPDATE produits 
-    //             SET nom = ?, prix_unitaire = ?, description = ?, courte_description = ?, quantite = ?, chemin_image=?, model =?
-    //             WHERE id_produit = ?";
-    //     // $conn = connexionDB();
-    //     try {
-    //         $stmt = $conn->prepare($sql);
-    //         return $stmt->execute([$nom, $prix, $description, $courte_description, $quantite, $id, $chemin_image, $model]);
-    //     } catch (Exception $e) {
-    //         return false;
-    //     }
-    // }
 
-    // function deleteProduitPromotion($idProduit) {
-    //     $conn = connexionDB();
-    
-    //     try {
-    //         $sql = "DELETE FROM produitpromotion WHERE id_produit = ?";
-    //         $stmt = $conn->prepare($sql);
-    //         $stmt->execute([$idProduit]);
-    //         return true;
-    //     } catch (Exception $e) {
-    //         return false;
-    //     }
-    // }
-
+   
     public function deleteProduitPromotion($id) {
         $sql = "DELETE FROM produitpromotion WHERE id_produit = ?";
         $stmt = $this->pdo->prepare($sql);
