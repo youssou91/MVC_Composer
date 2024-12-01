@@ -123,7 +123,6 @@
                             $descripton = $produit['description'] ?? null;
                             $couleurs = $produit['couleurs'] ?? null;
                             $prixReduit = $prix;
-                            // print_r($couleurs);
             
                             if ($promoType === 'pourcentage') {
                                 $prixReduit = $prix - ($prix * $promoValeur / 100);
@@ -154,7 +153,6 @@
                                 <input type="hidden" name="action" value="ajouter">
                                 <label for="quantite" class="block text-sm font-medium text-gray-700">Quantité</label>
                                 <input type="number" name="quantite" id="quantite" value="1" min="1" max="<?= $quantiteStock ?>" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                <p class="text-sm text-gray-600">Stock disponible: <?= $quantiteStock ?></p>
                                 <button type="submit" class="mt-4 w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center">
                                     <i class="fas fa-cart-plus mr-2"></i> 
                                 </button>
@@ -182,11 +180,11 @@
                                                 <strong>Prix réduit :</strong> <?= number_format($prixReduit, 2) ?> $
                                             </p>
                                         <?php endif; ?>
-                                        <p class="text-gray-600 mb-4">
-                                            <strong>Description :</strong> <?= $descripton ?> 
+                                        <p class="text-gray-700 mb-2">
+                                            <strong>Stock Disponible :</strong> <?= $quantiteStock ?> 
                                         </p>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700">Couleurs disponibles</label>
+                                            <p class="text-gray-600 mb-4"><strong>Couleurs disponibles</strong></p>
                                             <div class="mt-2 grid grid-cols-3 gap-4">
                                                 <?php
                                                 // Tableau des couleurs avec leurs classes Tailwind
@@ -228,6 +226,9 @@
                                                 ?>
                                             </div>
                                         </div>
+                                        <p class="text-gray-600 mb-4">
+                                            <strong>Description :</strong> <?= $descripton ?> 
+                                        </p>
                                     </div>
                                 </div>
                             </div>

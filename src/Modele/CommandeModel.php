@@ -88,7 +88,6 @@ class CommandeModel {
     function addProduitCommande($id_commande, $produit) {
         $id_produit = $produit['id_produit'];
         $quantite = $produit['quantite'];
-    
         try {
             // Vérifiez si le produit existe dans la table produits
             $stmtCheckProduit = $this->pdo->prepare("SELECT id_produit FROM produits WHERE id_produit = :id_produit");
@@ -138,7 +137,6 @@ class CommandeModel {
         }
     }    
     
-    
     function miseAJourQuantiteProduit($id_produit, $quantite) {
         try {
             $sql = "UPDATE produits SET quantite = quantite - :quantite WHERE id_produit = :id_produit";
@@ -152,6 +150,21 @@ class CommandeModel {
             throw new PDOException("Erreur dans miseAJourQuantiteProduit : " . $e->getMessage());
         }
     }
+    
+    function updateCommande($id_commande, $statut){
+        try {
+            $sql = "UPDATE commande SET statut = :statut WHERE id_commande = :id_commande";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':statut' => $statut,
+                ':id_commande' => $id_commande
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            throw new PDOException("Erreur dans updateCommande : ". $e->getMessage());
+        }
+    }
+       
     
     
     

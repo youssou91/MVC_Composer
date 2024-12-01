@@ -60,6 +60,8 @@ $router->map('POST', '/produits/supprimer', function() {
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
 $router->map('POST', '/commande', 'CommandeControlleur::ajouterCommande', 'commande');
+// $router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]', 'CommandeControlleur::modifierCommande', 'editerCommande');
+$router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]/action=[a:action]', 'CommandeControlleur::modifierCommande', 'editerCommande');
 
 
 // Routes pour le panier
@@ -110,22 +112,19 @@ $match = $router->match();
 if ($match) {
     require '../static/header.php';
 
-    // Vérifier si la cible est une fonction anonyme ou une méthode de classe
     if (is_callable($match['target'])) {
         call_user_func_array($match['target'], $match['params']);
     } else {
-        // Extraire le contrôleur et la méthode
         list($controlleur, $method) = explode('::', $match['target']);
         $controlleurClass = "../src/controlleur/{$controlleur}.php";
 
-        // Vérifier si le fichier du contrôleur existe
         if (file_exists($controlleurClass)) {
             require_once $controlleurClass;
             $controlleur = "App\\Controlleur\\" . $controlleur;
 
-            // Vérifier si la classe du contrôleur existe
             if (class_exists($controlleur)) {
-                // Instancier la classe du contrôleur en fonction de ses dépendances
+                // Gestion des dépendances des contrôleurs
+                // Gestion des dépendances des contrôleurs
                 switch ($controlleur) {
                     case "App\\Controlleur\\ProduitControlleur":
                         $produitModel = new ProduitModel($pdo);
@@ -146,30 +145,27 @@ if ($match) {
                 }
 
                 if (method_exists($controlleurInstance, $method)) {
-                    // Récupérer les paramètres de l'URL
+                    // Gestion des paramètres pour GET et POST
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $match['params'] = array_merge($match['params'], [$_POST]);
                     }
+
                     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                        // Vérifier si un paramètre est passé via l'URL sous forme "nom=valeur"
                         $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-                        if ($queryString) { // Vérifier si une chaîne de requête existe
+                        if ($queryString) {
                             parse_str($queryString, $queryParams);
                             $match['params'] = array_merge($match['params'], $queryParams);
                         }
                     }
-                    
 
-                    // Validation des paramètres requis
+                    // Validation et appel de la méthode
                     $reflection = new ReflectionMethod($controlleurInstance, $method);
                     $parameters = $reflection->getParameters();
 
-                    // Vérifier si le nombre de paramètres est suffisant
                     if (count($parameters) > count($match['params'])) {
-                        handleError("Nombre de paramètres insuffisants pour appeler la méthode : $method", 400);
+                        handleError("Nombre de paramètres insuffisants pour la méthode : $method", 400);
                     }
 
-                    // Appeler la méthode du contrôleur avec les paramètres
                     call_user_func_array([$controlleurInstance, $method], $match['params']);
                 } else {
                     handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
@@ -181,13 +177,11 @@ if ($match) {
             handleError("Fichier du contrôleur introuvable : $controlleurClass");
         }
     }
-
-    // Inclure le pied de page
     require '../static/footer.php';
 } else {
-    // Gestion des erreurs si aucune route ne correspond
     handleError("Aucune route correspondante trouvée.");
 }
+
 
 // Fonction pour gérer les erreurs et afficher un message générique
 function handleError($errstr, $errno = 500, $errfile = '', $errline = 0) {
@@ -197,14 +191,6 @@ function handleError($errstr, $errno = 500, $errfile = '', $errline = 0) {
     // Enregistrer l'erreur dans le log avec tous les détails
     error_log("Erreur [$errno] : $errstr dans $errfile à la ligne $errline | ID : $errorId");
 
-    // Afficher le message générique à l'utilisateur avec l'ID de l'erreur
-    echo "Une erreur interne est survenue. Veuillez réessayer plus tard. Si l'erreur persiste, veuillez citer le code d'erreur : $errorId.";
-    
-    exit;
+    // Afficher le message générique à l'utilisateur
+    echo "Désolé, une erreur est survenue. Veuillez réessayer plus tard. [ID: $errorId]";
 }
-
-// Définir cette fonction pour intercepter toutes les erreurs
-set_error_handler("handleError");
-
-
-?>

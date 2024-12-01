@@ -39,6 +39,7 @@ class CommandeControlleur {
             $id_commande = $this->commandeModel->addCommande($data);
             if ($id_commande) {
                 echo "Commande ajoutée avec succès. ID de la commande : $id_commande";
+                header('Location: /mon_profile'); 
             } else {
                 echo "Erreur lors de l'ajout de la commande.";
             }
@@ -59,6 +60,33 @@ class CommandeControlleur {
             echo "Méthode non autorisée.";
         }
     }
+    // Modifier une commande existante
+    
+    public function modifierCommande($id_commande, $action) {
+        // Définir le statut basé sur l'action
+        $statut = match ($action) {
+            'traiter' => 'En traitement',
+            'expedier' => 'En expédition',
+            'annuler' => 'Annulée',
+            default => null,
+        };
+    
+        if ($statut) {
+            try {
+                $this->commandeModel->updateCommande($id_commande, $statut);
+                // Rediriger vers la page des commandes après la modification
+                header('Location: /commandes'); 
+                exit; // Ne pas oublier d'arrêter l'exécution après la redirection
+            } catch (Exception $e) {
+                echo "Erreur lors de la modification de la commande : " . $e->getMessage();
+            }
+        } else {
+            echo "Action invalide.";
+        }
+    }
+    
+    
+
 
     
 }
