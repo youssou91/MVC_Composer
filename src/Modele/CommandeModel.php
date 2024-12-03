@@ -43,9 +43,7 @@ class CommandeModel {
     }
     
     function addCommande($commande) {
-        echo '<pre>';
-        print_r($commande);
-        echo '</pre>';
+        
         if (!isset($commande['id_utilisateur']) || !isset($commande['prix_total'])) {
             throw new PDOException("Les informations requises pour ajouter une commande sont manquantes.");
         }

@@ -6,7 +6,7 @@
     $quantiteTotale = 0;
     // Regroupement des produits par ID et addition des quantités
     $panierRegroupe = $_SESSION['panier'] ?? [];
-
+    
     ?>
 
     <!DOCTYPE html>
@@ -17,6 +17,7 @@
         <title>Ma boutique</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body class="bg-gray-200 m-5">
@@ -52,7 +53,9 @@
                                 <td class="border px-4 py-2"><?= number_format($prixUnitaireProduit, 2) ?> $</td>
                                 <td class="border px-4 py-2"><?= number_format($prixTotalProduit, 2) ?> $</td>
                                 <td class="border px-4 py-2">
-                                    <form method="POST" action="/produits/supprimer/<?= $id ?>">
+                                    <!-- <form method="POST"  action="/produits/panier"> -->
+                                    <form method="POST"  action="/produits/supprimer/<?= $id ?>" >
+
                                         <input type="hidden" name="id_produit" value="<?= $id ?>">
                                         <input type="hidden" name="action" value="supprimer">
                                         <button type="submit" class="text-red-500 hover:text-red-700">
@@ -108,7 +111,7 @@
                 <?php endif; ?>
             </div>
             <!-- Section des Produits -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
                 <?php
                     if (!empty($produits)): ?>
                         <?php foreach ($produits as $produit): ?>
@@ -123,7 +126,6 @@
                                 $descripton = $produit['description'] ?? null;
                                 $couleurs = $produit['couleurs'] ?? null;
                                 $prixReduit = $prix;
-                
                                 if ($promoType === 'pourcentage') {
                                     $prixReduit = $prix - ($prix * $promoValeur / 100);
                                 } elseif ($promoType === 'fixe') {

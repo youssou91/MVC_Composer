@@ -11,7 +11,6 @@ class CommandeControlleur {
         $this->commandeModel = $commandeModel; 
     }
     
-
     public function index() {
         require_once '../src/vue/Commandes.php';
     }
@@ -38,7 +37,9 @@ class CommandeControlleur {
         try {
             $id_commande = $this->commandeModel->addCommande($data);
             if ($id_commande) {
+                unset($_SESSION['panier']);
                 echo "Commande ajoutée avec succès. ID de la commande : $id_commande";
+                header('Location: /mon_profile'); 
             } else {
                 echo "Erreur lors de l'ajout de la commande.";
             }
@@ -46,21 +47,7 @@ class CommandeControlleur {
             echo "Erreur lors de l'ajout de la commande : " . $e->getMessage();
         }
     }
-    // Exemple d'une méthode pour traiter un formulaire (par exemple en POST)
-    public function traiterAjoutCommande() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = json_decode(file_get_contents('php://input'), true); // Pour les requêtes JSON
-            if ($data && isset($data['id_utilisateur'], $data['prix_total'], $data['produits'])) {
-                $this->ajouterCommande($data);
-            } else {
-                echo "Données invalides pour ajouter une commande.";
-            }
-        } else {
-            echo "Méthode non autorisée.";
-        }
-    }
-
-    // Fonction pour afficher le total d'une commande
+    
     public function afficherTotalCommande($id_commande) {
         try {
             // Appeler la méthode du modèle

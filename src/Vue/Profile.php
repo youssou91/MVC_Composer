@@ -114,99 +114,88 @@ if (isset($_POST['action'])) {
             </div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md lg:w-2/3">
-    <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Mes Commandes</h3>
-    <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
-        <div class="overflow-x-auto">
-            <table class="min-w-full text-center border border-gray-200">
-                <thead>
-                    <tr class="bg-gray-100">
-                        <th class="py-2 px-4 border-b">#</th>
-                        <th class="py-2 px-4 border-b">Date</th>
-                        <th class="py-2 px-4 border-b">Montant</th>
-                        <th class="py-2 px-4 border-b">Statut</th>
-                        <th class="py-2 px-4 border-b">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $index = 1; ?>
-                    <?php foreach ($userOrders as $order): ?>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-2 px-4"><?= $index++; ?></td>
-                            <td class="py-2 px-4"><?= htmlspecialchars($order['date_commande']) ?></td>
-                            <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
-                            <td class="py-2 px-4">
-                                <span class="px-2 py-1 rounded-full 
-                                    <?php 
-                                        // Application des couleurs en fonction du statut
-                                        if ($order['statut'] == 'En attente') {
-                                            echo 'bg-yellow-200 text-yellow-800'; 
-                                        } elseif ($order['statut'] == 'En traitement') {
-                                            echo 'bg-orange-200 text-orange-800'; 
-                                        } elseif ($order['statut'] == 'En expédition') {
-                                            echo 'bg-green-200 text-green-800'; 
-                                        } elseif ($order['statut'] == 'Livrée') {
-                                            echo 'bg-blue-200 text-blue-800'; 
-                                        } elseif ($order['statut'] == 'Annulée') {
-                                            echo 'bg-red-200 text-red-800'; 
-                                        } elseif ($order['statut'] == 'Payée') {
-                                            echo 'bg-purple-200 text-purple-800'; 
-                                        }
-                                    ?>">
-                                    <?= htmlspecialchars($order['statut']); ?>
-                                </span>
-                            </td>
-                            <td>
-                                <div class="flex space-x-2">
-                                    <!-- Détails -->
-                                    <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-
-                                    <!-- Paiement -->
-                                    
-                                    <!--  -->
-                                    <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
-                                        <!-- <form method="post" class="inline">
-                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
-                                            <a href="/profile/paiement/<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                                                <i class="fas fa-credit-card"></i>
+            <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Mes Commandes</h3>
+            <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-center border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border-b">#</th>
+                                <th class="py-2 px-4 border-b">Date</th>
+                                <th class="py-2 px-4 border-b">Montant</th>
+                                <th class="py-2 px-4 border-b">Statut</th>
+                                <th class="py-2 px-4 border-b">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $index = 1; ?>
+                            <?php foreach ($userOrders as $order): ?>
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="py-2 px-4"><?= $index++; ?></td>
+                                    <td class="py-2 px-4"><?= htmlspecialchars($order['date_commande']) ?></td>
+                                    <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
+                                    <td class="py-2 px-4">
+                                        <span class="px-2 py-1 rounded-full 
+                                            <?php 
+                                                // Application des couleurs en fonction du statut
+                                                if ($order['statut'] == 'En attente') {
+                                                    echo 'bg-yellow-200 text-yellow-800'; 
+                                                } elseif ($order['statut'] == 'En traitement') {
+                                                    echo 'bg-orange-200 text-orange-800'; 
+                                                } elseif ($order['statut'] == 'En expédition') {
+                                                    echo 'bg-green-200 text-green-800'; 
+                                                } elseif ($order['statut'] == 'Livrée') {
+                                                    echo 'bg-blue-200 text-blue-800'; 
+                                                } elseif ($order['statut'] == 'Annulée') {
+                                                    echo 'bg-red-200 text-red-800'; 
+                                                } elseif ($order['statut'] == 'Payée') {
+                                                    echo 'bg-purple-200 text-purple-800'; 
+                                                }
+                                            ?>">
+                                            <?= htmlspecialchars($order['statut']); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-2">
+                                            <!-- Détails -->
+                                            <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                                <i class="fas fa-info-circle"></i>
                                             </a>
-                                        </form> -->
-                                        <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
-                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
-                                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                                                <i class="fas fa-credit-card"></i>
-                                            </button>
-                                        </form>
 
-                                    <?php else: ?>
-                                        <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
-                                            <i class="fas fa-credit-card"></i>
-                                        </a>
-                                    <?php endif; ?>
-
-                                    <!--  -->
-                                    <!-- Annulation -->
-                                    <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
-                                        <a href="/profile/annuler/<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    <?php else: ?>
-                                        <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    <?php endif; ?>
-                                </div>
-                            </td> 
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                                            <!-- Paiement -->                                    
+                                            <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
+                                                <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
+                                                    <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
+                                                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                                        <i class="fas fa-credit-card"></i>
+                                                    </button>
+                                                </form>
+                                            <?php else: ?>
+                                                <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
+                                                    <i class="fas fa-credit-card"></i>
+                                                </a>
+                                            <?php endif; ?>
+                                            <!-- Annulation -->
+                                            <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
+                                                <a href="/profile/annuler/<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            <?php else: ?>
+                                                <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td> 
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <p>Aucune commande trouvée.</p>
+            <?php endif; ?>
         </div>
-    <?php else: ?>
-        <p>Aucune commande trouvée.</p>
-    <?php endif; ?>
-</div>
 
     </div>
 </div>
