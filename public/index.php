@@ -61,7 +61,6 @@ $router->map('POST', '/produits/supprimer', function() {
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
 $router->map('POST', '/commande', 'CommandeControlleur::ajouterCommande', 'commande');
 // $router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]', 'CommandeControlleur::modifierCommande', 'editerCommande');
-$router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]/action=[a:action]', 'CommandeControlleur::modifierCommande', 'editerCommande');
 
 
 // Routes pour le panier
@@ -86,7 +85,7 @@ $router->map('GET', '/mon_profile', 'ProfileControlleur::index', 'profile');
 $router->map('GET', '/profile/edit', 'ProfileControlleur::editProfile', 'edit_profile');
 $router->map('POST', '/profile/edit', 'ProfileControlleur::updateProfile', 'update_profile');
 ///
-$router->map('GET', '/profile/paiement/[i:id_commande]', 'ProfileControlleur::payOrder', 'paiement');
+$router->map('GET, POST', '/profile/paiement/[i:id_commande]', 'ProfileControlleur::payOrder', 'paiement');
 $router->map('GET', '/profile/details/[i:id_commande]', 'ProfileControlleur::getOrderDetails', 'details');
 $router->map('GET', '/profile/annuler/[i:id_commande]', 'ProfileControlleur::changeOrderStatus', 'annuler');
 
@@ -165,8 +164,12 @@ if ($match) {
                     if (count($parameters) > count($match['params'])) {
                         handleError("Nombre de paramètres insuffisants pour la méthode : $method", 400);
                     }
+                    // Filtrer les arguments nommés
+                    $filteredParams = array_values($match['params']); // Récupère uniquement les arguments positionnels
 
-                    call_user_func_array([$controlleurInstance, $method], $match['params']);
+                    // Appel de la méthode
+                    call_user_func_array([$controlleurInstance, $method], $filteredParams);
+
                 } else {
                     handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
                 }

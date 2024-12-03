@@ -88,6 +88,7 @@ class CommandeModel {
     function addProduitCommande($id_commande, $produit) {
         $id_produit = $produit['id_produit'];
         $quantite = $produit['quantite'];
+    
         try {
             // Vérifiez si le produit existe dans la table produits
             $stmtCheckProduit = $this->pdo->prepare("SELECT id_produit FROM produits WHERE id_produit = :id_produit");
@@ -137,6 +138,7 @@ class CommandeModel {
         }
     }    
     
+    
     function miseAJourQuantiteProduit($id_produit, $quantite) {
         try {
             $sql = "UPDATE produits SET quantite = quantite - :quantite WHERE id_produit = :id_produit";
@@ -151,22 +153,34 @@ class CommandeModel {
         }
     }
     
-    function updateCommande($id_commande, $statut){
+    public function getOrderTotal($order_id) {
         try {
-            $sql = "UPDATE commande SET statut = :statut WHERE id_commande = :id_commande";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                ':statut' => $statut,
-                ':id_commande' => $id_commande
-            ]);
-            return true;
+            // Préparer la requête SQL
+            $stmt = $this->pdo->prepare("
+                SELECT SUM(p.prix_unitaire * pc.quantite) AS total 
+                FROM commande c
+                INNER JOIN produit_commande pc ON c.id_commande = pc.id_commande
+                INNER JOIN produits p ON pc.id_produit = p.id_produit
+                WHERE c.id_commande = :order_id
+            ");
+    
+            // Lier l'ID de la commande avec un paramètre sécurisé
+            $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+    
+            // Exécuter la requête
+            $stmt->execute();
+    
+            // Récupérer le résultat
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Retourner le total ou 0 par défaut
+            return $row['total'] ?? 0;
+    
         } catch (PDOException $e) {
-            throw new PDOException("Erreur dans updateCommande : ". $e->getMessage());
+            // Lever une exception en cas d'erreur
+            throw new PDOException("Erreur lors de la récupération du total de la commande avec ID $order_id : " . $e->getMessage());
         }
     }
-       
-    
-    
     
     
 }

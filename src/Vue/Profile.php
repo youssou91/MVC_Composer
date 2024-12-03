@@ -1,21 +1,29 @@
 <?php
-// require '/../../vendor/autoload.php';
 require __DIR__ . '/../../vendor/autoload.php';
-
 
 use App\Controlleur\ProfileControlleur;
 
-// Connexion à la base de données
+// Vérifiez si l'utilisateur est connecté
+if (!isset($_SESSION['id_utilisateur'])) {
+    echo '<script>window.location.href = "connexion.php";</script>';
+    exit;
+}
+
+// Initialisez les dépendances
 $dbConnection = getConnection();  
+$userController = new ProfileControlleur($dbConnection);
 
-// Créer une instance du ProfileControlleur
-$profileControlleur = new ProfileControlleur($dbConnection);
-
-// Récupérer l'ID de l'utilisateur connecté
+// Récupérez l'ID de l'utilisateur
 $userId = $_SESSION['id_utilisateur'];
 
-// Récupérer les informations de l'utilisateur
-$userInfo = $profileControlleur->getUserInfo($userId);
+// Récupérez les informations utilisateur
+$userInfo = $userController->getUserInfo($userId);
+
+// Récupérez les commandes de l'utilisateur
+$userOrders = $userController->getUserOrders($userId);
+
+// Stockez les commandes dans la session pour les rendre accessibles
+$_SESSION['orders'] = $userOrders;
 
 // Traitement du formulaire de mise à jour du profil
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
@@ -28,18 +36,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     $codePostal = $_POST['code_postal_utilisateur'];
     $province = $_POST['province_utilisateur'];
     $pays = $_POST['pays_utilisateur'];
-    $profileControlleur->updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays);
+    $userController->updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays);
     header('Location: profile.php');  
     exit;
 }
 
+// Traitement du changement de mot de passe
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
     $ancienMotDePasse = $_POST['ancien_mot_de_passe'];
     $nouveauMotDePasse = $_POST['nouveau_mot_de_passe'];
     $confirmationMotDePasse = $_POST['confirmation_mot_de_passe'];
 
     if ($nouveauMotDePasse === $confirmationMotDePasse) {
-        if ($profileControlleur->updatePassword($userId, $ancienMotDePasse, $nouveauMotDePasse)) {
+        if ($userController->updatePassword($userId, $ancienMotDePasse, $nouveauMotDePasse)) {
             echo "Mot de passe mis à jour avec succès!";
         } else {
             echo "L'ancien mot de passe est incorrect.";
@@ -49,33 +58,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
     }
 }
 
-if (!isset($_SESSION['id_utilisateur'])) {
-    echo '<script>window.location.href = "connexion.php";</script>';
-    exit;
-}
-
-$userController = new ProfileControlleur($dbConnection);
-$userId = $_SESSION['id_utilisateur'];
-$userInfo = $userController->getUserInfo($userId);
-$userOrders = $userController->getUserOrders($userId);
-
+// Gestion des actions sur les commandes
 if (isset($_POST['action'])) {
     $orderId = $_POST['order_id'];
     $action = $_POST['action'];
     switch ($action) {
         case 'traiter':
-            update_commandeOrderstatut($orderId, 'En traitement');
+            $userController->updateOrderStatus($orderId, 'En traitement');
             break;
         case 'expédier':
-            update_commandeOrderstatut($orderId, 'En expedition');
+            $userController->updateOrderStatus($orderId, 'En expédition');
             break;
         case 'annuler':
-            update_commandeOrderstatut($orderId, 'Annulee');
+            $userController->updateOrderStatus($orderId, 'Annulée');
             break;
     }
     echo '<script>window.location.href = "profile.php";</script>';
     exit;
 }
+
 ?>
 
 <html lang="en">
@@ -162,16 +163,29 @@ if (isset($_POST['action'])) {
                                     </a>
 
                                     <!-- Paiement -->
+                                    
+                                    <!--  -->
                                     <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
-                                        <a href="/profile/paiement/<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                                            <i class="fas fa-credit-card"></i>
-                                        </a>
+                                        <!-- <form method="post" class="inline">
+                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
+                                            <a href="/profile/paiement/<?= $order['id_commande'] ?>" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                                <i class="fas fa-credit-card"></i>
+                                            </a>
+                                        </form> -->
+                                        <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
+                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
+                                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                                <i class="fas fa-credit-card"></i>
+                                            </button>
+                                        </form>
+
                                     <?php else: ?>
                                         <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
                                             <i class="fas fa-credit-card"></i>
                                         </a>
                                     <?php endif; ?>
 
+                                    <!--  -->
                                     <!-- Annulation -->
                                     <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
                                         <a href="/profile/annuler/<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
@@ -205,4 +219,4 @@ if (isset($_POST['action'])) {
     });
 </script>
 </body>
-</html>
+</html> 
