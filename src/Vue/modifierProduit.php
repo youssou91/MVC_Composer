@@ -40,7 +40,8 @@ $produit = isset($produit) ? $produit : null; // Si le produit est passé depuis
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="/produits/modifierProduit=<?=$produit['id']?>" enctype="multipart/form-data" class="space-y-8">
+        <!-- <form method="POST" action="/produits/editerProduit/id_produit=<?=$produit['id_produit']?>" enctype="multipart/form-data" class="space-y-8"> -->
+        <form method="POST" action="/produits/editerProduit/<?= $produit['id_produit'] ?>" enctype="multipart/form-data" class="space-y-8">
             <div class="bg-gray-50 p-6 rounded-lg shadow-md">
                 <h2 class="text-lg font-semibold mb-4 text-blue-500">Détails du produit</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -100,41 +101,42 @@ $produit = isset($produit) ? $produit : null; // Si le produit est passé depuis
                         <input type="file" id="image" name="chemin_image" class="mt-1 p-2 block w-full border-gray-300 rounded-lg">
                     </div>
                 </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Couleurs disponibles</label>
-                        <div class="mt-2 grid grid-cols-3 gap-4">
-                        <?php
-                        $couleurs = [
-                            'Rouge' => 'bg-red-500',
-                            'Bleu' => 'bg-blue-500',
-                            'Vert' => 'bg-green-500',
-                            'Noir' => 'bg-black text-white',
-                            'Blanc' => 'bg-white border-gray-300 text-gray-700',
-                            'Gris' => 'bg-gray-500 text-white',
-                        ];
-                        // Décoder les couleurs stockées sous forme de chaîne JSON
-                        $couleursProduit = $produit ? json_decode($produit['couleurs'], true) : []; 
-                        foreach ($couleurs as $couleur => $classeCouleur) {
-                            // Vérifier si la couleur est sélectionnée
-                            $checked = in_array($couleur, $couleursProduit) ? 'checked' : '';
-                            echo "
-                            <label class='flex items-center justify-center border border-gray-300 rounded-lg shadow-md cursor-pointer hover:opacity-75 transition p-2'>
-                                <input type='checkbox' name='couleurs[]' value='$couleur' $checked class='hidden peer'>
-                                <span class='peer-checked:$classeCouleur peer-checked:text-white px-4 py-2'>
-                                    $couleur
-                                </span>
-                            </label>";
-                        }
-                        ?>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Couleurs disponibles</label>
+                    <div class="mt-2 grid grid-cols-3 gap-4">
+                    <?php
+                    $couleurs = [
+                        'Rouge' => 'bg-red-500',
+                        'Bleu' => 'bg-blue-500',
+                        'Vert' => 'bg-green-500',
+                        'Noir' => 'bg-black text-white',
+                        'Blanc' => 'bg-white border-gray-300 text-gray-700',
+                        'Gris' => 'bg-gray-500 text-white',
+                    ];
+                    // Décoder les couleurs stockées sous forme de chaîne JSON
+                    $couleursProduit = $produit ? json_decode($produit['couleurs'], true) : []; 
+                    foreach ($couleurs as $couleur => $classeCouleur) {
+                        // Vérifier si la couleur est sélectionnée
+                        $checked = in_array($couleur, $couleursProduit) ? 'checked' : '';
+                        echo "
+                        <label class='flex items-center justify-center border border-gray-300 rounded-lg shadow-md cursor-pointer hover:opacity-75 transition p-2'>
+                            <input type='checkbox' name='couleurs[]' value='$couleur' $checked class='hidden peer'>
+                            <span class='peer-checked:$classeCouleur peer-checked:text-white px-4 py-2'>
+                                $couleur
+                            </span>
+                        </label>";
+                    }
+                    ?>
                     </div>
                 </div>
             </div>
             <div class="mt-6">
                 <button type="submit" class="w-full py-3 px-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg">
-                    Mettre a jour
+                    Mettre à jour
                 </button>
             </div>
         </form>
+
     </div>
 </body>
 </html>

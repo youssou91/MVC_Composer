@@ -180,6 +180,13 @@ class CommandeModel {
         }
     }
     
+    public function updateCommande($id_commande, $statut) {
+        $stmt = $this->pdo->prepare("UPDATE commande SET   statut = :statut WHERE id_commande = :id_commande");
+        $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
+        $stmt->bindParam(':statut', $statut);
+        return $stmt->execute();
+    }
+
     
 }
 

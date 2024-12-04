@@ -161,15 +161,7 @@ class ProduitModel {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
     }
-    public function updateProduit($id, $nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description = null, $couleurs = null, $chemin_image = null) {
-        $sql = "UPDATE produits 
-                SET nom = ?, prix_unitaire = ?, quantite = ?, id_categorie = ?, model = ?, courte_description = ?, longue_description = ?, couleurs = ?, chemin_image = ?
-                WHERE id_produit = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description, $couleurs, $chemin_image, $id]);
-        return true;
-    }
-
+    
     public function deleteProduit($id) {
         try {
             $this->pdo->beginTransaction();
@@ -183,6 +175,26 @@ class ProduitModel {
             $this->pdo->rollBack();
             return false;
         }
+    }
+
+    public function updateProduit($id, $nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description = null, $couleurs = null, $chemin_image = null) {
+        try {
+            // Vérifier et convertir les couleurs en chaîne si c'est un tableau
+            if (is_array($couleurs)) {
+               
+                $couleurs = implode(',', $couleurs);
+            }
+            
+            $sql = "UPDATE produits 
+                    SET nom = ?, prix_unitaire = ?, quantite = ?, id_categorie = ?, model = ?, courte_description = ?, longue_description = ?, couleurs = ?, chemin_image = ?
+                    WHERE id_produit = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$nom, $prix, $quantite, $id_categorie, $model, $courte_description, $longue_description, $couleurs, $chemin_image, $id]);
+        } catch (PDOException $e) {
+            error_log("Erreur SQL : " . $e->getMessage());
+            throw new Exception("Impossible de mettre à jour le produit.");
+        }
+        return true;
     }
     
 }

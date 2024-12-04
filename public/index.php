@@ -44,10 +44,11 @@ $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout
 $router->map('POST', '/produits/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 //
 $router->map('GET', '/produits/modifierProduit=[i:id]', 'ProduitControlleur::recupererProduit', 'modifier');
-$router->map('GET', '/produits/editerProduit=[i:id]', 'ProduitControlleur::updateProduit', 'editer');
+// $router->map('POST', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
+$router->map('POST', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
+// $router->map('GET', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
+
 $router->map('GET', '/produits/supprimer=[i:id]', 'ProduitControlleur::supprimerProduit', 'supprimer');
-
-
 // Définir le routage pour l'action d'ajout de produit au panier
 $router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
 $router->map('POST', '/produits/supprimer/[i:id]', function($id) {
@@ -60,7 +61,7 @@ $router->map('POST', '/produits/supprimer', function() {
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
 $router->map('POST', '/commande', 'CommandeControlleur::ajouterCommande', 'commande');
-// $router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]', 'CommandeControlleur::modifierCommande', 'editerCommande');
+$router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]/action=[a:action]', 'CommandeControlleur::modifierCommande', 'editerCommande');
 
 
 // Routes pour le panier
@@ -105,85 +106,87 @@ $router->map('POST', '/promotion/edit/[i:id]', 'PromotionControlleur::edit', 'ad
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Configuration des routes
+
 // Vérification des routes
 $match = $router->match();
+
 // Vérifier si une route correspond
-if ($match) {
-    require '../static/header.php';
-
-    if (is_callable($match['target'])) {
-        call_user_func_array($match['target'], $match['params']);
-    } else {
-        list($controlleur, $method) = explode('::', $match['target']);
-        $controlleurClass = "../src/controlleur/{$controlleur}.php";
-
-        if (file_exists($controlleurClass)) {
-            require_once $controlleurClass;
-            $controlleur = "App\\Controlleur\\" . $controlleur;
-
-            if (class_exists($controlleur)) {
-                // Gestion des dépendances des contrôleurs
-                // Gestion des dépendances des contrôleurs
-                switch ($controlleur) {
-                    case "App\\Controlleur\\ProduitControlleur":
-                        $produitModel = new ProduitModel($pdo);
-                        $categorieModel = new CategorieModel($pdo);
-                        $controlleurInstance = new $controlleur($produitModel, $categorieModel);
-                        break;
-                    case "App\\Controlleur\\CommandeControlleur":
-                        $commandeModel = new CommandeModel($pdo);
-                        $controlleurInstance = new $controlleur($commandeModel);
-                        break;
-                    case "App\\Controlleur\\CartControlleur":
-                        $cartModel = new CartModel($pdo);
-                        $controlleurInstance = new $controlleur($cartModel);
-                        break;
-                    default:
-                        $controlleurInstance = new $controlleur();
-                        break;
-                }
-
-                if (method_exists($controlleurInstance, $method)) {
-                    // Gestion des paramètres pour GET et POST
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $match['params'] = array_merge($match['params'], [$_POST]);
+try {
+    if ($match) {
+        require '../static/header.php';
+        if (is_callable($match['target'])) {
+            call_user_func_array($match['target'], $match['params']);
+        } else {
+            list($controlleur, $method) = explode('::', $match['target']);
+            $controlleurClass = "../src/controlleur/{$controlleur}.php";
+            if (file_exists($controlleurClass)) {
+                require_once $controlleurClass;
+                $controlleur = "App\\Controlleur\\" . $controlleur;
+                if (class_exists($controlleur)) {
+                    // Gestion des dépendances des contrôleurs
+                    switch ($controlleur) {
+                        case "App\\Controlleur\\ProduitControlleur":
+                            $produitModel = new ProduitModel($pdo);
+                            $categorieModel = new CategorieModel($pdo);
+                            $controlleurInstance = new $controlleur($produitModel, $categorieModel);
+                            break;
+                        case "App\\Controlleur\\CommandeControlleur":
+                            $commandeModel = new CommandeModel($pdo);
+                            $controlleurInstance = new $controlleur($commandeModel);
+                            break;
+                        case "App\\Controlleur\\CartControlleur":
+                            $cartModel = new CartModel($pdo);
+                            $controlleurInstance = new $controlleur($cartModel);
+                            break;
+                        default:
+                            $controlleurInstance = new $controlleur();
+                            break;
                     }
-
-                    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                        $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
-                        if ($queryString) {
-                            parse_str($queryString, $queryParams);
-                            $match['params'] = array_merge($match['params'], $queryParams);
+                    if (method_exists($controlleurInstance, $method)) {
+                        // Gestion des paramètres pour POST
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $match['params'] = array_merge($match['params'], [$_POST]);
                         }
+                        
+                        // Gestion des paramètres GET
+                        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                            $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+                            if ($queryString) {
+                                parse_str($queryString, $queryParams);
+                                $match['params'] = array_merge($match['params'], $queryParams);
+                            }
+                        }
+                        
+                        // Validation et appel de la méthode
+                        $reflection = new ReflectionMethod($controlleurInstance, $method);
+                        $parameters = $reflection->getParameters();
+
+                        if (count($parameters) > count($match['params'])) {
+                            handleError("Nombre de paramètres insuffisants pour la méthode : $method", 400);
+                        }
+                        // Filtrer les arguments nommés
+                        $filteredParams = array_values($match['params']); // Récupère uniquement les arguments positionnels
+                        // Appel de la méthode
+                        call_user_func_array([$controlleurInstance, $method], $filteredParams);
+                    } else {
+                        throw new Exception("Méthode non trouvée : $method dans le contrôleur $controlleur");
                     }
-
-                    // Validation et appel de la méthode
-                    $reflection = new ReflectionMethod($controlleurInstance, $method);
-                    $parameters = $reflection->getParameters();
-
-                    if (count($parameters) > count($match['params'])) {
-                        handleError("Nombre de paramètres insuffisants pour la méthode : $method", 400);
-                    }
-                    // Filtrer les arguments nommés
-                    $filteredParams = array_values($match['params']); // Récupère uniquement les arguments positionnels
-
-                    // Appel de la méthode
-                    call_user_func_array([$controlleurInstance, $method], $filteredParams);
-
                 } else {
-                    handleError("Méthode non trouvée : $method dans le contrôleur $controlleur");
+                    throw new Exception("Classe non trouvée : $controlleur");
                 }
             } else {
-                handleError("Classe non trouvée : $controlleur");
+                throw new Exception("Fichier du contrôleur introuvable : $controlleurClass");
             }
-        } else {
-            handleError("Fichier du contrôleur introuvable : $controlleurClass");
         }
+        require '../static/footer.php';
+    } else {
+        throw new Exception("Aucune route correspondante trouvée pour " . $_SERVER['REQUEST_URI']);
     }
-    require '../static/footer.php';
-} else {
-    handleError("Aucune route correspondante trouvée.");
+} catch (Exception $e) {
+    handleError($e->getMessage(), 500);
 }
+
 
 
 // Fonction pour gérer les erreurs et afficher un message générique

@@ -62,5 +62,35 @@ class CommandeControlleur {
         }
     }
 
+     // Méthode pour mettre à jour une commande
+    public function modifierCommande($id_commande, $action) {
+        switch ($action) {
+            case 'traiter':
+                $statut = 'En traitement';
+                break;
+            case 'expedier':
+                $statut = 'En expédition';
+                break;
+            case 'annuler':
+                $statut = 'Annulée';
+                break;
+            case 'livrer':
+                $statut = 'Livrée';
+                break;
+            case 'payer':
+                $statut = 'Payée';
+                break;
+            default:
+                throw new Exception("Action inconnue : $action");
+        }
+        if ($this->commandeModel->updateCommande($id_commande, $statut)) {
+            // require_once '../src/vue/Commandes.php';
+            header('Location: /commandes'); 
+        } else {
+            throw new Exception("Échec de la mise à jour de la commande.");
+        }
+    }
+    
+
 }
 ?>
