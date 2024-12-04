@@ -58,6 +58,10 @@ $index = 1;
                             <td class="px-4 py-2">
                                 <span class="px-2 py-1 rounded-full 
                                     <?php 
+                                        // Définir le prix total dans la session avant de rediriger
+                                        $_SESSION['prix_total'] = $order['prix_total'];
+                                        // $_SESSION['id_commande'] = $order['id_commande'];
+
                                         // Application des couleurs en fonction du statut
                                         if ($order['statut'] == 'En attente') {
                                             echo 'bg-yellow-200 text-yellow-800'; 

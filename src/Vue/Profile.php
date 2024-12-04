@@ -25,6 +25,7 @@ $userOrders = $userController->getUserOrders($userId);
 // Stockez les commandes dans la session pour les rendre accessibles
 $_SESSION['orders'] = $userOrders;
 
+
 // Traitement du formulaire de mise à jour du profil
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     $nom = $_POST['nom_utilisateur'];
@@ -136,7 +137,8 @@ if (isset($_POST['action'])) {
                                     <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
                                     <td class="py-2 px-4">
                                         <span class="px-2 py-1 rounded-full 
-                                            <?php 
+                                            <?php   
+                                                                                      
                                                 // Application des couleurs en fonction du statut
                                                 if ($order['statut'] == 'En attente') {
                                                     echo 'bg-yellow-200 text-yellow-800'; 
@@ -166,6 +168,9 @@ if (isset($_POST['action'])) {
                                             <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
                                                 <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
                                                     <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
+                                                    <input type="hidden" name="prix_total" value="<?= htmlspecialchars($order['prix_total']); ?>">
+
+
                                                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
                                                         <i class="fas fa-credit-card"></i>
                                                     </button>

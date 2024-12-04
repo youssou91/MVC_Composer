@@ -3,29 +3,20 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use App\Controlleur\CommandeControlleur;
 
-// Initialisez les dépendances
-$dbConnection = getConnection();  
+// Initialisation des dépendances
+$dbConnection = getConnection();
+$commandeController = new CommandeControlleur(new \App\Modele\CommandeModel($dbConnection));
 
-// Vérifier si l'ID de la commande est bien envoyé via POST
-if (isset($_POST['id_commande'])) {
-    $order_id = $_POST['id_commande']; // Récupérer l'ID de la commande
-    // print_r($order_id);
-    // Instancier le modèle CommandeModel en passant la connexion PDO
-    $commandeModel = new \App\Modele\CommandeModel($dbConnection);
-
-    // Créer le contrôleur CommandeControlleur et lui passer l'objet CommandeModel
-    $commandeController = new CommandeControlleur($commandeModel);
-
-    // Appeler la méthode afficherTotalCommande
-    $prix_total = $commandeController->afficherTotalCommande($order_id);
-    // Appeler l'action pour afficher le total
-    if ($prix_total === null || $prix_total === false) {
-        die("Erreur lors de la récupération du prix total.");
-    }
-} else {
-    die("Aucune commande spécifiée.");
+// Validation des données POST
+if (!isset($_POST['id_commande']) || !isset($_POST['prix_total'])) {
+    header('Location: profile.php'); // Redirection en cas d'erreur
+    exit;
 }
+
+$order_id = htmlspecialchars($_POST['id_commande']);
+$prix_total = htmlspecialchars($_POST['prix_total']);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -54,9 +45,7 @@ if (isset($_POST['id_commande'])) {
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
-                        amount: {
-                            value: '<?= $prix_total ?>'
-                        },
+                        amount: { value: '<?= $prix_total ?>' },
                         description: 'Paiement pour la commande #<?= $order_id ?>',
                         custom_id: '<?= $order_id ?>'
                     }]
@@ -65,7 +54,7 @@ if (isset($_POST['id_commande'])) {
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     alert('Transaction réussie par ' + details.payer.name.given_name);
-                    // Redirection vers une page de confirmation après paiement réussi
+                    // Redirection vers une page de confirmation
                     window.location.href = "/profile/confirmation?id_commande=<?= $order_id ?>";
                 });
             },
@@ -73,99 +62,10 @@ if (isset($_POST['id_commande'])) {
                 alert('Transaction annulée.');
             },
             onError: function(err) {
-                alert('Une erreur est survenue lors du paiement.');
-                console.error('Erreur :', err);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+                console.error('Erreur PayPal:', err);
             }
         }).render('#paypal-button-container');
     </script>
 </body>
 </html>
-
-
-
-
-<script>
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
-    </script>
-</html>
-
- <!-- Modal -->
- <div id="modal-<?= $idProduit ?>" 
-    class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white w-full max-w-2xl rounded-lg shadow-lg p-8 relative">
-        <!-- Bouton de fermeture -->
-        <button onclick="closeModal('modal-<?= $idProduit ?>')" 
-                class="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-2xl">
-            ✕
-        </button>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <img src="/public/<?= $cheminImage ?>" class="w-full h-auto rounded-lg shadow-md">
-            <div>
-                <h2 class="text-2xl font-bold mb-4"><?= $nom ?></h2>
-                <p class="text-gray-700 mb-2">
-                    <strong>Prix :</strong> <?= number_format($prix, 2) ?> $
-                </p>
-                <?php if ($promoType): ?>
-                    <p class="text-green-500 mb-4">
-                        <strong>Prix réduit :</strong> <?= number_format($prixReduit, 2) ?> $
-                    </p>
-                <?php endif; ?>
-                <p class="text-gray-700 mb-2">
-                    <strong>Stock Disponible :</strong> <?= $quantiteStock ?> 
-                </p>
-                <div>
-                    <p class="text-gray-600 mb-4"><strong>Couleurs disponibles</strong></p>
-                    <div class="mt-2 grid grid-cols-3 gap-4">
-                        <?php
-                        // Tableau des couleurs avec leurs classes Tailwind
-                        $couleurs = [
-                            'Rouge' => 'bg-red-500',
-                            'Bleu' => 'bg-blue-500',
-                            'Vert' => 'bg-green-500',
-                            'Noir' => 'bg-black text-white',
-                            'Blanc' => 'bg-white border-gray-300 text-gray-700',
-                            'Gris' => 'bg-gray-500 text-white',
-                            'Jaune' => 'bg-yellow-500',
-                            'Rose' => 'bg-pink-500',
-                            'Marron' => 'bg-amber-700'
-                        ];
-
-                        // Vérifier si la chaîne des couleurs est bien définie et la décoder
-                        if (isset($produit['couleurs']) && !empty($produit['couleurs'])) {
-                            $couleursProduit = json_decode($produit['couleurs'], true);  // Décode en tableau
-
-                            // Vérifier si le résultat du json_decode est bien un tableau
-                            if (is_array($couleursProduit)) {
-                                foreach ($couleursProduit as $couleur) {
-                                    // Vérifier que la couleur existe dans le tableau $couleurs
-                                    if (array_key_exists($couleur, $couleurs)) {
-                                        $classeCouleur = $couleurs[$couleur]; // Récupérer la classe Tailwind correspondante
-                                        echo "
-                                        <span class='inline-block px-4 py-2 $classeCouleur text-white rounded-md shadow-md'>
-                                            $couleur
-                                        </span>";
-                                    }
-                                }
-                            } else {
-                                // Si json_decode échoue, afficher un message d'erreur ou ignorer
-                                echo "<p>Erreur de format des couleurs disponibles.</p>";
-                            }
-                        } else {
-                            echo "<p>Aucune couleur disponible.</p>";
-                        }
-                        ?>
-                    </div>
-                </div>
-                <p class="text-gray-600 mb-4">
-                    <strong>Description :</strong> <?= $descripton ?> 
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
