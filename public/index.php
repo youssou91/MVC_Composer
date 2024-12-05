@@ -18,6 +18,7 @@ use App\Modele\CategorieModel;
 use App\Modele\CommandeModel;
 use App\Modele\CartModel;
 use App\Modele\PanierModele;
+use App\Modele\UserModel;
 
 
 $pdo = getConnection();
@@ -36,20 +37,18 @@ $router = new AltoRouter();
 // Routes principales
 $router->map('GET', '/', 'HomeControlleur::index', 'accueil');
 $router->map('GET', '/contact', 'ContactControlleur::index', 'contacter');
-
 // Routes pour les produits
 $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_detail');
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
+$router->map('GET', '/utilisateurs', 'UserControlleur::getUsers', 'utilisateurs');
 $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
 $router->map('POST', '/produits/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 //
 $router->map('GET', '/produits/modifierProduit=[i:id]', 'ProduitControlleur::recupererProduit', 'modifier');
-// $router->map('POST', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
 $router->map('POST', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
-// $router->map('GET', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
 
 $router->map('GET', '/produits/supprimer=[i:id]', 'ProduitControlleur::supprimerProduit', 'supprimer');
-// Définir le routage pour l'action d'ajout de produit au panier
+// Routage pour l'action d'ajout de produit au panier
 $router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
 $router->map('POST', '/produits/supprimer/[i:id]', function($id) {
     (new HomeControlleur())->gererPanier($id);
@@ -73,7 +72,7 @@ $router->map('POST', '/cart/vider', 'CartControlleur::vider');
 $router->map('GET|POST', '/login', 'AuthControlleur::loginForm', 'connexion');
 $router->map('POST', '/login', 'AuthControlleur::login', 'traitement_connexion');
 $router->map('GET', '/register', 'AuthControlleur::registerForm', 'inscription');
-$router->map('POST', '/register', 'AuthControlleur::register', 'traitement_inscription');
+$router->map('POST', '/register', 'AuthControlleur::registerUser', 'traitement_inscription');
 $router->map('GET', '/logout', 'AuthControlleur::logout', 'deconnexion');
 
 // Routes pour l'administration
@@ -89,6 +88,11 @@ $router->map('POST', '/profile/edit', 'ProfileControlleur::updateProfile', 'upda
 $router->map('GET, POST', '/profile/paiement/[i:id_commande]', 'ProfileControlleur::payOrder', 'paiement');
 $router->map('GET', '/profile/details/[i:id_commande]', 'ProfileControlleur::getOrderDetails', 'details');
 $router->map('GET', '/profile/annuler/[i:id_commande]', 'ProfileControlleur::changeOrderStatus', 'annuler');
+//utilisateurs
+
+$router->map('GET', '/users', 'ProfileControlleur::indexUsers', 'users');
+$router->map('POST', '/user/edit/[i:id]', 'ProfileControlleur::updateUser', 'update_user');
+
 
 
 // Routes pour les promotions
@@ -110,7 +114,6 @@ ini_set('display_errors', 1);
 
 // Vérification des routes
 $match = $router->match();
-
 // Vérifier si une route correspond
 try {
     if ($match) {
@@ -131,18 +134,27 @@ try {
                             $categorieModel = new CategorieModel($pdo);
                             $controlleurInstance = new $controlleur($produitModel, $categorieModel);
                             break;
+                    
                         case "App\\Controlleur\\CommandeControlleur":
                             $commandeModel = new CommandeModel($pdo);
                             $controlleurInstance = new $controlleur($commandeModel);
                             break;
+                    
                         case "App\\Controlleur\\CartControlleur":
                             $cartModel = new CartModel($pdo);
                             $controlleurInstance = new $controlleur($cartModel);
                             break;
+                    
+                        case "App\\Controlleur\\UserControlleur": // Gestion explicite de UserControlleur
+                            $userModel = new UserModel($pdo);
+                            $controlleurInstance = new $controlleur($userModel);
+                            break;
+                    
                         default:
-                            $controlleurInstance = new $controlleur();
+                            $controlleurInstance = new $controlleur(); // Par défaut, aucun paramètre
                             break;
                     }
+                    
                     if (method_exists($controlleurInstance, $method)) {
                         // Gestion des paramètres pour POST
                         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

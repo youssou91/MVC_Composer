@@ -71,7 +71,7 @@ if (isset($_POST['btn-connexion'])) {
                 <input type="password" name="mot_de_pass" id="password" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="mb-4 text-right">
-                <a href="addUserView.php" class="text-blue-600 hover:underline">S'inscrire</a>
+                <a href="/register" class="text-blue-600 hover:underline">S'inscrire</a>
             </div>
             <button type="submit" name="btn-connexion" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Se connecter

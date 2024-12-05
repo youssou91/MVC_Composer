@@ -33,6 +33,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <!-- Menu Admin -->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                     <a href="<?= $router->generate('produits'); ?>" class="text-gray-700 hover:text-blue-600">Produits</a>
+                    <a href="<?= $router->generate('utilisateurs'); ?>" class="text-gray-700 hover:text-blue-600">Utilisateurs</a>
                     <a href="<?= $router->generate('commandes'); ?>" class="text-gray-700 hover:text-blue-600">Commandes</a>
                     <a href="<?= $router->generate('promotions'); ?>" class="text-gray-700 hover:text-blue-600">Promotions</a>
                 <?php endif; ?>

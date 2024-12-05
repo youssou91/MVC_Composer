@@ -11,7 +11,10 @@ class UserControlleur {
     public function __construct($dbConnection) {
         $this->userModel = new UserModel($dbConnection);
     }
-    
+    public function getUsers() {
+        $users = $this->userModel->getAllUsers();
+        require __DIR__ . '/../vue/users.php';
+    }
 
     // Méthode pour enregistrer un nouvel utilisateur
     public function registerUser($user) {

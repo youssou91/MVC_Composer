@@ -1,31 +1,22 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
-
 use App\Controlleur\ProfileControlleur;
-
 // Vérifiez si l'utilisateur est connecté
 if (!isset($_SESSION['id_utilisateur'])) {
     echo '<script>window.location.href = "connexion.php";</script>';
     exit;
 }
-
 // Initialisez les dépendances
 $dbConnection = getConnection();  
 $userController = new ProfileControlleur($dbConnection);
-
 // Récupérez l'ID de l'utilisateur
 $userId = $_SESSION['id_utilisateur'];
-
 // Récupérez les informations utilisateur
 $userInfo = $userController->getUserInfo($userId);
-
 // Récupérez les commandes de l'utilisateur
 $userOrders = $userController->getUserOrders($userId);
-
 // Stockez les commandes dans la session pour les rendre accessibles
 $_SESSION['orders'] = $userOrders;
-
-
 // Traitement du formulaire de mise à jour du profil
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     $nom = $_POST['nom_utilisateur'];
@@ -41,13 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     header('Location: profile.php');  
     exit;
 }
-
 // Traitement du changement de mot de passe
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
     $ancienMotDePasse = $_POST['ancien_mot_de_passe'];
     $nouveauMotDePasse = $_POST['nouveau_mot_de_passe'];
     $confirmationMotDePasse = $_POST['confirmation_mot_de_passe'];
-
     if ($nouveauMotDePasse === $confirmationMotDePasse) {
         if ($userController->updatePassword($userId, $ancienMotDePasse, $nouveauMotDePasse)) {
             echo "Mot de passe mis à jour avec succès!";
@@ -58,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {
         echo "Les nouveaux mots de passe ne correspondent pas.";
     }
 }
-
 // Gestion des actions sur les commandes
 if (isset($_POST['action'])) {
     $orderId = $_POST['order_id'];
@@ -77,7 +65,6 @@ if (isset($_POST['action'])) {
     echo '<script>window.location.href = "profile.php";</script>';
     exit;
 }
-
 ?>
 
 <html lang="en">
@@ -137,8 +124,7 @@ if (isset($_POST['action'])) {
                                     <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
                                     <td class="py-2 px-4">
                                         <span class="px-2 py-1 rounded-full 
-                                            <?php   
-                                                                                      
+                                            <?php                                             
                                                 // Application des couleurs en fonction du statut
                                                 if ($order['statut'] == 'En attente') {
                                                     echo 'bg-yellow-200 text-yellow-800'; 
@@ -163,14 +149,11 @@ if (isset($_POST['action'])) {
                                             <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
-
                                             <!-- Paiement -->                                    
                                             <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
                                                 <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
                                                     <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
                                                     <input type="hidden" name="prix_total" value="<?= htmlspecialchars($order['prix_total']); ?>">
-
-
                                                     <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
                                                         <i class="fas fa-credit-card"></i>
                                                     </button>
@@ -182,17 +165,42 @@ if (isset($_POST['action'])) {
                                             <?php endif; ?>
                                             <!-- Annulation -->
                                             <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
-                                                <a href="/profile/annuler/<?= $order['id_commande'] ?>" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
+                                                <button onclick="openModal('<?= $order['id_commande']; ?>')" 
+                                                    class="bg-red-500 text-white px-4 py-2 rounded"> 
                                                     <i class="fas fa-times"></i>
-                                                </a>
+                                                </button>
                                             <?php else: ?>
-                                                <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
+                                                <button onclick="openModal('<?= $order['id_commande']; ?>')" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
                                                     <i class="fas fa-times"></i>
-                                                </a>
+                                                </button>
                                             <?php endif; ?>
                                         </div>
                                     </td> 
                                 </tr>
+                                <!-- Modal unique pour cette commande -->
+                                <div id="modalAnnulerCommande<?= $order['id_commande']; ?>" 
+                                    class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+                                    <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                                        <div class="flex justify-between items-center mb-4">
+                                            <h5 class="text-lg font-semibold">Confirmer l'annulation</h5>
+                                            <button onclick="closeModal('<?= $order['id_commande']; ?>')" class="text-gray-500 hover:text-gray-800">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="mb-4">
+                                            Êtes-vous sûr de vouloir annuler la commande : <strong><?= $order['id_commande']; ?></strong> ? 
+                                            Cette action est irréversible.
+                                        </div>
+                                        <div class="flex justify-end gap-4">
+                                            <button onclick="closeModal('<?= $order['id_commande']; ?>')" 
+                                                class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Annuler</button>
+                                            <a href="/commande/editer/id_commande=<?= $order['id_commande']; ?>/action=annuler" 
+                                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                                                Confirmer l'annulation
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -204,6 +212,102 @@ if (isset($_POST['action'])) {
 
     </div>
 </div>
+
+<!-- Modals -->
+ <!-- Modal Modification Profil -->
+<!-- Modal de modification du profil -->
+<div id="modalModifierProfil" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6 relative">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="document.querySelector('#modalModifierProfil').classList.add('hidden');">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 class="text-2xl font-semibold text-center text-blue-600 mb-6">Modifier les informations du profil</h3>
+        <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Colonne 1 -->
+            <div class="space-y-4">
+                <div>
+                    <label for="nom_utilisateur" class="block text-sm font-medium text-gray-700">Nom</label>
+                    <input type="text" id="nom_utilisateur" name="nom_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['nom_utilisateur']) ?>">
+                </div>
+                <div>
+                    <label for="prenom_utilisateur" class="block text-sm font-medium text-gray-700">Prénom</label>
+                    <input type="text" id="prenom_utilisateur" name="prenom_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['prenom']) ?>">
+                </div>
+                <div>
+                    <label for="email_utilisateur" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email_utilisateur" name="email_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['couriel']) ?>">
+                </div>
+                <div>
+                    <label for="telephone_utilisateur" class="block text-sm font-medium text-gray-700">Téléphone</label>
+                    <input type="text" id="telephone_utilisateur" name="telephone_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['telephone']) ?>">
+                </div>
+            </div>
+            <!-- Colonne 2 -->
+            <div class="space-y-4">
+                <div>
+                    <label for="adresse_utilisateur" class="block text-sm font-medium text-gray-700">Adresse</label>
+                    <input type="text" id="adresse_utilisateur" name="adresse_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['rue']) ?>">
+                </div>
+                <div>
+                    <label for="ville_utilisateur" class="block text-sm font-medium text-gray-700">Ville</label>
+                    <input type="text" id="ville_utilisateur" name="ville_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['ville']) ?>">
+                </div>
+                <div>
+                    <label for="code_postal_utilisateur" class="block text-sm font-medium text-gray-700">Code Postal</label>
+                    <input type="text" id="code_postal_utilisateur" name="code_postal_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['code_postal']) ?>">
+                </div>
+                <div>
+                    <label for="province_utilisateur" class="block text-sm font-medium text-gray-700">Province</label>
+                    <input type="text" id="province_utilisateur" name="province_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['province']) ?>">
+                </div>
+                <div>
+                    <label for="pays_utilisateur" class="block text-sm font-medium text-gray-700">Pays</label>
+                    <input type="text" id="pays_utilisateur" name="pays_utilisateur" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required value="<?= htmlspecialchars($userInfo['pays']) ?>">
+                </div>
+            </div>
+            <!-- Bouton de soumission -->
+            <div class="col-span-1 md:col-span-2 flex justify-end mt-4">
+                <button type="submit" name="updateProfile" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700">
+                    Enregistrer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Modal Modification Mot de Passe -->
+<div id="modalModifierMotDePasse" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2">
+        <h2 class="text-2xl text-center text-blue-600 font-semibold mb-4">Modifier le Mot de Passe</h2>
+        <form method="POST">
+            <div class="grid gap-4">
+                <div>
+                    <label class="block font-semibold">Ancien Mot de Passe</label>
+                    <input type="password" name="ancien_mot_de_passe" 
+                        class="w-full border border-gray-300 p-2 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold">Nouveau Mot de Passe</label>
+                    <input type="password" name="nouveau_mot_de_passe" 
+                        class="w-full border border-gray-300 p-2 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold">Confirmer le Nouveau Mot de Passe</label>
+                    <input type="password" name="confirmation_mot_de_passe" 
+                        class="w-full border border-gray-300 p-2 rounded-lg">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-4">
+                <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                    onclick="document.getElementById('modalModifierMotDePasse').classList.add('hidden')">
+                    Annuler
+                </button>
+                <button type="submit" name="updatePassword" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Modifier
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 <script>
     document.querySelectorAll('[data-modal-target]').forEach(button => {
         button.addEventListener('click', function() {
@@ -211,6 +315,31 @@ if (isset($_POST['action'])) {
             document.querySelector(modalId).classList.toggle('hidden');
         });
     });
+
+    document.querySelectorAll('[data-modal-target]').forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal-target');
+            document.querySelector(modalId).classList.remove('hidden');
+        });
+    });
+    // 
+    function openModal(orderId) {
+        const modal = document.getElementById(`modalAnnulerCommande${orderId}`);
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('block');
+        }
+    }
+
+    function closeModal(orderId) {
+        const modal = document.getElementById(`modalAnnulerCommande${orderId}`);
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('block');
+        }
+    }
+
 </script>
+
 </body>
 </html> 

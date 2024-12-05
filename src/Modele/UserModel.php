@@ -1,6 +1,5 @@
 <?php
 namespace App\Modele;
-
 use PDO;
 use Exception;
 use DateTime;
@@ -14,7 +13,7 @@ class UserModel {
     // Fonction pour ajouter un utilisateur à la base de données
     public function addUserDB($user) {
         // Démarrer une transaction
-        $this->conn->beginTransaction();
+        $this->db->beginTransaction();
 
         try {
             // Insérer l'utilisateur, l'adresse, et les associer
@@ -24,11 +23,11 @@ class UserModel {
             $this->assignUserRole($id_utilisateur, 'client');
 
             // Commit de la transaction
-            $this->conn->commit();
+            $this->db->commit();
             return "L'utilisateur a été ajouté avec succès.";
         } catch (Exception $e) {
             // Rollback si une erreur se produit
-            $this->conn->rollBack();
+            $this->db->rollBack();
             return "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
         }
     }
@@ -38,7 +37,7 @@ class UserModel {
         $sql = "INSERT INTO utilisateur (nom_utilisateur, prenom, date_naissance, couriel, mot_de_pass, telephone, statut) 
                 VALUES (:nom_utilisateur, :prenom, :datNaiss, :couriel, :password, :telephone, :statut)";
         
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         
         // Hash du mot de passe
         $passwordHash = password_hash($user['password'], PASSWORD_DEFAULT);
@@ -53,7 +52,7 @@ class UserModel {
                 ':telephone' => $user['telephone'],
                 ':statut' => 'actif'
             ]);
-            return $this->conn->lastInsertId();
+            return $this->db->lastInsertId();
         } catch (Exception $e) {
             throw new Exception("Erreur lors de l'insertion de l'utilisateur : " . $e->getMessage());
         }
@@ -64,7 +63,7 @@ class UserModel {
         $sql = "INSERT INTO adresse (rue, ville, code_postal, pays, numero, province) 
                 VALUES (:rue, :ville, :code_postal, :pays, :numero, :province)";
         
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         
         try {
             $stmt->execute([
@@ -75,7 +74,7 @@ class UserModel {
                 ':numero' => $user['numero'],
                 ':province' => $user['province']
             ]);
-            return $this->conn->lastInsertId();
+            return $this->db->lastInsertId();
         } catch (Exception $e) {
             throw new Exception("Erreur lors de l'insertion de l'adresse : " . $e->getMessage());
         }
@@ -86,7 +85,7 @@ class UserModel {
         $sql = "INSERT INTO utilisateur_adresse (id_utilisateur, id_adresse) 
                 VALUES (:id_utilisateur, :id_adresse)";
         
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         try {
             $stmt->execute([
@@ -106,7 +105,7 @@ class UserModel {
             $sql = "INSERT INTO role_utilisateur (id_role, id_utilisateur) 
                     VALUES (:id_role, :id_utilisateur)";
             
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 ':id_role' => $role['id_role'],
                 ':id_utilisateur' => $id_utilisateur
@@ -119,7 +118,7 @@ class UserModel {
     // Récupérer un rôle par description
     private function getRoleByDescription($role_description) {
         $sql = "SELECT * FROM role WHERE description = :description";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute([':description' => $role_description]);
 
         $role = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -157,7 +156,7 @@ class UserModel {
     // Vérifier si l'email existe déjà dans la base de données
     private function getElementByEmailForAddUser($email) {
         $sql = "SELECT * FROM utilisateur WHERE couriel = :couriel";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute([':couriel' => $email]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -177,21 +176,21 @@ class UserModel {
     }
     
     // Récupérer tous les utilisateurs avec leurs rôles
-    public function getAllUsers() {
-        try {
-            $sql = "SELECT u.*, r.description as role 
-                    FROM utilisateur u 
-                    JOIN role_utilisateur ru ON u.id_utilisateur = ru.id_utilisateur 
-                    JOIN role r ON ru.id_role = r.id_role";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            throw new Exception("Erreur lors de la récupération des utilisateurs : " . $e->getMessage());
-        }
+   // Récupérer tous les utilisateurs avec leurs rôles
+   public function getAllUsers() {
+    try {
+        $sql = "SELECT * FROM utilisateur";
+        // Préparer la requête
+        $stmt = $this->db->prepare($sql);
+        // Exécuter la requête
+        $stmt->execute();
+        // Récupérer les résultats
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        // Gestion des erreurs
+        throw new Exception("Erreur lors de la récupération des utilisateurs : " . $e->getMessage());
     }
-
+}
     // Get user information by ID
     public function getUserInfo($id_utilisateur) {
         $sql = "SELECT u.*, a.rue, a.numero, a.ville, a.code_postal, a.province, a.pays
@@ -208,7 +207,7 @@ class UserModel {
     // Récupérer un utilisateur par email pour la connexion
     public function getElementByEmailForLogin($email) {
         $query = 'SELECT * FROM utilisateur WHERE couriel = :email LIMIT 1'; // vérifier que le nom de table et colonne sont corrects
-        $stmt = $this->conn->prepare($query); // Remplacez `$this->db` par `$this->conn`
+        $stmt = $this->db->prepare($query); // Remplacez `$this->db` par `$this->conn`
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         
@@ -238,16 +237,13 @@ class UserModel {
         return false; // Utilisateur non trouvé ou mot de passe incorrect
     }
 
-    
-    
-
     // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts
     public function getUserCommandWithStatus($userId) {
         // Préparer la requête SQL
         $sql = "SELECT * FROM commande WHERE id_utilisateur = :userId";
         
         // Préparer la déclaration PDO
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         
         // Lier les paramètres
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -260,16 +256,6 @@ class UserModel {
         
         return $commande;
     }
-
-
-    //PROFILE 
-    // Fonction pour récupérer les informations de l'utilisateur
-    // public function getUserInfo($userId) {
-    //     $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE id_utilisateur = :userId");
-    //     $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     return $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
 
     // Fonction pour mettre à jour les informations personnelles de l'utilisateur
     public function updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays) {
@@ -312,7 +298,6 @@ class UserModel {
             return false;  // L'ancien mot de passe est incorrect
         }
     }
-    //getUserOrders
     // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts
     public function getUserOrders($userId) {
         // Préparer la requête SQL

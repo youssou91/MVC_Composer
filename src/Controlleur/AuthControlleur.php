@@ -1,9 +1,18 @@
 <?php
 namespace App\Controlleur;
 use AltoRouter; // Importer AltoRouter
+use App\Modele\UserModel;
 
 class AuthControlleur {
+    private $db;
+    private $userModel;
+    public function __construct() {
+        $this->db = getConnection(); 
+        // $this->userModel = new UserModel($dbConnection);
+    }
+
     
+
     public function loginForm()
     {
         // Initialisation du routeur
@@ -35,15 +44,53 @@ class AuthControlleur {
         }
     }
 
-    public function register() {
-        // Traiter les données d'inscription (ex: validation, création d'un utilisateur)
-        // Rediriger vers une autre page en cas de succès
+    // Méthode pour enregistrer un nouvel utilisateur
+
+    public function registerUser($user) {
+        try {
+            // Valider les données de l'utilisateur avant l'ajout
+            // $this->validateUserData($user['couriel'], $user['password'], $user['cpassword'], $user['datNaiss']);
+
+            // Ajouter l'utilisateur à la base de données
+            $message = $this->addUserDB($user);
+
+            // Si l'ajout est réussi, retournez le message de succès
+            return $message;
+            
+        } catch (Exception $e) {
+            // En cas d'erreur, afficher un message d'erreur
+            return "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
+        }
+    }
+
+    public function addUserDB($user) {
+        // Démarrer une transaction
+        $this->db->beginTransaction();
+
+        try {
+            // Insérer l'utilisateur, l'adresse, et les associer
+            $id_utilisateur = $this->insertUser($user);
+            $id_adresse = $this->insertAddress($user);
+            $this->associateUserAddress($id_utilisateur, $id_adresse);
+            $this->assignUserRole($id_utilisateur, 'client');
+
+            // Commit de la transaction
+            $this->db->commit();
+            return "L'utilisateur a été ajouté avec succès.";
+        } catch (Exception $e) {
+            // Rollback si une erreur se produit
+            $this->db->rollBack();
+            return "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
+        }
     }
 
     public function logout() {
+        // session_start();
         session_unset();
         session_destroy();
         header('Location: /login'); 
+        exit();
     }
 }
+
 ?>
