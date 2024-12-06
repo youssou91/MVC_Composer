@@ -7,7 +7,10 @@ use App\Controlleur\ProfileControlleur;
 
 // Connexion à la base de données
 $pdo = getConnection();  
-
+if (!isset($_SESSION['id_utilisateur'])) {
+    header('Location: /login'); 
+    exit;
+}
 // Créer une instance du ProfileControlleur
 $profileControlleur = new ProfileControlleur($pdo);
 
@@ -48,6 +51,9 @@ $sql_produits = "SELECT pc.quantite, p.nom, p.prix_unitaire
 $stmt_produits = $pdo->prepare($sql_produits);
 $stmt_produits->execute([$id_commande]);
 $produits = $stmt_produits->fetchAll();
+
+$utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,43 +66,47 @@ $produits = $stmt_produits->fetchAll();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-3xl text-center text-blue-600 font-semibold mb-5">Détails de la Commande #<?= htmlspecialchars($commande['id_commande']) ?></h1>
-        <div class="mb-6">
-            <p><strong class="font-semibold">Date de la commande:</strong> <?= htmlspecialchars($commande['date_commande']) ?></p>
-            <p><strong class="font-semibold">Prix total:</strong> $<?= number_format($commande['prix_total'], 2) ?></p>
-            <p><strong class="font-semibold">Nom utilisateur:</strong> <?= htmlspecialchars($commande['nom_utilisateur']) . ' ' . htmlspecialchars($commande['prenom']) ?></p>
-        </div>
-        <h3 class="text-3xl text-center text-blue-600 font-semibold mb-5">Produits commandés</h3>
-        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-            <table class="min-w-full table-auto border-collapse border border-gray-300">
-                <thead class="bg-gray-200 text-gray-700">
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-2">Nom produit</th>
-                        <th class="border border-gray-300 px-4 py-2 text-center">Quantité</th>
-                        <th class="border border-gray-300 px-4 py-2">Prix unitaire</th>
-                        <th class="border border-gray-300 px-4 py-2">Prix total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($produits): ?>
-                        <?php foreach ($produits as $produit): ?>
-                            <tr class="hover:bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-2"><?= htmlspecialchars($produit['nom']) ?></td>
-                                <td class="border border-gray-300 px-4 py-2 text-center"><?= $produit['quantite'] ?></td>
-                                <td class="border border-gray-300 px-4 py-2">$<?= number_format($produit['prix_unitaire'], 2) ?></td>
-                                <td class="border border-gray-300 px-4 py-2">$<?= number_format($produit['quantite'] * $produit['prix_unitaire'], 2) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+    <?php if ($utilisateurEstConnecte): 
+        $utilisateurId = $_SESSION['id_utilisateur']; ?>
+        <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl text-center text-blue-600 font-semibold mb-5">Détails de la Commande #<?= htmlspecialchars($commande['id_commande']) ?></h1>
+            <div class="mb-6">
+                <p><strong class="font-semibold">Date de la commande:</strong> <?= htmlspecialchars($commande['date_commande']) ?></p>
+                <p><strong class="font-semibold">Prix total:</strong> $<?= number_format($commande['prix_total'], 2) ?></p>
+                <p><strong class="font-semibold">Nom utilisateur:</strong> <?= htmlspecialchars($commande['nom_utilisateur']) . ' ' . htmlspecialchars($commande['prenom']) ?></p>
+            </div>
+            <h3 class="text-3xl text-center text-blue-600 font-semibold mb-5">Produits commandés</h3>
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+                <table class="min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-gray-200 text-gray-700">
                         <tr>
-                            <td colspan="4" class="border border-gray-300 px-4 py-2 text-center text-gray-500">Aucun produit trouvé pour cette commande</td>
+                            <th class="border border-gray-300 px-4 py-2">Nom produit</th>
+                            <th class="border border-gray-300 px-4 py-2 text-center">Quantité</th>
+                            <th class="border border-gray-300 px-4 py-2">Prix unitaire</th>
+                            <th class="border border-gray-300 px-4 py-2">Prix total</th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php if ($produits): ?>
+                            <?php foreach ($produits as $produit): ?>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="border border-gray-300 px-4 py-2"><?= htmlspecialchars($produit['nom']) ?></td>
+                                    <td class="border border-gray-300 px-4 py-2 text-center"><?= $produit['quantite'] ?></td>
+                                    <td class="border border-gray-300 px-4 py-2">$<?= number_format($produit['prix_unitaire'], 2) ?></td>
+                                    <td class="border border-gray-300 px-4 py-2">$<?= number_format($produit['quantite'] * $produit['prix_unitaire'], 2) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="border border-gray-300 px-4 py-2 text-center text-gray-500">Aucun produit trouvé pour cette commande</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-
+        <?php else: 
+        header('Location: /login'); 
+    endif; ?>   
 </body>
 </html>

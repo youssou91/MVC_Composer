@@ -2,10 +2,10 @@
 require __DIR__ . '/../../vendor/autoload.php';
 use App\Controlleur\ProfileControlleur;
 // Vérifiez si l'utilisateur est connecté
-if (!isset($_SESSION['id_utilisateur'])) {
-    echo '<script>window.location.href = "connexion.php";</script>';
-    exit;
-}
+// if (!isset($_SESSION['id_utilisateur'])) {
+//     echo '<script>window.location.href = "connexion.php";</script>';
+//     exit;
+// }
 // Initialisez les dépendances
 $dbConnection = getConnection();  
 $userController = new ProfileControlleur($dbConnection);
@@ -15,6 +15,8 @@ $userId = $_SESSION['id_utilisateur'];
 $userInfo = $userController->getUserInfo($userId);
 // Récupérez les commandes de l'utilisateur
 $userOrders = $userController->getUserOrders($userId);
+$utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
+
 // Stockez les commandes dans la session pour les rendre accessibles
 $_SESSION['orders'] = $userOrders;
 // Traitement du formulaire de mise à jour du profil
@@ -78,142 +80,145 @@ if (isset($_POST['action'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-<div class="container mx-auto p-8">
-    <h1 class="text-3xl text-center text-blue-600 font-semibold mb-5">Mon Profil</h1>
-    <div class="flex flex-col lg:flex-row gap-5">
-        <div class="bg-white p-6 rounded-lg shadow-md lg:w-1/3">
-            <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Informations personnelles</h3>
-            <p><span class="font-semibold">Nom:</span> <?= htmlspecialchars($userInfo['nom_utilisateur']) ?></p>
-            <p><span class="font-semibold">Prénom:</span> <?= htmlspecialchars($userInfo['prenom']) ?></p>
-            <p><span class="font-semibold">Email:</span> <?= htmlspecialchars($userInfo['couriel']) ?></p>
-            <p><span class="font-semibold">Téléphone:</span> <?= htmlspecialchars($userInfo['telephone']) ?></p>
-            <h4 class="text-lg font-semibold text-blue-600 mt-4">Adresse</h4>
-            <p><span class="font-semibold">Rue:</span> <?= htmlspecialchars($userInfo['numero']).' '.htmlspecialchars($userInfo['rue']) ?></p>
-            <p><span class="font-semibold">Code Postal:</span> <?= htmlspecialchars($userInfo['code_postal']) ?></p>
-            <p><span class="font-semibold">Ville:</span> <?= htmlspecialchars($userInfo['ville']).', '.htmlspecialchars($userInfo['province']) ?></p>
-            <p><span class="font-semibold">Pays:</span> <?= htmlspecialchars($userInfo['pays']) ?></p>
-            <div class="mt-6 flex gap-4">
-                <button class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600" data-modal-target="#modalModifierProfil">
-                    <i class="fas fa-user-edit"></i>
-                </button>
-                <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" data-modal-target="#modalModifierMotDePasse">
-                    <i class="fas fa-key"></i>
-                </button>
+    <?php if ($utilisateurEstConnecte): 
+            $utilisateurId = $_SESSION['id_utilisateur']; ?>
+        <div class="container mx-auto p-8">
+            <h1 class="text-3xl text-center text-blue-600 font-semibold mb-5">Mon Profil</h1>
+            <div class="flex flex-col lg:flex-row gap-5">
+                <div class="bg-white p-6 rounded-lg shadow-md lg:w-1/3">
+                    <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Informations personnelles</h3>
+                    <p><span class="font-semibold">Nom:</span> <?= htmlspecialchars($userInfo['nom_utilisateur']) ?></p>
+                    <p><span class="font-semibold">Prénom:</span> <?= htmlspecialchars($userInfo['prenom']) ?></p>
+                    <p><span class="font-semibold">Email:</span> <?= htmlspecialchars($userInfo['couriel']) ?></p>
+                    <p><span class="font-semibold">Téléphone:</span> <?= htmlspecialchars($userInfo['telephone']) ?></p>
+                    <h4 class="text-lg font-semibold text-blue-600 mt-4">Adresse</h4>
+                    <p><span class="font-semibold">Rue:</span> <?= htmlspecialchars($userInfo['numero']).' '.htmlspecialchars($userInfo['rue']) ?></p>
+                    <p><span class="font-semibold">Code Postal:</span> <?= htmlspecialchars($userInfo['code_postal']) ?></p>
+                    <p><span class="font-semibold">Ville:</span> <?= htmlspecialchars($userInfo['ville']).', '.htmlspecialchars($userInfo['province']) ?></p>
+                    <p><span class="font-semibold">Pays:</span> <?= htmlspecialchars($userInfo['pays']) ?></p>
+                    <div class="mt-6 flex gap-4">
+                        <button class="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600" data-modal-target="#modalModifierProfil">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" data-modal-target="#modalModifierMotDePasse">
+                            <i class="fas fa-key"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md lg:w-2/3">
+                    <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Mes Commandes</h3>
+                    <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-center border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-4 border-b">#</th>
+                                        <th class="py-2 px-4 border-b">Date</th>
+                                        <th class="py-2 px-4 border-b">Montant</th>
+                                        <th class="py-2 px-4 border-b">Statut</th>
+                                        <th class="py-2 px-4 border-b">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $index = 1; ?>
+                                    <?php foreach ($userOrders as $order): ?>
+                                        <tr class="border-b hover:bg-gray-50">
+                                            <td class="py-2 px-4"><?= $index++; ?></td>
+                                            <td class="py-2 px-4"><?= htmlspecialchars($order['date_commande']) ?></td>
+                                            <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
+                                            <td class="py-2 px-4">
+                                                <span class="px-2 py-1 rounded-full 
+                                                    <?php                                             
+                                                        // Application des couleurs en fonction du statut
+                                                        if ($order['statut'] == 'En attente') {
+                                                            echo 'bg-yellow-200 text-yellow-800'; 
+                                                        } elseif ($order['statut'] == 'En traitement') {
+                                                            echo 'bg-orange-200 text-orange-800'; 
+                                                        } elseif ($order['statut'] == 'En expédition') {
+                                                            echo 'bg-green-200 text-green-800'; 
+                                                        } elseif ($order['statut'] == 'Livrée') {
+                                                            echo 'bg-blue-200 text-blue-800'; 
+                                                        } elseif ($order['statut'] == 'Annulée') {
+                                                            echo 'bg-red-200 text-red-800'; 
+                                                        } elseif ($order['statut'] == 'Payée') {
+                                                            echo 'bg-purple-200 text-purple-800'; 
+                                                        }
+                                                    ?>">
+                                                    <?= htmlspecialchars($order['statut']); ?>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="flex space-x-2">
+                                                    <!-- Détails -->
+                                                    <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                    <!-- Paiement -->                                    
+                                                    <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
+                                                        <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
+                                                            <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
+                                                            <input type="hidden" name="prix_total" value="<?= htmlspecialchars($order['prix_total']); ?>">
+                                                            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                                                <i class="fas fa-credit-card"></i>
+                                                            </button>
+                                                        </form>
+                                                    <?php else: ?>
+                                                        <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
+                                                            <i class="fas fa-credit-card"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <!-- Annulation -->
+                                                    <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
+                                                        <button onclick="openModal('<?= $order['id_commande']; ?>')" 
+                                                            class="bg-red-500 text-white px-4 py-2 rounded"> 
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button onclick="openModal('<?= $order['id_commande']; ?>')" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </td> 
+                                        </tr>
+                                        <!-- Modal unique pour cette commande -->
+                                        <div id="modalAnnulerCommande<?= $order['id_commande']; ?>" 
+                                            class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+                                            <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                                                <div class="flex justify-between items-center mb-4">
+                                                    <h5 class="text-lg font-semibold">Confirmer l'annulation</h5>
+                                                    <button onclick="closeModal('<?= $order['id_commande']; ?>')" class="text-gray-500 hover:text-gray-800">
+                                                        &times;
+                                                    </button>
+                                                </div>
+                                                <div class="mb-4">
+                                                    Êtes-vous sûr de vouloir annuler la commande : <strong><?= $order['id_commande']; ?></strong> ? 
+                                                    Cette action est irréversible.
+                                                </div>
+                                                <div class="flex justify-end gap-4">
+                                                    <button onclick="closeModal('<?= $order['id_commande']; ?>')" 
+                                                        class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Annuler</button>
+                                                    <a href="/commande/editer/id_commande=<?= $order['id_commande']; ?>/action=annuler" 
+                                                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                                                        Confirmer l'annulation
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <p>Aucune commande trouvée.</p>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md lg:w-2/3">
-            <h3 class="text-xl text-center text-blue-600 font-semibold mb-4">Mes Commandes</h3>
-            <?php if (is_array($userOrders) && count($userOrders) > 0): ?>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full text-center border border-gray-200">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="py-2 px-4 border-b">#</th>
-                                <th class="py-2 px-4 border-b">Date</th>
-                                <th class="py-2 px-4 border-b">Montant</th>
-                                <th class="py-2 px-4 border-b">Statut</th>
-                                <th class="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $index = 1; ?>
-                            <?php foreach ($userOrders as $order): ?>
-                                <tr class="border-b hover:bg-gray-50">
-                                    <td class="py-2 px-4"><?= $index++; ?></td>
-                                    <td class="py-2 px-4"><?= htmlspecialchars($order['date_commande']) ?></td>
-                                    <td class="px-4 py-2"><?= number_format(htmlspecialchars($order['prix_total']), 2); ?> $</td>
-                                    <td class="py-2 px-4">
-                                        <span class="px-2 py-1 rounded-full 
-                                            <?php                                             
-                                                // Application des couleurs en fonction du statut
-                                                if ($order['statut'] == 'En attente') {
-                                                    echo 'bg-yellow-200 text-yellow-800'; 
-                                                } elseif ($order['statut'] == 'En traitement') {
-                                                    echo 'bg-orange-200 text-orange-800'; 
-                                                } elseif ($order['statut'] == 'En expédition') {
-                                                    echo 'bg-green-200 text-green-800'; 
-                                                } elseif ($order['statut'] == 'Livrée') {
-                                                    echo 'bg-blue-200 text-blue-800'; 
-                                                } elseif ($order['statut'] == 'Annulée') {
-                                                    echo 'bg-red-200 text-red-800'; 
-                                                } elseif ($order['statut'] == 'Payée') {
-                                                    echo 'bg-purple-200 text-purple-800'; 
-                                                }
-                                            ?>">
-                                            <?= htmlspecialchars($order['statut']); ?>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="flex space-x-2">
-                                            <!-- Détails -->
-                                            <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            <!-- Paiement -->                                    
-                                            <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
-                                                <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
-                                                    <input type="hidden" name="id_commande" value="<?= htmlspecialchars($order['id_commande']) ?>">
-                                                    <input type="hidden" name="prix_total" value="<?= htmlspecialchars($order['prix_total']); ?>">
-                                                    <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
-                                                        <i class="fas fa-credit-card"></i>
-                                                    </button>
-                                                </form>
-                                            <?php else: ?>
-                                                <a href="#" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
-                                                    <i class="fas fa-credit-card"></i>
-                                                </a>
-                                            <?php endif; ?>
-                                            <!-- Annulation -->
-                                            <?php if ($order['statut'] == 'En attente' || $order['statut'] == 'En traitement'): ?>
-                                                <button onclick="openModal('<?= $order['id_commande']; ?>')" 
-                                                    class="bg-red-500 text-white px-4 py-2 rounded"> 
-                                                    <i class="fas fa-times"></i>
-                                                </button>
-                                            <?php else: ?>
-                                                <button onclick="openModal('<?= $order['id_commande']; ?>')" class="bg-gray-500 text-white py-2 px-4 rounded cursor-not-allowed" disabled>
-                                                    <i class="fas fa-times"></i>
-                                                </button>
-                                            <?php endif; ?>
-                                        </div>
-                                    </td> 
-                                </tr>
-                                <!-- Modal unique pour cette commande -->
-                                <div id="modalAnnulerCommande<?= $order['id_commande']; ?>" 
-                                    class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
-                                    <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-                                        <div class="flex justify-between items-center mb-4">
-                                            <h5 class="text-lg font-semibold">Confirmer l'annulation</h5>
-                                            <button onclick="closeModal('<?= $order['id_commande']; ?>')" class="text-gray-500 hover:text-gray-800">
-                                                &times;
-                                            </button>
-                                        </div>
-                                        <div class="mb-4">
-                                            Êtes-vous sûr de vouloir annuler la commande : <strong><?= $order['id_commande']; ?></strong> ? 
-                                            Cette action est irréversible.
-                                        </div>
-                                        <div class="flex justify-end gap-4">
-                                            <button onclick="closeModal('<?= $order['id_commande']; ?>')" 
-                                                class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Annuler</button>
-                                            <a href="/commande/editer/id_commande=<?= $order['id_commande']; ?>/action=annuler" 
-                                                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                                                Confirmer l'annulation
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php else: ?>
-                <p>Aucune commande trouvée.</p>
-            <?php endif; ?>
-        </div>
-
-    </div>
-</div>
-
-<!-- Modals -->
+        <?php else: 
+        header('Location: /login'); 
+    endif; ?>    
  <!-- Modal Modification Profil -->
 <!-- Modal de modification du profil -->
 <div id="modalModifierProfil" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -322,7 +327,7 @@ if (isset($_POST['action'])) {
             document.querySelector(modalId).classList.remove('hidden');
         });
     });
-    // 
+    
     function openModal(orderId) {
         const modal = document.getElementById(`modalAnnulerCommande${orderId}`);
         if (modal) {
@@ -330,7 +335,6 @@ if (isset($_POST['action'])) {
             modal.classList.add('block');
         }
     }
-
     function closeModal(orderId) {
         const modal = document.getElementById(`modalAnnulerCommande${orderId}`);
         if (modal) {
@@ -338,7 +342,6 @@ if (isset($_POST['action'])) {
             modal.classList.remove('block');
         }
     }
-
 </script>
 
 </body>
