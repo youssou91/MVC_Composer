@@ -40,7 +40,9 @@ $router->map('GET', '/contact', 'ContactControlleur::index', 'contacter');
 // Routes pour les produits
 $router->map('GET', '/produits/[i:id]', 'ProduitControlleur::show', 'produit_detail');
 $router->map('GET', '/produits', 'ProduitControlleur::index', 'produits');
-$router->map('GET', '/utilisateurs', 'UserControlleur::getUsers', 'utilisateurs');
+
+$router->map('GET', '/utilisateurs', 'UserControlleur::index', 'utilisateurs');
+
 $router->map('GET', '/produits/ajout', 'ProduitControlleur::afficheForm', 'ajout');
 $router->map('POST', '/produits/ajouterProduit', 'ProduitControlleur::ajouterProduit', 'ajouterProduit');
 //
@@ -72,7 +74,8 @@ $router->map('POST', '/cart/vider', 'CartControlleur::vider');
 $router->map('GET|POST', '/login', 'AuthControlleur::loginForm', 'connexion');
 $router->map('POST', '/login', 'AuthControlleur::login', 'traitement_connexion');
 $router->map('GET', '/register', 'AuthControlleur::registerForm', 'inscription');
-$router->map('POST', '/register', 'AuthControlleur::registerUser', 'traitement_inscription');
+$router->map('POST', '/inscription', 'AuthControlleur::registerUser', 'traitement_inscription');
+
 $router->map('GET', '/logout', 'AuthControlleur::logout', 'deconnexion');
 
 // Routes pour l'administration
@@ -145,13 +148,13 @@ try {
                             $controlleurInstance = new $controlleur($cartModel);
                             break;
                     
-                        case "App\\Controlleur\\UserControlleur": // Gestion explicite de UserControlleur
+                        case "App\\Controlleur\\UserControlleur": 
                             $userModel = new UserModel($pdo);
                             $controlleurInstance = new $controlleur($userModel);
                             break;
                     
                         default:
-                            $controlleurInstance = new $controlleur(); // Par défaut, aucun paramètre
+                            $controlleurInstance = new $controlleur(); 
                             break;
                     }
                     

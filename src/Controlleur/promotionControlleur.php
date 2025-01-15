@@ -1,15 +1,14 @@
 <?php
 namespace App\Controlleur;
 
-use App\Modele\PromotionModel;  // Assurez-vous d'importer le modèle
-
+use App\Modele\PromotionModel;  
 class PromotionControlleur {
     private $db;
-    private $model;  // Cette propriété va contenir l'instance de PromotionModel
+    private $model;  
 
     public function __construct() {
-        $this->db = getConnection();  // Connexion à la base de données
-        $this->model = new PromotionModel($this->db);  // Initialisation du modèle
+        $this->db = getConnection();  
+        $this->model = new PromotionModel($this->db);  
     }
 
     public function index() {

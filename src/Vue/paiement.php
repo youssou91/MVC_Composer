@@ -27,18 +27,18 @@ $prix_total = htmlspecialchars($_POST['prix_total']);
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-200 m-5">
-    <div class="container mx-auto">
-        <h1 class="text-3xl text-center text-blue-600 font-semibold mb-7 mt-7">Paiement PayPal</h1>
-        <div class="flex justify-center">
-            <div class="bg-white rounded shadow-md p-6 mb-8">
-                <div class="text-center mb-3">
-                    <h2 class="text-xl font-semibold text-blue-700">Montant à payer</h2>
-                    <p class="text-3xl font-extrabold text-green-500 mt-2">$<?= number_format($prix_total, 2, '.', ' ') ?></p>
+        <div class="container mx-auto">
+            <h1 class="text-3xl text-center text-blue-600 font-semibold mb-7 mt-7">Paiement PayPal</h1>
+            <div class="flex justify-center">
+                <div class="bg-white rounded shadow-md p-6 mb-8">
+                    <div class="text-center mb-3">
+                        <h2 class="text-xl font-semibold text-blue-700">Montant à payer</h2>
+                        <p class="text-3xl font-extrabold text-green-500 mt-2">$<?= number_format($prix_total, 2, '.', ' ') ?></p>
+                    </div>
+                    <div id="paypal-button-container" class="mt-4 flex justify-center"></div>
                 </div>
-                <div id="paypal-button-container" class="mt-4 flex justify-center"></div>
             </div>
         </div>
-    </div>
 
     <script>
         paypal.Buttons({

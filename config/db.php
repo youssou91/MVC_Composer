@@ -8,9 +8,7 @@ define('DB_CHARSET', 'utf8');
 
 function getConnection() {
     try {
-        // Correction de la chaîne DSN
         $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT . ";charset=" . DB_CHARSET;
-        
         $pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;

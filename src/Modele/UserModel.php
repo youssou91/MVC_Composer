@@ -4,10 +4,10 @@ use PDO;
 use Exception;
 use DateTime;
 class UserModel {
-    private $db; // Déclaration de la propriété pour la connexion à la base de données
-
+    private $db; 
+    
     public function __construct($db) {
-        $this->db = $db; // Initialisation de la propriété
+        $this->db = $db; 
     }
 
     // Fonction pour ajouter un utilisateur à la base de données
@@ -175,22 +175,21 @@ class UserModel {
         return $age->y;
     }
     
-    // Récupérer tous les utilisateurs avec leurs rôles
-   // Récupérer tous les utilisateurs avec leurs rôles
-   public function getAllUsers() {
-    try {
-        $sql = "SELECT * FROM utilisateur";
-        // Préparer la requête
-        $stmt = $this->db->prepare($sql);
-        // Exécuter la requête
-        $stmt->execute();
-        // Récupérer les résultats
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (Exception $e) {
-        // Gestion des erreurs
-        throw new Exception("Erreur lors de la récupération des utilisateurs : " . $e->getMessage());
+   // Récupérer tous les utilisateurs avec leurs détails
+    public function getAllUsers() {
+        try {
+            if (!$this->db instanceof \PDO) {
+                throw new Exception("La connexion PDO est invalide dans UserModel.");
+            }
+    
+            $stmt = $this->db->prepare("SELECT * FROM utilisateur");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new Exception("Erreur lors de la récupération des utilisateurs : " . $e->getMessage());
+        }
     }
-}
+
     // Get user information by ID
     public function getUserInfo($id_utilisateur) {
         $sql = "SELECT u.*, a.rue, a.numero, a.ville, a.code_postal, a.province, a.pays
@@ -206,12 +205,12 @@ class UserModel {
 
     // Récupérer un utilisateur par email pour la connexion
     public function getElementByEmailForLogin($email) {
-        $query = 'SELECT * FROM utilisateur WHERE couriel = :email LIMIT 1'; // vérifier que le nom de table et colonne sont corrects
-        $stmt = $this->db->prepare($query); // Remplacez `$this->db` par `$this->conn`
+        $query = 'SELECT * FROM utilisateur WHERE couriel = :email LIMIT 1'; 
+        $stmt = $this->db->prepare($query); 
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourner les données de l'utilisateur ou null
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
 
     // Vérifier les informations d'identification de l'utilisateur
@@ -239,43 +238,13 @@ class UserModel {
 
     // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts
     public function getUserCommandWithStatus($userId) {
-        // Préparer la requête SQL
         $sql = "SELECT * FROM commande WHERE id_utilisateur = :userId";
-        
-        // Préparer la déclaration PDO
         $stmt = $this->db->prepare($sql);
-        
-        // Lier les paramètres
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        
-        // Exécuter la requête
         $stmt->execute();
-        
-        // Récupérer les résultats
         $commande = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         return $commande;
-    }
-
-    // Fonction pour mettre à jour les informations personnelles de l'utilisateur
-    public function updateUserInfo($userId, $nom, $prenom, $email, $telephone, $adresse, $ville, $codePostal, $province, $pays) {
-        $stmt = $this->db->prepare("
-            UPDATE utilisateurs 
-            SET nom_utilisateur = :nom, prenom = :prenom, couriel = :email, telephone = :telephone, 
-                numero = :adresse, ville = :ville, code_postal = :codePostal, province = :province, pays = :pays 
-            WHERE id_utilisateur = :userId
-        ");
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
-        $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':telephone', $telephone, PDO::PARAM_STR);
-        $stmt->bindParam(':adresse', $adresse, PDO::PARAM_STR);
-        $stmt->bindParam(':ville', $ville, PDO::PARAM_STR);
-        $stmt->bindParam(':codePostal', $codePostal, PDO::PARAM_STR);
-        $stmt->bindParam(':province', $province, PDO::PARAM_STR);
-        $stmt->bindParam(':pays', $pays, PDO::PARAM_STR);
-        return $stmt->execute();
     }
 
     // Fonction pour mettre à jour le mot de passe de l'utilisateur

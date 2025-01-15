@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php echo $message; ?>
                 </div>
             <?php endif; ?>
-            <form method="POST" class="space-y-8">
+            <form method="POST"  action="/inscription" class="space-y-8">
                 <!-- Formulaire de l'utilisateur comme dans votre code initial -->
                 <!-- Informations Personnelles -->
                 <div class="bg-gray-50 p-6 rounded-lg shadow-md">

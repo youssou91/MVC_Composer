@@ -6,14 +6,20 @@ use Exception;
 
 class UserControlleur {
     private $userModel;
-
+    private $db;
+    
     // Puis instancier le contrôleur avec cette connexion
     public function __construct($dbConnection) {
+        // $this->db = getConnexion();  
         $this->userModel = new UserModel($dbConnection);
     }
-    public function getUsers() {
-        $users = $this->userModel->getAllUsers();
-        require __DIR__ . '/../vue/users.php';
+    public function index() {
+        try {
+            $users = $this->userModel->getAllUsers();
+            require __DIR__ . '/../vue/users.php';
+        } catch (\Exception $e) {
+            echo "Erreur lors de la récupération des utilisateurs : " . $e->getMessage();
+        }
     }
 
     // Méthode pour enregistrer un nouvel utilisateur
@@ -43,11 +49,10 @@ class UserControlleur {
         }
     }
 
-
+   
     // Method to fetch all users
-    public function getAllUsers() {
-        $users = $this->userModel->getAllUsers();
-        return $users;
+    public function listAllUsers() {
+        return $this->userModel->getAllUsers();
     }
 
     // Method to get user information by user ID

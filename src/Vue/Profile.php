@@ -2,10 +2,7 @@
 require __DIR__ . '/../../vendor/autoload.php';
 use App\Controlleur\ProfileControlleur;
 // Vérifiez si l'utilisateur est connecté
-// if (!isset($_SESSION['id_utilisateur'])) {
-//     echo '<script>window.location.href = "connexion.php";</script>';
-//     exit;
-// }
+
 // Initialisez les dépendances
 $dbConnection = getConnection();  
 $userController = new ProfileControlleur($dbConnection);
