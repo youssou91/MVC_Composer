@@ -7,28 +7,59 @@ class UserModel {
     private $db; 
     
     public function __construct($db) {
-        $this->db = $db; 
+        error_log("Constructeur UserModel appelé");
+        error_log("Type de db reçu: " . gettype($db));
+        if (is_object($db)) {
+            error_log("Classe de db: " . get_class($db));
+        }
+        
+        if (!($db instanceof \PDO)) {
+            error_log("ERREUR: La connexion fournie n'est pas une instance de PDO");
+            if (is_object($db)) {
+                error_log("La classe de l'objet est: " . get_class($db));
+            }
+            throw new \Exception("Une instance valide de PDO est requise pour initialiser UserModel");
+        }
+        
+        $this->db = $db;
+        error_log("Connexion PDO correctement initialisée dans UserModel");
     }
 
     // Fonction pour ajouter un utilisateur à la base de données
     public function addUserDB($user) {
         // Démarrer une transaction
         $this->db->beginTransaction();
+        error_log("Début de l'ajout d'un utilisateur: " . print_r($user, true));
 
         try {
             // Insérer l'utilisateur, l'adresse, et les associer
+            error_log("Tentative d'insertion de l'utilisateur");
             $id_utilisateur = $this->insertUser($user);
+            error_log("Utilisateur inséré avec l'ID: " . $id_utilisateur);
+            
+            error_log("Tentative d'insertion de l'adresse");
             $id_adresse = $this->insertAddress($user);
+            error_log("Adresse insérée avec l'ID: " . $id_adresse);
+            
+            error_log("Tentative d'association utilisateur-adresse");
             $this->associateUserAddress($id_utilisateur, $id_adresse);
+            error_log("Association utilisateur-adresse réussie");
+            
+            error_log("Tentative d'assignation du rôle");
             $this->assignUserRole($id_utilisateur, 'client');
+            error_log("Rôle assigné avec succès");
 
             // Commit de la transaction
             $this->db->commit();
+            error_log("Transaction commitée avec succès");
             return "L'utilisateur a été ajouté avec succès.";
         } catch (Exception $e) {
             // Rollback si une erreur se produit
             $this->db->rollBack();
-            return "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
+            $errorMsg = "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
+            error_log($errorMsg);
+            error_log("Stack trace: " . $e->getTraceAsString());
+            return $errorMsg;
         }
     }
 
@@ -39,22 +70,40 @@ class UserModel {
         
         $stmt = $this->db->prepare($sql);
         
+        // Vérifier que tous les champs requis sont présents
+        $requiredFields = ['nom_utilisateur', 'prenom', 'datNaiss', 'couriel', 'password', 'telephone'];
+        foreach ($requiredFields as $field) {
+            if (!isset($user[$field]) || empty($user[$field])) {
+                throw new Exception("Le champ '$field' est requis mais n'a pas été fourni.");
+            }
+        }
+        
         // Hash du mot de passe
         $passwordHash = password_hash($user['password'], PASSWORD_DEFAULT);
+        
+        $params = [
+            ':nom_utilisateur' => $user['nom_utilisateur'],
+            ':prenom' => $user['prenom'],
+            ':datNaiss' => $user['datNaiss'],
+            ':couriel' => $user['couriel'],
+            ':password' => $passwordHash,
+            ':telephone' => $user['telephone'],
+            ':statut' => 'actif'
+        ];
+        
+        error_log("Paramètres d'insertion utilisateur: " . print_r($params, true));
 
         try {
-            $stmt->execute([
-                ':nom_utilisateur' => $user['nom_utilisateur'],
-                ':prenom' => $user['prenom'],
-                ':datNaiss' => $user['datNaiss'],
-                ':couriel' => $user['couriel'],
-                ':password' => $passwordHash,
-                ':telephone' => $user['telephone'],
-                ':statut' => 'actif'
-            ]);
-            return $this->db->lastInsertId();
+            $stmt->execute($params);
+            $lastInsertId = $this->db->lastInsertId();
+            error_log("Utilisateur inséré avec succès. ID: " . $lastInsertId);
+            return $lastInsertId;
         } catch (Exception $e) {
-            throw new Exception("Erreur lors de l'insertion de l'utilisateur : " . $e->getMessage());
+            $errorMsg = "Erreur lors de l'insertion de l'utilisateur : " . $e->getMessage();
+            error_log($errorMsg);
+            error_log("Requête SQL: " . $sql);
+            error_log("Paramètres: " . print_r($params, true));
+            throw new Exception($errorMsg);
         }
     }
 
@@ -63,20 +112,37 @@ class UserModel {
         $sql = "INSERT INTO adresse (rue, ville, code_postal, pays, numero, province) 
                 VALUES (:rue, :ville, :code_postal, :pays, :numero, :province)";
         
-        $stmt = $this->db->prepare($sql);
+        // Vérifier que tous les champs requis sont présents
+        $requiredFields = ['rue', 'ville', 'code_postal', 'pays', 'numero', 'province'];
+        foreach ($requiredFields as $field) {
+            if (!isset($user[$field]) || $user[$field] === '') {
+                throw new Exception("Le champ d'adresse '$field' est requis mais n'a pas été fourni.");
+            }
+        }
+        
+        $params = [
+            ':rue' => $user['rue'],
+            ':ville' => $user['ville'],
+            ':code_postal' => $user['code_postal'],
+            ':pays' => $user['pays'],
+            ':numero' => $user['numero'],
+            ':province' => $user['province']
+        ];
+        
+        error_log("Paramètres d'insertion d'adresse: " . print_r($params, true));
         
         try {
-            $stmt->execute([
-                ':rue' => $user['rue'],
-                ':ville' => $user['ville'],
-                ':code_postal' => $user['code_postal'],
-                ':pays' => $user['pays'],
-                ':numero' => $user['numero'],
-                ':province' => $user['province']
-            ]);
-            return $this->db->lastInsertId();
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($params);
+            $lastInsertId = $this->db->lastInsertId();
+            error_log("Adresse insérée avec succès. ID: " . $lastInsertId);
+            return $lastInsertId;
         } catch (Exception $e) {
-            throw new Exception("Erreur lors de l'insertion de l'adresse : " . $e->getMessage());
+            $errorMsg = "Erreur lors de l'insertion de l'adresse : " . $e->getMessage();
+            error_log($errorMsg);
+            error_log("Requête SQL: " . $sql);
+            error_log("Paramètres: " . print_r($params, true));
+            throw new Exception($errorMsg);
         }
     }
 
@@ -86,47 +152,85 @@ class UserModel {
                 VALUES (:id_utilisateur, :id_adresse)";
         
         $stmt = $this->db->prepare($sql);
+        
+        error_log("Association utilisateur-adresse - ID Utilisateur: $id_utilisateur, ID Adresse: $id_adresse");
 
         try {
-            $stmt->execute([
+            $params = [
                 ':id_utilisateur' => $id_utilisateur,
                 ':id_adresse' => $id_adresse
-            ]);
+            ];
+            
+            $stmt->execute($params);
+            error_log("Association utilisateur-adresse réussie");
         } catch (Exception $e) {
-            throw new Exception("Erreur lors de l'association utilisateur-adresse : " . $e->getMessage());
+            $errorMsg = "Erreur lors de l'association utilisateur-adresse : " . $e->getMessage();
+            error_log($errorMsg);
+            error_log("Requête SQL: " . $sql);
+            error_log("Paramètres: " . print_r($params, true));
+            throw new Exception($errorMsg);
         }
     }
 
     // Assigner un rôle à l'utilisateur
     private function assignUserRole($id_utilisateur, $role_description) {
+        error_log("Tentative d'assignation du rôle '$role_description' à l'utilisateur ID: $id_utilisateur");
+        
         try {
             $role = $this->getRoleByDescription($role_description);
+            error_log("Rôle trouvé: " . print_r($role, true));
 
             $sql = "INSERT INTO role_utilisateur (id_role, id_utilisateur) 
                     VALUES (:id_role, :id_utilisateur)";
             
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
+            $params = [
                 ':id_role' => $role['id_role'],
                 ':id_utilisateur' => $id_utilisateur
-            ]);
+            ];
+            
+            error_log("Exécution de la requête d'assignation de rôle");
+            $stmt->execute($params);
+            error_log("Rôle assigné avec succès à l'utilisateur ID: $id_utilisateur");
         } catch (Exception $e) {
-            throw new Exception("Erreur lors de l'assignation du rôle à l'utilisateur : " . $e->getMessage());
+            $errorMsg = "Erreur lors de l'assignation du rôle à l'utilisateur : " . $e->getMessage();
+            error_log($errorMsg);
+            if (isset($sql)) error_log("Requête SQL: " . $sql);
+            if (isset($params)) error_log("Paramètres: " . print_r($params, true));
+            throw new Exception($errorMsg);
         }
     }
 
     // Récupérer un rôle par description
     private function getRoleByDescription($role_description) {
+        error_log("Recherche du rôle avec la description: " . $role_description);
+        
         $sql = "SELECT * FROM role WHERE description = :description";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':description' => $role_description]);
-
-        $role = $stmt->fetch(PDO::FETCH_ASSOC);
-        if (!$role) {
-            throw new Exception("Rôle non trouvé : " . $role_description);
+        $params = [':description' => $role_description];
+        
+        try {
+            $stmt->execute($params);
+            $role = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$role) {
+                // Vérifier quels rôles existent dans la base de données
+                $allRolesStmt = $this->db->query("SELECT * FROM role");
+                $allRoles = $allRolesStmt->fetchAll(PDO::FETCH_ASSOC);
+                error_log("Rôles disponibles dans la base de données: " . print_r($allRoles, true));
+                
+                throw new Exception("Rôle non trouvé : " . $role_description);
+            }
+            
+            error_log("Rôle trouvé: " . print_r($role, true));
+            return $role;
+            
+        } catch (Exception $e) {
+            error_log("Erreur lors de la récupération du rôle: " . $e->getMessage());
+            error_log("Requête SQL: " . $sql);
+            error_log("Paramètres: " . print_r($params, true));
+            throw $e;
         }
-
-        return $role;
     }
 
     // Valider les données de l'utilisateur (Email, Mot de passe, etc.)
@@ -178,15 +282,38 @@ class UserModel {
    // Récupérer tous les utilisateurs avec leurs détails
     public function getAllUsers() {
         try {
-            if (!$this->db instanceof \PDO) {
+            error_log("Début de getAllUsers()");
+            
+            // Vérifier que la propriété db existe
+            if (!isset($this->db)) {
+                error_log("La propriété db n'est pas définie dans UserModel");
+                throw new Exception("Erreur de configuration du modèle utilisateur");
+            }
+            
+            // Vérifier que db est une instance de PDO
+            if (!($this->db instanceof \PDO)) {
+                error_log(sprintf("La propriété db n'est pas une instance de PDO. Type: %s", gettype($this->db)));
+                if (is_object($this->db)) {
+                    error_log(sprintf("Classe de l'objet: %s", get_class($this->db)));
+                }
                 throw new Exception("La connexion PDO est invalide dans UserModel.");
             }
-    
+            
+            error_log("Exécution de la requête SQL...");
             $stmt = $this->db->prepare("SELECT * FROM utilisateur");
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            error_log(sprintf("Nombre d'utilisateurs récupérés: %d", count($result)));
+            return $result;
+            
         } catch (\PDOException $e) {
+            error_log("Erreur PDO dans getAllUsers(): " . $e->getMessage());
+            error_log("Fichier: " . $e->getFile() . ", Ligne: " . $e->getLine());
             throw new Exception("Erreur lors de la récupération des utilisateurs : " . $e->getMessage());
+        } catch (\Exception $e) {
+            error_log("Erreur dans getAllUsers(): " . $e->getMessage());
+            error_log("Fichier: " . $e->getFile() . ", Ligne: " . $e->getLine());
+            throw $e;
         }
     }
 

@@ -1,0 +1,3491 @@
+[25-Sep-2025 15:28:00 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:28:00 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:28:00 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:28:00 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:28:00 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:28:00 America/Toronto] Port: 3306
+[25-Sep-2025 15:28:00 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:28:00 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:28:00 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:28:01 America/Toronto] Connexion réussie en 0.0303 secondes
+[25-Sep-2025 15:28:01 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:28:01 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:28:01 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:28:01 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:28:01 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:28:01 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:28:01 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:28:01 America/Toronto] Port: 3306
+[25-Sep-2025 15:28:01 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:28:01 America/Toronto] Connexion réussie en 0.0051 secondes
+[25-Sep-2025 15:28:01 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:28:01 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:28:01 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:28:01 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:28:01 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:28:01 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:28:01 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:28:01 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:28:01 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:28:01 America/Toronto] Port: 3306
+[25-Sep-2025 15:28:01 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:28:01 America/Toronto] Connexion réussie en 0.0138 secondes
+[25-Sep-2025 15:28:01 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:28:01 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:28:01 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:28:01 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:28:01 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:28:01 America/Toronto] Port: 3306
+[25-Sep-2025 15:28:01 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:28:01 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:28:01 America/Toronto] Connexion réussie en 0.0034 secondes
+[25-Sep-2025 15:28:01 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0292 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:18 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0050 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:18 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:18 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:18 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:18 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:18 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:18 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0023 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0265 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:18 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0043 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:18 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:18 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:18 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0029 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:18 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:18 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:18 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0030 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:18 America/Toronto] Connexion réussie en 0.0162 secondes
+[25-Sep-2025 15:30:18 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:18 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:18 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:18 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:18 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:21 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:21 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:21 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:21 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:21 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:21 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:21 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:21 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:30:21 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:21 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:21 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:21 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:21 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:21 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:21 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:21 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:21 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:21 America/Toronto] Connexion réussie en 0.0015 secondes
+[25-Sep-2025 15:30:21 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:21 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:21 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:21 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:21 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:21 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:21 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:21 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:21 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:21 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:21 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:21 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:30:21 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:21 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:21 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:21 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:21 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:21 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:21 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:21 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:21 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:30:21 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:25 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:25 America/Toronto] Connexion réussie en 0.0047 secondes
+[25-Sep-2025 15:30:25 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:25 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:25 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0230 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:26 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:26 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:26 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0231 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0151 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0025 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:26 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0270 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:26 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:26 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:26 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0040 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:26 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:26 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:26 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:26 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:26 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:26 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:26 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:26 America/Toronto] Connexion réussie en 0.0018 secondes
+[25-Sep-2025 15:30:26 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:29 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:29 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:29 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:29 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:29 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:29 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:29 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:29 America/Toronto] Connexion réussie en 0.0043 secondes
+[25-Sep-2025 15:30:29 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:29 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:29 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:29 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:29 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:29 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:29 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:29 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:29 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:29 America/Toronto] Connexion réussie en 0.0042 secondes
+[25-Sep-2025 15:30:29 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:29 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:29 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:29 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:29 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:29 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:29 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:29 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:29 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:29 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:29 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:29 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0045 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:30 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:30 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:30 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:30 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:30 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0047 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:30 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:30 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:30 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:30 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:30 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:30 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0037 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:30 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:30 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:30 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:30 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:30 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:30 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:30 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0036 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:30 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:30 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:30 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:30 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:30 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:30 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:30 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:30 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0040 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:30 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:30 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:30 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:30 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:30 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:30 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:30 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:30 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:30:30 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:38 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:38 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:38 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:38 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:38 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:38 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:38 America/Toronto] Connexion réussie en 0.0068 secondes
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:38 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:38 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:38 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:38 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:38 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:38 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:38 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:38 America/Toronto] Connexion réussie en 0.0086 secondes
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:38 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:38 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:38 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:38 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:38 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:38 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:38 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:38 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:38 America/Toronto] Connexion réussie en 0.0046 secondes
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:38 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:38 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:38 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:38 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:38 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:38 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:38 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:38 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:38 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:38 America/Toronto] Connexion réussie en 0.0148 secondes
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:38 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:38 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:38 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:38 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:38 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:38 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:38 America/Toronto] Connexion réussie en 0.0030 secondes
+[25-Sep-2025 15:30:38 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:38 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:38 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:38 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:38 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:50 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0242 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:50 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0161 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:50 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:50 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:50 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0044 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:50 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:50 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:50 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0025 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0135 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:30:50 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:30:50 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:30:50 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:30:50 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0139 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:30:50 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:30:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:50 America/Toronto] Connexion réussie en 0.0244 secondes
+[25-Sep-2025 15:30:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:50 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:30:50 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:30:50 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:30:51 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:30:51 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:51 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:51 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:51 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:51 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:51 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:51 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:51 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:51 America/Toronto] Connexion réussie en 0.0067 secondes
+[25-Sep-2025 15:30:51 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:30:51 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:30:51 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:30:51 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:30:51 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:30:51 America/Toronto] Port: 3306
+[25-Sep-2025 15:30:51 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:30:51 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:30:51 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:30:51 America/Toronto] Connexion réussie en 0.0045 secondes
+[25-Sep-2025 15:30:51 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:04 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:04 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:04 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:04 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:04 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:04 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:04 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:04 America/Toronto] Connexion réussie en 0.0038 secondes
+[25-Sep-2025 15:31:04 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:04 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:04 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:04 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:04 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:04 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:04 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:04 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:04 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:04 America/Toronto] Connexion réussie en 0.0150 secondes
+[25-Sep-2025 15:31:04 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:04 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:04 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:04 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:04 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:04 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:04 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:04 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:04 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:04 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:04 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:04 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0263 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:05 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:05 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:05 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0234 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0041 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:05 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0252 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:05 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:05 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:05 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0034 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:05 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:05 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:05 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:05 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:05 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:05 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:05 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:05 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:05 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:05 America/Toronto] Connexion réussie en 0.0017 secondes
+[25-Sep-2025 15:31:05 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:05 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:05 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:05 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:05 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:10 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0038 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:10 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0042 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:10 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:10 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:10 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0203 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:10 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:10 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:10 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0032 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0233 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:10 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:10 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:10 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:10 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0031 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:10 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0038 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:10 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:10 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:10 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0025 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:10 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:10 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:10 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:10 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:10 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:10 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:10 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:10 America/Toronto] Connexion réussie en 0.0037 secondes
+[25-Sep-2025 15:31:10 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:25 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:25 America/Toronto] Connexion réussie en 0.0033 secondes
+[25-Sep-2025 15:31:25 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:25 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:25 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:25 America/Toronto] Connexion réussie en 0.0268 secondes
+[25-Sep-2025 15:31:25 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:25 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:25 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:25 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:25 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:25 America/Toronto] Connexion réussie en 0.0236 secondes
+[25-Sep-2025 15:31:25 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:25 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:25 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:25 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:25 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:25 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:25 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:25 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:25 America/Toronto] Connexion réussie en 0.0203 secondes
+[25-Sep-2025 15:31:25 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0054 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:47 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0034 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:47 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:47 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:47 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0027 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0023 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:47 America/Toronto] Connexion réussie en 0.0135 secondes
+[25-Sep-2025 15:31:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:47 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:47 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:47 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:47 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:47 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:47 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:47 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:47 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:53 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0041 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:53 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0273 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:53 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:53 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:53 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0264 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:53 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:53 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:53 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0150 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0130 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:31:53 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0040 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:31:53 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:31:53 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:31:53 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0032 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:53 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:53 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:53 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0034 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:31:53 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:31:53 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:31:53 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:31:53 America/Toronto] Port: 3306
+[25-Sep-2025 15:31:53 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:31:53 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:31:53 America/Toronto] Connexion réussie en 0.0033 secondes
+[25-Sep-2025 15:31:53 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:31:53 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:31:53 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:31:53 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:31:53 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:06 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0025 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:06 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:06 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:06 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:06 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:06 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:06 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:06 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0147 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0241 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:06 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:06 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:06 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:06 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0023 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:06 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:06 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:06 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:06 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:06 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:06 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:06 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:06 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:06 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:06 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:06 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:06 America/Toronto] Connexion réussie en 0.0024 secondes
+[25-Sep-2025 15:32:06 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0123 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:12 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:12 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:12 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:12 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0018 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0190 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0017 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:12 America/Toronto] Connexion réussie en 0.0024 secondes
+[25-Sep-2025 15:32:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:12 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:12 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:12 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:12 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:12 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:12 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:12 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:12 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:16 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:16 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:16 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:16 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:16 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:16 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:16 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:16 America/Toronto] Connexion réussie en 0.0021 secondes
+[25-Sep-2025 15:32:16 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:16 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:16 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:16 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:16 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:16 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:16 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:16 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:16 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:16 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:32:16 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:16 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:16 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:16 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:16 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:16 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:16 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:16 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:16 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:16 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:16 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:16 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:16 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:16 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:16 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:16 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:16 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:16 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:16 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:16 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:16 America/Toronto] Connexion réussie en 0.0018 secondes
+[25-Sep-2025 15:32:16 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:22 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0137 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:22 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:22 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:22 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0017 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0016 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0093 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:22 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0262 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:22 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:22 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:22 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:22 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:22 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:22 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:22 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:22 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:22 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:22 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:22 America/Toronto] Connexion réussie en 0.0016 secondes
+[25-Sep-2025 15:32:22 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0021 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:24 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:24 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:24 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:24 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0140 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0025 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:24 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0024 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:24 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:24 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:24 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0026 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0021 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:24 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:24 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:24 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:24 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:24 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:24 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:24 America/Toronto] Connexion réussie en 0.0027 secondes
+[25-Sep-2025 15:32:24 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:24 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:24 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:24 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:24 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:24 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:24 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:24 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:24 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:31 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0209 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:31 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0032 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:31 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:31 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:31 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0157 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0021 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:31 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:31 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:31 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:31 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:31 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:31 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:31 America/Toronto] Connexion réussie en 0.0016 secondes
+[25-Sep-2025 15:32:31 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:31 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:31 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:31 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:31 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:31 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:31 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:31 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:31 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:37 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:37 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:37 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:37 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:37 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:37 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:37 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:37 America/Toronto] Connexion réussie en 0.0042 secondes
+[25-Sep-2025 15:32:37 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:37 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:37 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:37 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:37 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:37 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:37 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:37 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:37 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:37 America/Toronto] Connexion réussie en 0.0203 secondes
+[25-Sep-2025 15:32:37 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:37 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:37 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:37 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:37 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:37 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:37 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:37 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:37 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:37 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:37 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:37 America/Toronto] Connexion réussie en 0.0034 secondes
+[25-Sep-2025 15:32:37 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:37 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:37 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:37 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:37 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:37 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:37 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:37 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:37 America/Toronto] Connexion réussie en 0.0209 secondes
+[25-Sep-2025 15:32:37 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0152 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:47 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0213 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:47 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:47 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:47 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0261 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0030 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0204 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:47 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0036 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:47 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:47 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:47 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0143 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:47 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:47 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:47 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:47 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:47 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:47 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:47 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:47 America/Toronto] Connexion réussie en 0.0212 secondes
+[25-Sep-2025 15:32:47 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0028 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:50 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0246 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:50 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:50 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:50 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0023 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0031 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:32:50 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:32:50 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:32:50 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:32:50 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0264 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0020 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:32:50 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:32:50 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:32:50 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:32:50 America/Toronto] Port: 3306
+[25-Sep-2025 15:32:50 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:32:50 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:32:50 America/Toronto] Connexion réussie en 0.0019 secondes
+[25-Sep-2025 15:32:50 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:32:50 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:50 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:50 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:50 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:32:50 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:32:50 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:32:50 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:32:50 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:43:12 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0118 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:43:12 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0144 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:43:12 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:43:12 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:43:12 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0073 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0255 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:43:12 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0026 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:43:12 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:43:12 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:43:12 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0047 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0195 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0022 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:43:12 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0023 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:43:12 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:43:12 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:43:12 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0196 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:12 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:12 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:12 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:12 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:12 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:12 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:12 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:12 America/Toronto] Connexion réussie en 0.0152 secondes
+[25-Sep-2025 15:43:12 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:18 America/Toronto] Chemin absolu de db.php: C:\xampp\htdocs\dashboard\PHP2\MVC_Composer\MVC_Composer\MVC_Composer\config\db.php
+[25-Sep-2025 15:43:18 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:18 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:18 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:18 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:18 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:18 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:18 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:18 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0277 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données réussie
+[25-Sep-2025 15:43:19 America/Toronto] Tentative de connexion à la base de données...
+[25-Sep-2025 15:43:19 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:19 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:19 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:19 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:19 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:19 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0048 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] Type de pdo: object
+[25-Sep-2025 15:43:19 America/Toronto] Classe de pdo: PDO
+[25-Sep-2025 15:43:19 America/Toronto] Test de la connexion PDO...
+[25-Sep-2025 15:43:19 America/Toronto] Connexion PDO établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:19 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:19 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:19 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:19 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:19 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0049 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:19 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:19 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:19 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:19 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:19 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0264 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:19 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:19 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:19 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:19 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:19 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0241 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] === Tentative de connexion PDO ===
+[25-Sep-2025 15:43:19 America/Toronto] Hôte: 127.0.0.1
+[25-Sep-2025 15:43:19 America/Toronto] Base de données: cours343
+[25-Sep-2025 15:43:19 America/Toronto] Utilisateur: root
+[25-Sep-2025 15:43:19 America/Toronto] Port: 3306
+[25-Sep-2025 15:43:19 America/Toronto] Charset: utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] DSN: mysql:host=127.0.0.1;dbname=cours343;port=3306;charset=utf8mb4
+[25-Sep-2025 15:43:19 America/Toronto] Options: Array
+(
+    [3] => 2
+    [19] => 2
+    [20] => 
+    [12] => 
+    [1002] => SET NAMES utf8mb4
+    [2] => 5
+)
+
+[25-Sep-2025 15:43:19 America/Toronto] Connexion réussie en 0.0206 secondes
+[25-Sep-2025 15:43:19 America/Toronto] Connexion à la base de données établie avec succès
+[25-Sep-2025 15:43:19 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:43:19 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:43:19 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:43:19 America/Toronto] Connexion PDO correctement initialisée dans UserModel
+[25-Sep-2025 15:43:19 America/Toronto] Constructeur UserModel appelé
+[25-Sep-2025 15:43:19 America/Toronto] Type de db reçu: object
+[25-Sep-2025 15:43:19 America/Toronto] Classe de db: PDO
+[25-Sep-2025 15:43:19 America/Toronto] Connexion PDO correctement initialisée dans UserModel

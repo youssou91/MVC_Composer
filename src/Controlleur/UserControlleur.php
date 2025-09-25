@@ -8,10 +8,9 @@ class UserControlleur {
     private $userModel;
     private $db;
     
-    // Puis instancier le contrôleur avec cette connexion
-    public function __construct($dbConnection) {
-        // $this->db = getConnexion();  
-        $this->userModel = new UserModel($dbConnection);
+    // Le constructeur accepte maintenant directement un UserModel
+    public function __construct($userModel) {
+        $this->userModel = $userModel;
     }
     public function index() {
         try {
