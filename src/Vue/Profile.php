@@ -147,9 +147,9 @@ if (isset($_POST['action'])) {
                                             <td>
                                                 <div class="flex space-x-2">
                                                     <!-- Détails -->
-                                                    <a href="/profile/details/<?= $order['id_commande'] ?>" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                                    <button onclick="openOrderDetailsModal('<?= $order['id_commande'] ?>')" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                                                         <i class="fas fa-info-circle"></i>
-                                                    </a>
+                                                    </button>
                                                     <!-- Paiement -->                                    
                                                     <?php if ($order['statut'] != 'Livrée' && $order['statut'] != 'Annulée' && $order['statut'] != 'En expédition'): ?>
                                                         <form method="post" action="/profile/paiement/<?= $order['id_commande'] ?>">
@@ -310,18 +310,37 @@ if (isset($_POST['action'])) {
         </form>
     </div>
 </div>
+
+<!-- Modal pour les détails de la commande -->
+<div id="orderDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">Détails de la commande #<span id="orderId"></span></h3>
+                <button onclick="closeOrderDetailsModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="orderDetailsContent">
+                <!-- Le contenu sera chargé dynamiquement ici -->
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-500 text-4xl mb-4"></i>
+                    <p class="text-gray-600">Chargement des détails de la commande...</p>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button onclick="closeOrderDetailsModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Gestion des modales existantes
     document.querySelectorAll('[data-modal-target]').forEach(button => {
         button.addEventListener('click', function() {
             const modalId = button.getAttribute('data-modal-target');
             document.querySelector(modalId).classList.toggle('hidden');
-        });
-    });
-
-    document.querySelectorAll('[data-modal-target]').forEach(button => {
-        button.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal-target');
-            document.querySelector(modalId).classList.remove('hidden');
         });
     });
     
@@ -332,6 +351,7 @@ if (isset($_POST['action'])) {
             modal.classList.add('block');
         }
     }
+    
     function closeModal(orderId) {
         const modal = document.getElementById(`modalAnnulerCommande${orderId}`);
         if (modal) {
@@ -339,7 +359,65 @@ if (isset($_POST['action'])) {
             modal.classList.remove('block');
         }
     }
-</script>
+    
+    // Fonction pour ouvrir la modale des détails de la commande
+    function openOrderDetailsModal(orderId) {
+        // Mettre à jour l'ID de la commande dans la modale
+        document.getElementById('orderId').textContent = orderId;
+        
+        // Afficher la modale
+        document.getElementById('orderDetailsModal').classList.remove('hidden');
+        
+        // Charger les détails de la commande via AJAX
+        fetch(`/profile/details/${orderId}`)
+            .then(response => response.text())
+            .then(html => {
+                // Extraire uniquement le contenu de la commande depuis la réponse
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const orderContent = doc.querySelector('.max-w-4xl');
+                
+                if (orderContent) {
+                    document.getElementById('orderDetailsContent').innerHTML = orderContent.innerHTML;
+                } else {
+                    document.getElementById('orderDetailsContent').innerHTML = 
+                        '<div class="text-red-500 p-4">Impossible de charger les détails de la commande.</div>';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des détails de la commande:', error);
+                document.getElementById('orderDetailsContent').innerHTML = 
+                    '<div class="text-red-500 p-4">Une erreur est survenue lors du chargement des détails de la commande.</div>';
+            });
+    }
 
-</body>
-</html> 
+    // Fonction pour fermer la modale des détails
+    function closeOrderDetailsModal() {
+        document.getElementById('orderDetailsModal').classList.add('hidden');
+        // Réinitialiser le contenu pour le prochain chargement
+        document.getElementById('orderDetailsContent').innerHTML = `
+            <div class="text-center py-8">
+                <i class="fas fa-spinner fa-spin text-blue-500 text-4xl mb-4"></i>
+                <p class="text-gray-600">Chargement des détails de la commande...</p>
+            </div>`;
+    }
+    
+    // Fermer la modale en cliquant en dehors du contenu
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('orderDetailsModal');
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeOrderDetailsModal();
+                }
+            });
+        }
+        
+        // Fermer la modale avec la touche Échap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeOrderDetailsModal();
+            }
+        });
+    });
+</script>
