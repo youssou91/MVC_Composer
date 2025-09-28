@@ -1,17 +1,47 @@
 <?php
+// Démarrer la session si elle n'est pas déjà démarrée
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+    
+    // Générer un jeton CSRF s'il n'existe pas déjà
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+}
+
+// Déclaration des espaces de noms
+use App\Modele\UserModel;
+use App\Controlleur\UserControlleur;
+
 // Configuration du mode débogage
 define('DEBUG_MODE', true); // Mettre à false en production
 
 // Configuration du rapport d'erreurs
-if (DEBUG_MODE) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('log_errors', 1);
-    ini_set('error_log', __DIR__ . '/../logs/error.log');
-} else {
-    error_reporting(0);
-    ini_set('display_errors', 0);
-}
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../logs/error.log');
+
+// Afficher toutes les erreurs
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    echo "<div style='color:red;background:#fee;padding:10px;margin:10px;border:1px solid #fcc;'>";
+    echo "<strong>Erreur PHP:</strong> $errstr<br>";
+    echo "Fichier: $errfile à la ligne $errline<br>";
+    echo "</div>";
+    return true;
+});
+
+// Gestion des exceptions non attrapées
+set_exception_handler(function($e) {
+    echo "<div style='color:red;background:#fee;padding:10px;margin:10px;border:1px solid #fcc;'>";
+    echo "<strong>Exception non attrapée:</strong> " . $e->getMessage() . "<br>";
+    echo "Fichier: " . $e->getFile() . " à la ligne " . $e->getLine() . "<br>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+    echo "</div>";
+});
 
 // Définir le fuseau horaire par défaut
 date_default_timezone_set('America/Toronto');
@@ -66,7 +96,6 @@ use App\Controlleur\AuthControlleur;
 use App\Controlleur\AdminControlleur;
 use App\Controlleur\AdminProduitControlleur;
 use App\Controlleur\ProfileControlleur;
-use App\Modele\UserModel;
 use App\Controlleur\PromotionControlleur;
 use App\Modele\ProduitModel;
 use App\Modele\CategorieModel;
@@ -151,6 +180,26 @@ $router->map('GET', '/profile/annuler/[i:id_commande]', 'ProfileControlleur::cha
 
 // User routes - French and English versions
 $router->map('GET', '/users', 'UserControlleur::index', 'users');
+
+// Route pour changer le statut d'un utilisateur (actif/inactif)
+$router->map('POST', '/api/user/[i:userId]/status/[:status]', function($userId, $status) use ($pdo) {
+    try {
+        error_log("Tentative de changement de statut pour l'utilisateur $userId vers $status");
+        $userModel = new UserModel($pdo);
+        $controller = new UserControlleur($userModel);
+        $result = $controller->toggleUserStatus($userId, $status);
+        error_log("Résultat du changement de statut: " . $result);
+        echo $result;
+    } catch (Exception $e) {
+        error_log("Erreur lors du changement de statut: " . $e->getMessage());
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erreur serveur lors du changement de statut: ' . $e->getMessage()
+        ]);
+    }
+    exit;
+}, 'api_user_toggle_status');
 
 // Single user routes
 $router->map('GET', '/utilisateur/[i:id]', 'ProfileControlleur::showUser', 'show_user');
@@ -311,15 +360,27 @@ try {
                             break;
                     
                         case "App\\Controlleur\\UserControlleur": 
+                            error_log("=== Création du UserControlleur ===");
                             // Vérifier que la connexion PDO est valide
                             if (!($pdo instanceof PDO)) {
-                                throw new Exception("La connexion PDO n'est pas valide lors de la création du UserModel");
+                                $errorMsg = "La connexion PDO n'est pas valide lors de la création du UserModel";
+                                error_log($errorMsg);
+                                error_log("Type de pdo: " . gettype($pdo));
+                                if (is_object($pdo)) {
+                                    error_log("Classe de pdo: " . get_class($pdo));
+                                }
+                                throw new Exception($errorMsg);
                             }
+                            error_log("Création du UserModel...");
                             $userModel = new UserModel($pdo);
                             if (!isset($userModel) || !is_object($userModel)) {
-                                throw new Exception("Échec de l'instanciation du UserModel");
+                                $errorMsg = "Échec de l'instanciation du UserModel";
+                                error_log($errorMsg);
+                                throw new Exception($errorMsg);
                             }
+                            error_log("UserModel créé avec succès, création du UserControlleur...");
                             $controlleurInstance = new $controlleur($userModel);
+                            error_log("UserControlleur créé avec succès");
                             break;
                     
                         case "App\\Controlleur\\AuthControlleur":

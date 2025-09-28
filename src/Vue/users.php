@@ -20,14 +20,15 @@ if (!$utilisateurEstConnecte || !isset($_SESSION['role']) || $_SESSION['role'] !
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?? '' ?>">
     <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 font-sans">
     <?php if ($utilisateurEstConnecte && isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
@@ -97,6 +98,19 @@ if (!$utilisateurEstConnecte || !isset($_SESSION['role']) || $_SESSION['role'] !
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="flex space-x-2">
+                                            <?php if (!isset($user['role']) || $user['role'] !== 'admin'): // Ne pas afficher le bouton pour les administrateurs ?>
+                                            <button 
+                                                onclick="toggleUserStatus(<?= $user['id_utilisateur'] ?>, '<?= strtolower($user['statut'] ?? 'inactif') === 'actif' ? 'inactif' : 'actif' ?>', this)"
+                                                class="flex items-center px-3 py-1 text-sm rounded <?= (strtolower($user['statut'] ?? 'inactif') === 'actif' ? 'bg-red-100 text-red-700 hover:bg-red-200' : 'bg-green-100 text-green-700 hover:bg-green-200') ?>"
+                                                title="<?= (strtolower($user['statut'] ?? 'inactif') === 'actif' ? 'Désactiver' : 'Activer') ?> l'utilisateur"
+                                            >
+                                                <?php if (strtolower($user['statut'] ?? 'inactif') === 'actif'): ?>
+                                                    <i class="fas fa-user-slash mr-1"></i> 
+                                                <?php else: ?>
+                                                    <i class="fas fa-user-check mr-1"></i> 
+                                                <?php endif; ?>
+                                            </button>
+                                            <?php endif; ?>
                                             <button onclick="showUserDetails(<?= htmlspecialchars(json_encode($user)) ?>)" 
                                                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center justify-center"
                                                title="Voir le profil">
@@ -340,6 +354,110 @@ if (!$utilisateurEstConnecte || !isset($_SESSION['role']) || $_SESSION['role'] !
                     });
             }
             
+            // Fonction pour basculer le statut d'un utilisateur (actif/inactif)
+            function toggleUserStatus(userId, newStatus, buttonElement) {
+                console.log('toggleUserStatus appelée avec userId:', userId, ', newStatus:', newStatus);
+                
+                if (!confirm(`Êtes-vous sûr de vouloir ${newStatus === 'actif' ? 'activer' : 'désactiver'} cet utilisateur ?`)) {
+                    console.log('Opération annulée par l\'utilisateur');
+                    return;
+                }
+                
+                // Désactiver le bouton pendant la requête
+                if (buttonElement) {
+                    buttonElement.disabled = true;
+                    buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Chargement...';
+                }
+
+                const url = `/api/user/${userId}/status/${newStatus}`;
+                console.log('Envoi de la requête à:', url);
+                
+                // Récupérer le jeton CSRF du meta tag
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+                
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(async response => {
+                    console.log('Réponse reçue, statut:', response.status);
+                    
+                    // Essayer de parser la réponse JSON
+                    let data;
+                    try {
+                        const text = await response.text();
+                        console.log('Réponse brute:', text);
+                        data = text ? JSON.parse(text) : {};
+                        console.log('Données de la réponse:', data);
+                    } catch (e) {
+                        console.error('Erreur lors du parsing de la réponse JSON:', e);
+                        throw new Error('Réponse invalide du serveur');
+                    }
+                    
+                    // Réactiver le bouton
+                    if (buttonElement) {
+                        buttonElement.disabled = false;
+                        // Mettre à jour l'icône en fonction du nouveau statut
+                        const icon = data.est_actif 
+                            ? '<i class="fas fa-user-check"></i>'
+                            : '<i class="fas fa-user-slash"></i>';
+                        buttonElement.innerHTML = icon;
+                        // Mettre à jour l'événement onclick
+                        buttonElement.onclick = () => toggleUserStatus(
+                            userId, 
+                            data.est_actif ? 'inactif' : 'actif', 
+                            buttonElement
+                        );
+                    }
+                    
+                    if (!response.ok) {
+                        const errorMsg = data && data.message 
+                            ? data.message 
+                            : `Erreur HTTP ${response.status}: ${response.statusText}`;
+                        throw new Error(errorMsg);
+                    }
+                    
+                    if (data && data.success) {
+                        // Afficher un message de succès
+                        const toast = document.createElement('div');
+                        toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50';
+                        toast.textContent = data.message || 'Statut mis à jour avec succès';
+                        document.body.appendChild(toast);
+                        
+                        // Recharger immédiatement la page
+                        window.location.reload();
+                    } else {
+                        throw new Error(data && data.message || 'Une erreur inconnue est survenue');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la requête:', error);
+                    
+                    // Afficher un message d'erreur
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded shadow-lg';
+                    toast.textContent = error.message || 'Une erreur est survenue lors de la mise à jour du statut';
+                    document.body.appendChild(toast);
+                    
+                    // Supprimer le message après 5 secondes
+                    setTimeout(() => toast.remove(), 5000);
+                    
+                    // Réactiver le bouton en cas d'erreur
+                    if (buttonElement) {
+                        buttonElement.disabled = false;
+                        const icon = newStatus === 'actif' 
+                            ? '<i class="fas fa-user-check mr-1"></i> Activer'
+                            : '<i class="fas fa-user-slash mr-1"></i> Désactiver';
+                        buttonElement.innerHTML = icon;
+                    }
+                });
+            }
+            
             // Fonction pour afficher les détails d'un utilisateur
             function showUserDetails(user) {
                 // Mettre à jour le titre de la modale
@@ -378,13 +496,7 @@ if (!$utilisateurEstConnecte || !isset($_SESSION['role']) || $_SESSION['role'] !
                                     <p class="font-medium text-gray-900">${user.nb_commandes || 0}</p>
                                 </div>
                             </div>
-                            <div class="mt-6 pt-4 border-t border-gray-200">
-                                <button onclick="showUserOrders(${user.id_utilisateur || user.id})" 
-                                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out">
-                                    <i class="fas fa-shopping-cart mr-2"></i>
-                                    Voir les commandes
-                                </button>
-                            </div>
+                            
                     </div>
                 `;
                 
