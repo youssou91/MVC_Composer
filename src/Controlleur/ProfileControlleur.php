@@ -76,6 +76,59 @@ class ProfileControlleur {
         $userModel->changeOrderStatus($id_commande, $status);
     }
     
+    /**
+     * Affiche les détails d'un utilisateur
+     * @param int $id ID de l'utilisateur
+     */
+    public function showUser($id) {
+        $userModel = new UserModel($this->db);
+        $userData = $userModel->getUserInfo($id);
+        
+        if ($userData) {
+            // Convertir le tableau associatif en objet
+            $user = (object) $userData;
+            require_once __DIR__ . '/../Vue/user_profile.php';
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            echo 'Utilisateur non trouvé';
+        }
+    }
     
+    /**
+     * Affiche les commandes d'un utilisateur
+     * @param int $id ID de l'utilisateur
+     */
+    public function userOrders($id) {
+        $userModel = new UserModel($this->db);
+        $userData = $userModel->getUserInfo($id);
+        
+        if ($userData) {
+            // Convertir le tableau associatif en objet
+            $user = (object) $userData;
+            $orders = $userModel->getUserOrders($id);
+            require_once __DIR__ . '/../Vue/user_orders.php';
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            echo 'Utilisateur non trouvé';
+        }
+    }
+    
+    /**
+     * Affiche le formulaire de modification d'un utilisateur
+     * @param int $id ID de l'utilisateur
+     */
+    public function editUserForm($id) {
+        $userModel = new UserModel($this->db);
+        $userData = $userModel->getUserInfo($id);
+        
+        if ($userData) {
+            // Convertir le tableau associatif en objet
+            $user = (object) $userData;
+            require_once __DIR__ . '/../Vue/edit_user.php';
+        } else {
+            header('HTTP/1.0 404 Not Found');
+            echo 'Utilisateur non trouvé';
+        }
+    }
 }
 ?>

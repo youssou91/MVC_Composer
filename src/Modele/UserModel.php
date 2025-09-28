@@ -317,6 +317,64 @@ class UserModel {
         }
     }
 
+    // Récupérer les utilisateurs avec leurs commandes
+    public function getUsersWithOrders() {
+        try {
+            $sql = "SELECT 
+                        u.id_utilisateur,
+                        u.nom_utilisateur,
+                        u.prenom,
+                        u.couriel,
+                        u.telephone,
+                        u.date_naissance,
+                        u.statut,
+                        c.id_commande,
+                        c.date_commande,
+                        c.prix_total,
+                        c.statut as statut_commande
+                    FROM utilisateur u
+                    LEFT JOIN commande c ON u.id_utilisateur = c.id_utilisateur
+                    ORDER BY u.nom_utilisateur, c.date_commande DESC";
+            
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            
+            // Grouper les commandes par utilisateur
+            $users = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $userId = $row['id_utilisateur'];
+                if (!isset($users[$userId])) {
+                    $users[$userId] = [
+                        'id_utilisateur' => $row['id_utilisateur'],
+                        'nom_utilisateur' => $row['nom_utilisateur'],
+                        'prenom' => $row['prenom'],
+                        'couriel' => $row['couriel'],
+                        'telephone' => $row['telephone'],
+                        'date_naissance' => $row['date_naissance'],
+                        'statut' => $row['statut'],
+                        'commandes' => []
+                    ];
+                }
+                
+                // Ajouter la commande si elle existe
+                if ($row['id_commande']) {
+                    $users[$userId]['commandes'][] = [
+                        'id_commande' => $row['id_commande'],
+                        'date_commande' => $row['date_commande'],
+                        'prix_total' => $row['prix_total'],
+                        'statut' => $row['statut_commande']
+                    ];
+                }
+            }
+            
+            return array_values($users);
+            
+        } catch (\PDOException $e) {
+            error_log("Erreur PDO dans getUsersWithOrders(): " . $e->getMessage());
+            throw new Exception("Erreur lors de la récupération des utilisateurs avec leurs commandes");
+        }
+    }
+
     // Get user information by ID
     public function getUserInfo($id_utilisateur) {
         $sql = "SELECT u.*, a.rue, a.numero, a.ville, a.code_postal, a.province, a.pays
@@ -349,18 +407,30 @@ class UserModel {
             JOIN role r ON ru.id_role = r.id_role
             WHERE u.couriel = :email
         ";
-        $stmt = $this->db->prepare($query); // Utilisation de $this->db
+        $stmt = $this->db->prepare($query);
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['mot_de_pass'])) {
-            // Supprimer le mot de passe du tableau retourné pour des raisons de sécurité
-            unset($user['mot_de_pass']);
-            return $user; // Utilisateur trouvé et mot de passe vérifié
+        if ($user) {
+            // Vérifier d'abord le mot de passe
+            if (password_verify($password, $user['mot_de_pass'])) {
+                // Vérifier si le compte est actif
+                if (strtolower($user['statut']) !== 'actif') {
+                    throw new Exception('Votre compte n\'est pas actif. Veuillez contacter l\'administrateur.');
+                }
+                
+                // Supprimer le mot de passe du tableau retourné pour des raisons de sécurité
+                unset($user['mot_de_pass']);
+                return $user; // Utilisateur trouvé, mot de passe vérifié et compte actif
+            }
+            
+            // Si on arrive ici, le mot de passe est incorrect
+            throw new Exception('Email ou mot de passe incorrect');
         }
 
-        return false; // Utilisateur non trouvé ou mot de passe incorrect
+        // Si on arrive ici, l'utilisateur n'existe pas
+        throw new Exception('Email ou mot de passe incorrect');
     }
 
     // Fonction pour récupérer les commandes d'un utilisateur avec leurs statuts

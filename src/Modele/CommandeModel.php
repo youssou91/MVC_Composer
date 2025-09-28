@@ -23,11 +23,22 @@ class CommandeModel {
                 commande.statut
             FROM 
                 commande
-            INNER JOIN  utilisateur ON commande.id_utilisateur = utilisateur.id_utilisateur;");
+            INNER JOIN utilisateur ON commande.id_utilisateur = utilisateur.id_utilisateur");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw new PDOException("Erreur lors de la récupération des commandes : " . $e->getMessage());
+        }
+    }
+    
+    public function updateCommande($id_commande, $statut) {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE commande SET statut = :statut WHERE id_commande = :id_commande");
+            $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
+            $stmt->bindParam(':statut', $statut);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Erreur lors de la mise à jour de la commande avec ID $id_commande : " . $e->getMessage());
         }
     }
     
@@ -42,8 +53,7 @@ class CommandeModel {
         }
     }
     
-    function addCommande($commande) {
-        
+    public function addCommande($commande) {
         if (!isset($commande['id_utilisateur']) || !isset($commande['prix_total'])) {
             throw new PDOException("Les informations requises pour ajouter une commande sont manquantes.");
         }
@@ -160,6 +170,7 @@ class CommandeModel {
                 INNER JOIN produit_commande pc ON c.id_commande = pc.id_commande
                 INNER JOIN produits p ON pc.id_produit = p.id_produit
                 WHERE c.id_commande = :order_id
+            
             ");
     
             // Lier l'ID de la commande avec un paramètre sécurisé
@@ -175,19 +186,71 @@ class CommandeModel {
             return $row['total'] ?? 0;
     
         } catch (PDOException $e) {
-            // Lever une exception en cas d'erreur
-            throw new PDOException("Erreur lors de la récupération du total de la commande avec ID $order_id : " . $e->getMessage());
+            error_log("Erreur lors de la récupération du total de la commande $order_id : " . $e->getMessage());
+            return 0;
         }
     }
     
-    public function updateCommande($id_commande, $statut) {
-        $stmt = $this->pdo->prepare("UPDATE commande SET   statut = :statut WHERE id_commande = :id_commande");
-        $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
-        $stmt->bindParam(':statut', $statut);
-        return $stmt->execute();
+    /**
+     * Récupère toutes les commandes d'un utilisateur avec leur statut
+     * 
+     * @param int $id_utilisateur L'ID de l'utilisateur
+     * @return array Les commandes de l'utilisateur
+     */
+    public function getCommandesByUser($id_utilisateur) {
+        try {
+            error_log("Début de getCommandesByUser pour l'utilisateur ID: $id_utilisateur");
+            
+            // Vérifier la connexion PDO
+            if (!$this->pdo) {
+                error_log("Erreur: Pas de connexion PDO");
+                throw new PDOException("Pas de connexion à la base de données");
+            }
+            
+            // Préparer et exécuter la requête
+            $query = "
+                SELECT 
+                    id_commande,
+                    id_utilisateur,
+                    date_commande,
+                    prix_total,
+                    statut
+                FROM 
+                    commande
+                WHERE 
+                    id_utilisateur = :id_utilisateur
+                ORDER BY 
+                    date_commande DESC
+            ";
+            
+            error_log("Requête SQL: " . $query);
+            
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':id_utilisateur', (int)$id_utilisateur, PDO::PARAM_INT);
+            
+            if (!$stmt->execute()) {
+                $errorInfo = $stmt->errorInfo();
+                throw new PDOException("Erreur d'exécution de la requête: " . ($errorInfo[2] ?? 'Inconnue'));
+            }
+            
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            error_log("Nombre de commandes trouvées: " . count($result));
+            
+            // Convertir les prix en nombres flottants
+            foreach ($result as &$row) {
+                $row['prix_total'] = (float)$row['prix_total'];
+            }
+            
+            return $result;
+            
+        } catch (PDOException $e) {
+            $errorMsg = "Erreur PDO dans getCommandesByUser: " . $e->getMessage();
+            error_log($errorMsg);
+            throw $e; // Renvoyer l'exception pour une meilleure gestion en amont
+        } catch (Exception $e) {
+            $errorMsg = "Erreur inattendue dans getCommandesByUser: " . $e->getMessage();
+            error_log($errorMsg);
+            throw $e; // Renvoyer l'exception pour une meilleure gestion en amont
+        }
     }
-
-    
 }
-
-?>

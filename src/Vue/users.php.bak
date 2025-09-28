@@ -1,0 +1,578 @@
+<?php
+use App\Modele\UserModel;
+use App\Controlleur\UserControlleur;
+
+// Démarrer la session si elle n'est pas déjà démarrée
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$pdo = getConnection(); 
+$userModel = new UserModel($pdo);
+$userController = new UserControlleur($userModel);
+$utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
+
+// Vérifier l'authentification et les autorisations
+if (!$utilisateurEstConnecte) {
+    header('Location: /login');
+    exit();
+}
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header('Location: /');
+    exit();
+}
+
+// Récupérer la liste des utilisateurs
+$users = $userModel->getAllUsers();
+$utilisateurId = $_SESSION['id_utilisateur'];
+
+// Récupérer les rôles disponibles
+$roles = [
+    ['id' => 'admin', 'nom' => 'Administrateur'],
+    ['id' => 'user', 'nom' => 'Utilisateur']
+];
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?= $_SESSION['csrf_token'] ?? ''; ?>">
+    <title>Liste des utilisateurs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Styles pour les modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 1.75rem auto;
+            max-width: 800px;
+        }
+        
+        .modal-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: 0.3rem;
+            outline: 0;
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 0.3rem;
+            border-top-right-radius: 0.3rem;
+        }
+        
+        .modal-body {
+            position: relative;
+            flex: 1 1 auto;
+            padding: 1rem;
+        }
+        
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+            border-bottom-right-radius: 0.3rem;
+            border-bottom-left-radius: 0.3rem;
+        }
+        
+        .btn-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+        
+        /* Style de base pour les boutons */
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .btn-primary {
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .btn:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+        
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 2px;
+        }
+        .role-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .role-admin {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .role-user {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        .btn-add-user {
+            padding: 0.5rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-blue-600">Liste des Utilisateurs</h1>
+            <a href="/utilisateur/ajouter" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+                <i class="fas fa-plus mr-2"></i> Nouvel utilisateur
+            </a>
+        </div>
+        
+        <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+            <table id="usersTable" class="min-w-full table-auto border border-gray-200">
+                <thead class="bg-blue-500 text-white">
+                    <tr>
+                        <th class="px-4 py-2 text-left border">#</th>
+                        <th class="px-4 py-2 text-left border">ID</th>
+                        <th class="px-4 py-2 text-left border">Nom d'utilisateur</th>
+                        <th class="px-4 py-2 text-left border">Prénom</th>
+                        <th class="px-4 py-2 text-left border">Email</th>
+                        <th class="px-4 py-2 text-left border">Rôle</th>
+                        <th class="px-4 py-2 text-left border">Statut</th>
+                        <th class="px-4 py-2 text-center border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <?php foreach ($users as $index => $user): ?>
+                        <tr class="hover:bg-gray-50 even:bg-gray-50">
+                            <td class="px-4 py-2 text-left border"><?= $index + 1; ?></td>
+                            <td class="px-4 py-2 text-left border"><?= htmlspecialchars($user['id_utilisateur'] ?? ''); ?></td>
+                            <td class="px-4 py-2 text-left border"><?= htmlspecialchars($user['nom_utilisateur'] ?? ''); ?></td>
+                            <td class="px-4 py-2 text-left border"><?= htmlspecialchars($user['prenom'] ?? ''); ?></td>
+                            <td class="px-4 py-2 text-left border"><?= htmlspecialchars($user['couriel'] ?? ''); ?></td>
+                            <td class="px-4 py-2 text-left border">
+                                <span class="role-badge <?= ($user['role'] ?? 'user') === 'admin' ? 'role-admin' : 'role-user' ?>">
+                                    <?= htmlspecialchars($user['role'] ?? 'user'); ?>
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 border">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <?= ($user['est_actif'] ?? 1) ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' ?> status-badge">
+                                    <?= ($user['est_actif'] ?? 1) ? 'Actif' : 'Inactif' ?>
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 text-center border">
+                                <div class="flex justify-center space-x-2">
+                                    <button type="button" 
+                                            class="action-btn bg-blue-500 text-white rounded hover:bg-blue-600 transition view-user"
+                                            data-user-id="<?= $user['id_utilisateur'] ?? ''; ?>"
+                                            title="Voir les détails">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button type="button" 
+                                            class="action-btn bg-green-500 text-white rounded hover:bg-green-600 transition edit-user"
+                                            onclick="openEditModal(<?= $user['id_utilisateur'] ?? ''; ?>)"
+                                            title="Modifier l'utilisateur">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <?php if ($user['id_utilisateur'] != $utilisateurId): ?>
+                                        <button type="button" 
+                                                class="action-btn <?= ($user['est_actif'] ?? 1) ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600' ?> text-white rounded transition toggle-status"
+                                                data-user-id="<?= $user['id_utilisateur'] ?? ''; ?>"
+                                                data-user-name="<?= htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom_utilisateur'] ?? '')); ?>"
+                                                data-user-status="<?= $user['est_actif'] ?? 1; ?>"
+                                                title="<?= ($user['est_actif'] ?? 1) ? 'Désactiver' : 'Activer' ?> l'utilisateur">
+                                            <i class="fas <?= ($user['est_actif'] ?? 1) ? 'fa-user-slash' : 'fa-user-check' ?>"></i>
+                                        </button>
+                                    <?php else: ?>
+                                        <button class="action-btn bg-gray-300 text-gray-600 rounded cursor-not-allowed"
+                                                title="Vous ne pouvez pas modifier votre propre statut"
+                                                disabled>
+                                            <i class="fas fa-user"></i>
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal pour afficher les détails de l'utilisateur -->
+    <div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-blue-500 text-white">
+                    <h5 class="modal-title" id="userDetailsModalLabel">Détails de l'utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body" id="userDetailsContent">
+                    <!-- Le contenu sera chargé dynamiquement via AJAX -->
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                        <p class="mt-2">Chargement des détails de l'utilisateur...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- La modale d'édition a été supprimée car elle est maintenant gérée par une page dédiée -->
+
+    <script>
+        // Fonctions pour gérer les interactions utilisateur
+        
+        // Initialisation de DataTables
+        $(document).ready(function() {
+            var table = $('#usersTable').DataTable({
+                language: {
+                    search: 'Rechercher :',
+                    lengthMenu: 'Afficher _MENU_ éléments',
+                    info: 'Affichage de _START_ à _END_ sur _TOTAL_ éléments',
+                    infoEmpty: 'Aucun élément à afficher',
+                    infoFiltered: '(filtré sur _MAX_ éléments au total)',
+                    paginate: {
+                        first: 'Premier',
+                        last: 'Dernier',
+                        next: 'Suivant',
+                        previous: 'Précédent'
+                    },
+                    emptyTable: 'Aucune donnée disponible dans le tableau',
+                    zeroRecords: 'Aucun enregistrement trouvé',
+                    loadingRecords: 'Chargement...',
+                    processing: 'Traitement...',
+                    searchPlaceholder: 'Rechercher...',
+                    aria: {
+                        sortAscending: ': activer pour trier par ordre croissant',
+                        sortDescending: ': activer pour trier par ordre décroissant'
+                    }
+                },
+                columnDefs: [
+                    { orderable: false, targets: [6] } // Désactiver le tri sur la colonne des actions
+                ]
+            });
+
+            // Gestion du clic sur le bouton Voir
+            $(document).on('click', '.view-user', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                
+                // Rediriger directement vers la page de détail
+                window.location.href = '/utilisateur/view/' + userId;
+            });
+
+            // Gestion du clic sur le bouton Modifier
+            $(document).on('click', '.edit-user', function(e) {
+                e.preventDefault();
+                var userId = $(this).data('user-id');
+                window.location.href = '/utilisateur/edit/' + userId;
+            });
+                            
+            // Gestion du basculement de l'état actif/inactif d'un utilisateur
+            $(document).on('click', '.toggle-status', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                var userId = button.data('user-id');
+                var userName = button.data('user-name');
+                var currentStatus = parseInt(button.data('user-status'));
+                var newStatus = currentStatus ? 0 : 1;
+                var actionText = newStatus ? 'activer' : 'désactiver';
+                
+                console.log('Bouton cliqué - ID:', userId, 'Statut actuel:', currentStatus, 'Nouveau statut:', newStatus);
+                
+                Swal.fire({
+                    title: 'Confirmer',
+                    text: 'Êtes-vous sûr de vouloir ' + actionText + ' l\'utilisateur "' + userName + '" ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, ' + actionText,
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Afficher un indicateur de chargement
+                        Swal.fire({
+                            title: 'Traitement en cours...',
+                            text: 'Veuillez patienter',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        
+                        // Envoyer la requête AJAX simplifiée
+                        $.ajax({
+                            url: '/utilisateur/toggle-status/' + userId,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function(response) {
+                                console.log('Réponse du serveur:', response);
+                                if (response.success) {
+                                    // Mettre à jour l'interface utilisateur
+                                    var statusBadge = button.closest('tr').find('.status-badge');
+                                    var statusText = response.est_actif ? 'Actif' : 'Inactif';
+                                    var statusClass = response.est_actif ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                                    
+                                    // Mettre à jour le badge de statut
+                                    statusBadge.removeClass('bg-red-100 bg-green-100 text-red-800 text-green-800')
+                                              .addClass(statusClass)
+                                              .text(statusText);
+                                    
+                                    // Mettre à jour le bouton
+                                    button.data('user-status', response.est_actif ? 1 : 0);
+                                    button.removeClass('bg-yellow-500 bg-green-500 hover:bg-yellow-600 hover:bg-green-600');
+                                    
+                                    if (response.est_actif) {
+                                        button.addClass('bg-yellow-500 hover:bg-yellow-600');
+                                        button.find('i').removeClass('fa-user-check').addClass('fa-user-slash');
+                                        button.attr('title', 'Désactiver l\'utilisateur');
+                                    } else {
+                                        button.addClass('bg-green-500 hover:bg-green-600');
+                                        button.find('i').removeClass('fa-user-slash').addClass('fa-user-check');
+                                        button.attr('title', 'Activer l\'utilisateur');
+                                    }
+                                    
+                                    // Afficher un message de succès
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Succès',
+                                        text: response.message,
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    });
+                                } else {
+                                    // Afficher un message d'erreur
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Erreur',
+                                        text: response.message || 'Une erreur est survenue lors de la mise à jour du statut de l\'utilisateur'
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Erreur AJAX:', error, 'Status:', status, 'Response:', xhr.responseText);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erreur',
+                                    text: 'Une erreur est survenue lors de la communication avec le serveur: ' + (xhr.responseJSON?.message || error)
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Afficher les messages flash
+            <?php if (isset($_SESSION['success'])): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Succès',
+                    text: '<?= addslashes($_SESSION['success']) ?>',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['success']); ?>
+            <?php endif; ?>
+            
+            <?php if (isset($_SESSION['error'])): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: '<?= addslashes($_SESSION['error']) ?>',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
+        });
+        
+        // Fonction pour ouvrir le modal d'édition
+        function openEditModal(userId) {
+            // Afficher l'indicateur de chargement
+            const modal = document.getElementById('editUserModal');
+            modal.classList.remove('hidden');
+            
+            // Récupérer les informations de l'utilisateur
+            fetch(`/api/user/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const user = data.user;
+                        document.getElementById('editUserId').value = userId;
+                        document.getElementById('editNom').value = user.nom_utilisateur || '';
+                        document.getElementById('editPrenom').value = user.prenom || '';
+                        document.getElementById('editEmail').value = user.courriel || '';
+                        document.getElementById('editTelephone').value = user.telephone || '';
+                        
+                        // Mettre à jour le titre du modal
+                        document.getElementById('editUserModalTitle').textContent = `Modifier ${user.prenom} ${user.nom_utilisateur}`;
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erreur',
+                            text: 'Erreur lors du chargement des informations de l\'utilisateur',
+                            confirmButtonText: 'OK'
+                        });
+                        closeEditModal();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: 'Une erreur est survenue lors du chargement des informations',
+                        confirmButtonText: 'OK'
+                    });
+                    closeEditModal();
+                });
+        }
+
+    // Fonction pour fermer le modal d'édition
+    function closeEditModal() {
+        document.getElementById('editUserModal').classList.add('hidden');
+    }
+
+    // Gestionnaire d'événement pour le bouton Enregistrer
+    document.getElementById('saveUserBtn').addEventListener('click', function() {
+        const userId = document.getElementById('editUserId').value;
+        const userData = {
+            nom: document.getElementById('editNom').value,
+            prenom: document.getElementById('editPrenom').value,
+            courriel: document.getElementById('editEmail').value,
+            telephone: document.getElementById('editTelephone').value
+        };
+        
+        // Afficher un indicateur de chargement
+        const saveBtn = this;
+        const originalText = saveBtn.textContent;
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement...';
+        
+        // Envoyer les données mises à jour au serveur
+        fetch(`/api/user/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Afficher un message de succès
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Succès',
+                    text: data.message || 'Informations mises à jour avec succès',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                
+                // Fermer le modal
+                closeEditModal();
+                
+                // Recharger la page pour afficher les modifications
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                throw new Error(data.message || 'Erreur lors de la mise à jour');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: error.message || 'Une erreur est survenue lors de la mise à jour des informations',
+                confirmButtonText: 'OK'
+            });
+        })
+        .finally(() => {
+            saveBtn.disabled = false;
+            saveBtn.textContent = originalText;
+        });
+    });
+
+    // Gestionnaire d'événement pour le bouton Annuler
+    document.getElementById('closeEditModalBtn').addEventListener('click', closeEditModal);
+
+    // Fermer le modal en cliquant en dehors de celui-ci
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('editUserModal');
+        if (event.target === modal) {
+            closeEditModal();
+        }
+    });

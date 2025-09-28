@@ -14,10 +14,43 @@ class UserControlleur {
     }
     public function index() {
         try {
-            $users = $this->userModel->getAllUsers();
-            require __DIR__ . '/../vue/users.php';
+            // Récupérer les utilisateurs avec leurs commandes
+            $users = $this->userModel->getUsersWithOrders();
+            
+            // Préparer les données pour la vue
+            $usersData = [];
+            foreach ($users as $user) {
+                $userData = [
+                    'id_utilisateur' => $user['id_utilisateur'],
+                    'nom_utilisateur' => $user['nom_utilisateur'],
+                    'prenom' => $user['prenom'],
+                    'couriel' => $user['couriel'],
+                    'telephone' => $user['telephone'],
+                    'statut' => $user['statut'],
+                    'nb_commandes' => count($user['commandes'] ?? []),
+                    'derniere_commande' => null,
+                    'montant_total' => 0
+                ];
+                
+                // Calculer le montant total et la dernière commande
+                if (!empty($user['commandes'])) {
+                    $userData['derniere_commande'] = $user['commandes'][0]['date_commande'] ?? null;
+                    foreach ($user['commandes'] as $commande) {
+                        $userData['montant_total'] += (float)($commande['prix_total'] ?? 0);
+                    }
+                }
+                
+                $usersData[] = $userData;
+            }
+            
+            // Rendre les données disponibles pour la vue
+            $GLOBALS['usersData'] = $usersData;
+            
+            // Inclure la vue
+            require __DIR__ . '/../Vue/users.php';
         } catch (\Exception $e) {
-            echo "Erreur lors de la récupération des utilisateurs : " . $e->getMessage();
+            error_log("Erreur dans UserControlleur::index(): " . $e->getMessage());
+            throw new \Exception("Impossible de récupérer les utilisateurs. Veuillez réessayer plus tard.");
         }
     }
 

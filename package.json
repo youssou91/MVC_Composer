@@ -1,0 +1,14 @@
+{
+  "name": "one-shop",
+  "version": "1.0.0",
+  "description": "E-commerce One-Shop",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/assets/css/app.css -o ./public/assets/css/app.css --watch",
+    "build": "npx tailwindcss -i ./src/assets/css/app.css -o ./public/assets/css/app.css --minify"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
+  }
+}

@@ -27,26 +27,30 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <!-- Navigation -->
             <nav id="nav-menu" class="hidden md:flex space-x-6">
-                <a href="<?= $router->generate('accueil'); ?>" class="text-gray-700 hover:text-blue-600">Accueil</a>
-                <a href="<?= $router->generate('contacter'); ?>" class="text-gray-700 hover:text-blue-600">Contact</a>
+                <?php 
+                // Récupérer le routeur depuis les variables globales
+                $router = $GLOBALS['router'] ?? null;
+                ?>
+                <a href="<?= $router ? $router->generate('accueil') : '/' ?>" class="text-gray-700 hover:text-blue-600">Accueil</a>
+                <a href="<?= $router ? $router->generate('contacter') : '/contact' ?>" class="text-gray-700 hover:text-blue-600">Contact</a>
 
                 <!-- Menu Admin -->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <a href="<?= $router->generate('produits'); ?>" class="text-gray-700 hover:text-blue-600">Produits</a>
-                    <a href="<?= $router->generate('utilisateurs'); ?>" class="text-gray-700 hover:text-blue-600">Utilisateurs</a>
-                    <a href="<?= $router->generate('commandes'); ?>" class="text-gray-700 hover:text-blue-600">Commandes</a>
-                    <a href="<?= $router->generate('promotions'); ?>" class="text-gray-700 hover:text-blue-600">Promotions</a>
+                    <a href="<?= $router ? $router->generate('produits') : '/produits' ?>" class="text-gray-700 hover:text-blue-600">Produits</a>
+                    <a href="<?= $router ? $router->generate('utilisateurs') : '/utilisateurs' ?>" class="text-gray-700 hover:text-blue-600">Utilisateurs</a>
+                    <a href="<?= $router ? $router->generate('commandes') : '/commandes' ?>" class="text-gray-700 hover:text-blue-600">Commandes</a>
+                    <a href="<?= $router ? $router->generate('promotions') : '/promotions' ?>" class="text-gray-700 hover:text-blue-600">Promotions</a>
                 <?php endif; ?>
             </nav>
 
             <!-- User Links -->
             <div class="hidden md:flex space-x-4">
                 <?php if (isset($_SESSION['id_utilisateur'])): ?>
-                    <a href="<?= $router->generate('profile'); ?>" class="text-gray-700 hover:text-blue-600">Mon Profil</a>
-                    <a href="<?= $router->generate('deconnexion'); ?>" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Déconnexion</a>
+                    <a href="<?= $router ? $router->generate('profile') : '/profile' ?>" class="text-gray-700 hover:text-blue-600">Mon Profil</a>
+                    <a href="<?= $router ? $router->generate('deconnexion') : '/logout' ?>" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Déconnexion</a>
                 <?php else: ?>
-                    <a href="<?= $router->generate('connexion'); ?>" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Connexion</a>
-                    <a href="<?= $router->generate('inscription'); ?>" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Inscription</a>
+                    <a href="<?= $router ? $router->generate('connexion') : '/login' ?>" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Connexion</a>
+                    <a href="<?= $router ? $router->generate('inscription') : '/register' ?>" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Inscription</a>
                 <?php endif; ?>
             </div>
         </div>

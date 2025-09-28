@@ -109,15 +109,18 @@ $router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajo
 $router->map('POST', '/produits/supprimer/[i:id]', function($id) {
     (new HomeControlleur())->gererPanier($id);
 }, 'supprimerProduitPanier');
-$router->map('POST', '/produits/supprimer', function() {
+
+$router->map('POST', '/panier/vider', function() {
     (new HomeControlleur())->gererPanier();
 }, 'viderPanier');
 
 // Routes pour les commandes
 $router->map('GET', '/commandes', 'CommandeControlleur::index', 'commandes');
-$router->map('POST', '/commande', 'CommandeControlleur::ajouterCommande', 'commande');
-$router->map('GET|POST', '/commande/editer/id_commande=[i:id_commande]/action=[a:action]', 'CommandeControlleur::modifierCommande', 'editerCommande');
-
+$router->map('GET', '/commande/[i:id]', 'CommandeControlleur::afficherCommande', 'commande_detail');
+$router->map('POST', '/commande/ajouter', 'CommandeControlleur::ajouterCommande');
+$router->map('POST', '/commande/[i:id_commande]/modifier/[a:action]', 'CommandeControlleur::modifierCommande', 'modifier_commande');
+$router->map('GET', '/admin/commandes/utilisateur/[i:user_id]', 'CommandeControlleur::adminCommandesUtilisateur', 'admin_commandes_utilisateur');
+$router->map('GET', '/utilisateur/[i:user_id]/commandes', 'CommandeControlleur::utilisateurCommandes', 'utilisateur_commandes');
 
 // Routes pour le panier
 $router->map('POST', '/cart/ajouter', 'CartControlleur::ajouter');
@@ -146,8 +149,107 @@ $router->map('GET', '/profile/details/[i:id_commande]', 'ProfileControlleur::get
 $router->map('GET', '/profile/annuler/[i:id_commande]', 'ProfileControlleur::changeOrderStatus', 'annuler');
 //utilisateurs
 
-$router->map('GET', '/users', 'ProfileControlleur::indexUsers', 'users');
+// User routes - French and English versions
+$router->map('GET', '/users', 'UserControlleur::index', 'users');
+
+// Single user routes
+$router->map('GET', '/utilisateur/[i:id]', 'ProfileControlleur::showUser', 'show_user');
+$router->map('GET', '/utilisateur/[i:id]/commandes', 'ProfileControlleur::userOrders', 'user_orders');
+
+// User edit routes
 $router->map('POST', '/user/edit/[i:id]', 'ProfileControlleur::updateUser', 'update_user');
+$router->map('GET', '/utilisateur/[i:id]/modifier', 'ProfileControlleur::editUserForm', 'edit_user_form');
+
+// API Routes
+$router->map('GET', '/api/utilisateur/[i:id]/commandes', function($id) use ($pdo) {
+    // Désactiver l'affichage des erreurs pour éviter toute sortie non désirée
+    ini_set('display_errors', 0);
+    error_reporting(0);
+    
+    // Fonction pour envoyer une réponse JSON
+    $sendJsonResponse = function($data, $statusCode = 200, $error = null) {
+        $response = [
+            'success' => $statusCode >= 200 && $statusCode < 300,
+            'data' => $data
+        ];
+        
+        if ($error !== null) {
+            $response['error'] = $error;
+        }
+        
+        http_response_code($statusCode);
+        header('Content-Type: application/json');
+        header('Cache-Control: no-cache, no-store, must-revalidate');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        
+        // S'assurer que les données sont encodées en UTF-8
+        if (is_array($response['data'])) {
+            array_walk_recursive($response['data'], function(&$item) {
+                if (is_string($item)) {
+                    $item = mb_convert_encoding($item, 'UTF-8', 'UTF-8');
+                }
+            });
+        }
+        
+        $json = json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        
+        // Vérifier les erreurs d'encodage JSON
+        if ($json === false) {
+            $json = json_encode([
+                'success' => false,
+                'error' => 'Erreur lors de l\'encodage JSON: ' . json_last_error_msg()
+            ]);
+            http_response_code(500);
+        }
+        
+        echo $json;
+        exit;
+    };
+    
+    // Vérifier que l'ID est valide
+    if (!is_numeric($id) || $id <= 0) {
+        $sendJsonResponse([], 400, 'ID utilisateur invalide');
+    }
+    
+    try {
+        // Vérifier la connexion à la base de données
+        if (!($pdo instanceof PDO)) {
+            throw new Exception("La connexion à la base de données a échoué");
+        }
+        
+        // Initialiser le modèle de commande
+        $commandeModel = new App\Modele\CommandeModel($pdo);
+        
+        // Récupérer les commandes
+        $commandes = $commandeModel->getCommandesByUser($id);
+        
+        // Formater les données de réponse
+        $formattedCommandes = [];
+        foreach ($commandes as $commande) {
+            $formattedCommandes[] = [
+                'id_commande' => (int)$commande['id_commande'],
+                'id_utilisateur' => (int)$commande['id_utilisateur'],
+                'date_commande' => $commande['date_commande'],
+                'prix_total' => (float)$commande['prix_total'],
+                'statut' => $commande['statut']
+            ];
+        }
+        
+        // Envoyer la réponse
+        $sendJsonResponse($formattedCommandes);
+        
+    } catch (PDOException $e) {
+        error_log("Erreur PDO dans l'API commandes: " . $e->getMessage());
+        $sendJsonResponse([], 500, 'Erreur de base de données');
+    } catch (Exception $e) {
+        error_log("Erreur dans l'API commandes: " . $e->getMessage());
+        $sendJsonResponse([], 500, 'Erreur interne du serveur');
+    }
+    
+    // Si on arrive ici, c'est qu'aucune réponse n'a été envoyée
+    $sendJsonResponse([], 500, 'Erreur inattendue');
+});
 
 
 
@@ -174,8 +276,12 @@ ini_set('display_errors', 1);
 $match = $router->match();
 
 // Vérifier si une route correspond
+// Rendre le routeur disponible globalement avant d'inclure le header
+$GLOBALS['router'] = $router;
+
 try {
     if ($match) {
+        // Inclure le header maintenant que le routeur est disponible globalement
         require '../static/header.php';
         if (is_callable($match['target'])) {
             call_user_func_array($match['target'], $match['params']);
