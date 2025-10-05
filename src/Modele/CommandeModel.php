@@ -44,10 +44,47 @@ class CommandeModel {
     
     public function getCommandeById($id_commande) {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM commande WHERE id_commande = :id_commande");
+            // Récupérer les informations de base de la commande
+            $stmt = $this->pdo->prepare(
+                "SELECT c.*, u.nom_utilisateur, u.prenom, u.telephone, u.couriel as email,
+                        a.rue, a.ville, a.code_postal, a.pays, a.numero 
+                 FROM commande c 
+                 INNER JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur 
+                 LEFT JOIN utilisateur_adresse ua ON u.id_utilisateur = ua.id_utilisateur
+                 LEFT JOIN adresse a ON ua.id_adresse = a.id_adresse
+                 WHERE c.id_commande = :id_commande"
+            );
             $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $commande = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$commande) {
+                return null;
+            }
+            
+            // Récupérer les articles de la commande
+            $stmt = $this->pdo->prepare(
+                "SELECT pc.*, p.nom as nom_produit, p.prix_unitaire as prix, p.chemin_image as image 
+                 FROM produit_commande pc 
+                 INNER JOIN produits p ON pc.id_produit = p.id_produit 
+                 WHERE pc.id_commande = :id_commande"
+            );
+            $stmt->bindParam(':id_commande', $id_commande, PDO::PARAM_INT);
+            $stmt->execute();
+            $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Calculer le sous-total
+            $sousTotal = array_reduce($articles, function($carry, $item) {
+                return $carry + ($item['prix'] * $item['quantite']);
+            }, 0);
+            
+            // Ajouter les articles et le sous-total à la commande
+            $commande['articles'] = $articles;
+            $commande['sous_total'] = $sousTotal;
+            $commande['frais_livraison'] = $commande['frais_livraison'] ?? 0;
+            $commande['total'] = $sousTotal + $commande['frais_livraison'];
+            
+            return $commande;
         } catch (PDOException $e) {
             throw new PDOException("Erreur lors de la récupération de la commande avec ID $id_commande : " . $e->getMessage());
         }
