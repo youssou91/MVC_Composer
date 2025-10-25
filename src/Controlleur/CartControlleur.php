@@ -2,54 +2,94 @@
 
 namespace App\Controlleur;
 
-use App\Modele\CartModel;
-
 class CartControlleur
 {
-    private $cartModel;
-
-    public function __construct(CartModel $cartModel)
+    public function __construct()
     {
-        $this->cartModel = $cartModel;
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     public function ajouter()
     {
         // Récupération des données POST
-        $produitId = $_POST['produit_id'] ?? null;
+        $produitId = $_POST['id_produit'] ?? null;
         $quantite = $_POST['quantite'] ?? 1;
-        $userId = $_SESSION['user_id'] ?? null; // Assurez-vous que l'utilisateur est connecté
-
-        if ($produitId && $userId) {
-            $this->cartModel->ajouterAuPanier($produitId, $quantite, $userId);
-            echo "Produit ajouté au panier.";
-        } else {
-            http_response_code(400);
-            echo "Erreur : Produit ou utilisateur manquant.";
+        $nom = $_POST['nom'] ?? '';
+        $prix = $_POST['prix_unitaire'] ?? 0;
+        $prixReduit = $_POST['prix_reduit'] ?? $prix;
+        
+        // Initialiser le panier s'il n'existe pas
+        if (!isset($_SESSION['panier'])) {
+            $_SESSION['panier'] = [];
         }
+        
+        // Ajouter ou mettre à jour le produit dans le panier
+        if ($produitId) {
+            if (isset($_SESSION['panier'][$produitId])) {
+                // Si le produit est déjà dans le panier, mettre à jour la quantité
+                $_SESSION['panier'][$produitId]['quantite'] += $quantite;
+            } else {
+                // Sinon, ajouter le produit au panier
+                $_SESSION['panier'][$produitId] = [
+                    'id_produit' => $produitId,
+                    'nom' => $nom,
+                    'prix_unitaire' => $prix,
+                    'prix_reduit' => $prixReduit,
+                    'quantite' => $quantite
+                ];
+            }
+            
+            $_SESSION['message'] = "Le produit a été ajouté au panier.";
+        } else {
+            $_SESSION['erreur'] = "Impossible d'ajouter le produit au panier.";
+        }
+        
+        // Rediriger vers la page précédente
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
     }
 
-    public function afficher()
+   
+
+    public function supprimerDuPanier($params)
     {
-        $userId = $_SESSION['user_id'] ?? null;
-        if ($userId) {
-            $panier = $this->cartModel->obtenirPanierParUtilisateur($userId);
-            require '../src/vue/vue_panier.php'; 
+        $produitId = $params['id_produit'] ?? null;
+        
+        if ($produitId && isset($_SESSION['panier'][$produitId])) {
+            unset($_SESSION['panier'][$produitId]);
+            $_SESSION['message'] = "Le produit a été retiré du panier.";
         } else {
-            http_response_code(403);
-            echo "Veuillez vous connecter pour accéder à votre panier.";
+            $_SESSION['erreur'] = "Impossible de retirer le produit du panier.";
         }
+        
+        // Rediriger vers la page précédente
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
     }
-
+    
     public function vider()
     {
-        $userId = $_SESSION['user_id'] ?? null;
-        if ($userId) {
-            $this->cartModel->viderPanier($userId);
-            echo "Panier vidé.";
-        } else {
-            http_response_code(403);
-            echo "Veuillez vous connecter pour vider votre panier.";
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['id_utilisateur'])) {
+            $_SESSION['erreur'] = "Veuillez vous connecter pour vider votre panier.";
+            header('Location: /connexion');
+            exit();
         }
+        
+        // Vider le panier
+        if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+            $_SESSION['panier'] = [];
+            $_SESSION['message'] = "Le panier a été vidé avec succès.";
+        } else {
+            $_SESSION['erreur'] = "Le panier est déjà vide.";
+        }
+        
+        // Rediriger vers la page précédente ou la page d'accueil
+        $redirectUrl = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+        header('Location: ' . $redirectUrl);
+        exit();
     }
 }

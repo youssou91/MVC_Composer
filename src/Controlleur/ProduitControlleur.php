@@ -17,7 +17,19 @@ class ProduitControlleur {
     }
 
     public function index() {
-        $produits = $this->produitModel->getAllProduits();
+        // Pagination
+        $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $perPage = 10; // Nombre d'éléments par page
+        
+        // Récupérer le nombre total de produits
+        $totalProduits = count($this->produitModel->getAllProduits());
+        $totalPages = ceil($totalProduits / $perPage);
+        $offset = ($page - 1) * $perPage;
+        
+        // Récupérer uniquement les produits pour la page courante
+        $produits = $this->produitModel->getProduitsPagination($offset, $perPage);
+        
+        // Passer les variables de pagination à la vue
         require __DIR__ . '/../vue/Produits.php';
     }
 

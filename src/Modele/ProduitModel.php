@@ -15,6 +15,14 @@ class ProduitModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getProduitsPagination($offset, $limit) {
+        $stmt = $this->pdo->prepare("SELECT * FROM produits LIMIT :offset, :limit");
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getProduitById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM produits WHERE id_produit = :id");
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -128,8 +136,7 @@ class ProduitModel {
         return null; // Retourne null en cas d'échec
     }
     
-    public  function getTousLesProduitsAvecPromotions() {
-        global $connect; 
+    public function getTousLesProduitsAvecPromotions() {
         $query = "
             SELECT 
                 p.id_produit,
@@ -139,19 +146,20 @@ class ProduitModel {
                 p.chemin_image,
                 p.description,
                 p.couleurs,
-                MAX(pr.valeur) AS promo_valeur, -- Prendre la valeur maximale de la promotion
-                MAX(pr.type) AS promo_type      -- Prendre le type de promotion correspondant
+                MAX(pr.valeur) AS promo_valeur,
+                MAX(pr.type) AS promo_type
             FROM Produits p
             LEFT JOIN ProduitPromotion pp ON p.id_produit = pp.id_produit
             LEFT JOIN Promotions pr ON pp.id_promotion = pr.id_promotion
             WHERE p.quantite > 0
             AND (pr.id_promotion IS NULL OR (pr.date_debut <= CURDATE() AND pr.date_fin >= CURDATE()))
-            GROUP BY p.id_produit, p.nom, p.prix_unitaire, p.quantite;
-
+            GROUP BY p.id_produit, p.nom, p.prix_unitaire, p.quantite, p.chemin_image, p.description, p.couleurs
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        error_log('Produits avec promotions: ' . print_r($result, true));
+        return $result;
     
     }
 

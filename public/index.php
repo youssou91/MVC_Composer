@@ -132,9 +132,12 @@ $router->map('POST', '/produits/ajouterProduit', 'ProduitControlleur::ajouterPro
 $router->map('GET', '/produits/modifierProduit=[i:id]', 'ProduitControlleur::recupererProduit', 'modifier');
 $router->map('POST', '/produits/editerProduit/[i:id_produit]', 'ProduitControlleur::updateProduits', 'editer');
 
-$router->map('GET', '/produits/supprimer=[i:id]', 'ProduitControlleur::supprimerProduit', 'supprimer');
+// Routes du panier
+$router->map('POST', '/panier/ajouter', 'CartControlleur::ajouter', 'ajouter_au_panier');
+$router->map('POST', '/panier/supprimer/[i:id_produit]', 'CartControlleur::supprimerDuPanier', 'supprimer_du_panier');
+$router->map('POST', '/panier/vider', 'CartControlleur::vider', 'vider_panier');
+$router->map('GET', '/panier', 'CartControlleur::afficher', 'afficher_panier');
 // Routage pour l'action d'ajout de produit au panier
-$router->map('POST', '/produits/panier', 'HomeControlleur::ajouterProduit', 'ajouterProduitPanier');
 $router->map('POST', '/produits/supprimer/[i:id]', function($id) {
     (new HomeControlleur())->gererPanier($id);
 }, 'supprimerProduitPanier');
@@ -151,10 +154,6 @@ $router->map('POST', '/commande/[i:id_commande]/modifier/[a:action]', 'CommandeC
 $router->map('GET', '/admin/commandes/utilisateur/[i:user_id]', 'CommandeControlleur::adminCommandesUtilisateur', 'admin_commandes_utilisateur');
 $router->map('GET', '/utilisateur/[i:user_id]/commandes', 'CommandeControlleur::utilisateurCommandes', 'utilisateur_commandes');
 
-// Routes pour le panier
-$router->map('POST', '/cart/ajouter', 'CartControlleur::ajouter');
-$router->map('GET', '/cart', 'CartControlleur::afficher');
-$router->map('POST', '/cart/vider', 'CartControlleur::vider');
 
 // Routes d'authentification
 $router->map('GET|POST', '/login', 'AuthControlleur::loginForm', 'connexion');

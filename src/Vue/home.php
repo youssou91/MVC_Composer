@@ -4,6 +4,12 @@
     $produits = $produits ?? []; 
     $totalPanier = 0; 
     $quantiteTotale = 0;
+    
+    // Variables de pagination (définies par défaut si non fournies par le contrôleur)
+    $page = isset($pagination) ? $pagination['page'] : (isset($_GET['page']) ? (int)$_GET['page'] : 1);
+    $totalPages = isset($pagination) ? $pagination['totalPages'] : 1;
+    $totalProduits = isset($pagination) ? $pagination['totalProduits'] : count($produits);
+    $perPage = isset($pagination) ? $pagination['perPage'] : 8;
     // Regroupement des produits par ID et addition des quantités
     $panierRegroupe = $_SESSION['panier'] ?? [];
     
@@ -53,11 +59,7 @@
                                 <td class="border px-4 py-2"><?= number_format($prixUnitaireProduit, 2) ?> $</td>
                                 <td class="border px-4 py-2"><?= number_format($prixTotalProduit, 2) ?> $</td>
                                 <td class="border px-4 py-2">
-                                    <!-- <form method="POST"  action="/produits/panier"> -->
-                                    <form method="POST"  action="/produits/supprimer/<?= $id ?>" >
-
-                                        <input type="hidden" name="id_produit" value="<?= $id ?>">
-                                        <input type="hidden" name="action" value="supprimer">
+                                    <form method="POST" action="/produits/supprimer/<?= $id_produit ?>" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit du panier ?');">
                                         <button type="submit" class="text-red-500 hover:text-red-700">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
@@ -78,16 +80,15 @@
                         </tfoot>
                     </table>
                     <div class="flex justify-between space-x-4 mt-4">
-                        <form method="POST" action="/produits/supprimer" class="w-1/4">
-                            <input type="hidden" name="action" value="vider">
+                        <form method="POST" action="/panier/vider" class="w-1/4" onsubmit="return confirm('Êtes-vous sûr de vouloir vider complètement votre panier ?');">
                             <button type="submit" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md w-full h-12 flex items-center justify-center">
-                                <i class="fas fa-trash mr-2"></i> 
+                                <i class="fas fa-trash mr-2"></i> Vider le panier
                             </button>
                         </form>
                         <?php if ($utilisateurEstConnecte): 
                             $utilisateurId = $_SESSION['id_utilisateur']; 
                         ?>
-                            <form method="POST" action="/commande" class="w-1/4">
+                            <form method="POST" action="/commande/ajouter" class="w-1/4">
                                 <input type="hidden" name="id_utilisateur" value="<?= $utilisateurId ?? '' ?>">
                                 <input type="hidden" name="prix_total" value="<?= $totalPanier ?>">
                                 <?php foreach ($_SESSION['panier'] as $id => $produit): ?>
@@ -112,9 +113,8 @@
             </div>
             <!-- Section des Produits -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
-                <?php
-                    if (!empty($produits)): ?>
-                        <?php foreach ($produits as $produit): ?>
+                <?php if (!empty($produits)): ?>
+                    <?php foreach ($produits as $produit): ?>
                             <?php
                                 $idProduit = $produit['id_produit'];
                                 $nom = htmlspecialchars($produit['nom'] ?? 'Nom indisponible');
@@ -145,7 +145,7 @@
                                         <?= number_format($prix, 2) ?> $
                                     <?php endif; ?>
                                 </p>
-                                <form method="POST" action="/produits/panier">
+                                <form method="POST" action="/panier/ajouter">
                                     <input type="hidden" name="id_produit" value="<?= $idProduit ?>">
                                     <input type="hidden" name="nom" value="<?= $nom ?>">
                                     <input type="hidden" name="prix_unitaire" value="<?= $prix ?>">
@@ -242,6 +242,55 @@
                     <?php endif;
                 ?>
             </div>
+            
+            <!-- Pagination -->
+            <?php if ($totalPages > 1): ?>
+            <div class="flex justify-center mt-8 mb-8">
+                <nav class="flex items-center space-x-2">
+                    <?php if ($page > 1): ?>
+                        <a href="?page=<?= $page - 1 ?>" class="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-50">
+                            Précédent
+                        </a>
+                    <?php endif; ?>
+                    
+                    <?php 
+                    // Afficher jusqu'à 5 numéros de page autour de la page courante
+                    $start = max(1, $page - 2);
+                    $end = min($totalPages, $page + 2);
+                    
+                    // Afficher le premier numéro avec des points de suspension si nécessaire
+                    if ($start > 1): ?>
+                        <a href="?page=1" class="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-50">1</a>
+                        <?php if ($start > 2): ?>
+                            <span class="px-2">...</span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    
+                    <?php // Afficher les numéros de page
+                    for ($i = $start; $i <= $end; $i++): ?>
+                        <a href="?page=<?= $i ?>" class="px-4 py-2 border rounded-md <?= $i === $page ? 'bg-blue-600 text-white' : 'text-blue-600 hover:bg-blue-50' ?>">
+                            <?= $i ?>
+                        </a>
+                    <?php endfor; ?>
+                    
+                    <?php // Afficher le dernier numéro avec des points de suspension si nécessaire
+                    if ($end < $totalPages): ?>
+                        <?php if ($end < $totalPages - 1): ?>
+                            <span class="px-2">...</span>
+                        <?php endif; ?>
+                        <a href="?page=<?= $totalPages ?>" class="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-50">
+                            <?= $totalPages ?>
+                        </a>
+                    <?php endif; ?>
+                    
+                    <?php if ($page < $totalPages): ?>
+                        <a href="?page=<?= $page + 1 ?>" class="px-4 py-2 border rounded-md text-blue-600 hover:bg-blue-50">
+                            Suivant
+                        </a>
+                    <?php endif; ?>
+                </nav>
+            </div>
+            <?php endif; ?>
         </div> 
     </body>
     <script>

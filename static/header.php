@@ -46,7 +46,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <!-- User Links -->
             <div class="hidden md:flex space-x-4">
                 <?php if (isset($_SESSION['id_utilisateur'])): ?>
-                    <a href="<?= $router ? $router->generate('profile') : '/profile' ?>" class="text-gray-700 hover:text-blue-600">Mon Profil</a>
+                    <a href="<?= $router ? $router->generate('profile') : '/profile' ?>" class="text-gray-700 hover:text-blue-600">
+                        <!-- Afficher le nom de l'utilisateur (son profil) -->
+                         <?= $_SESSION['nom_utilisateur'] ?> (<?= $_SESSION['role'] ?>)
+                    </a>
                     <a href="<?= $router ? $router->generate('deconnexion') : '/logout' ?>" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Déconnexion</a>
                 <?php else: ?>
                     <a href="<?= $router ? $router->generate('connexion') : '/login' ?>" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Connexion</a>

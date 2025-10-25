@@ -2,15 +2,26 @@
 use App\Controlleur\ProduitControlleur;
 use App\Modele\ProduitModel; 
 use App\Modele\CategorieModel;
-use AltoRouter\Router;
+
 $db = getConnection(); 
 $produitModel = new ProduitModel($db); 
 $categorieModel = new CategorieModel($db);
 $produitsController = new ProduitControlleur($produitModel, $categorieModel);
-$produits = $produitsController->afficherProduits();
-$utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
 
-$index = 1;
+// Récupération des variables de pagination
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$perPage = 10; // Doit correspondre à la valeur dans le contrôleur
+$totalProduits = count($produitModel->getAllProduits());
+$totalPages = ceil($totalProduits / $perPage);
+
+// Récupération des produits pour la page courante
+$offset = ($page - 1) * $perPage;
+$produits = $produitModel->getProduitsPagination($offset, $perPage);
+
+$utilisateurEstConnecte = isset($_SESSION['id_utilisateur']) && !empty($_SESSION['id_utilisateur']);
+$index = ($page - 1) * $perPage + 1; // Pour la numérotation continue des lignes
+
+// Fermeture de la connexion
 $db = null;
 ?>
 <!DOCTYPE html>
@@ -110,8 +121,50 @@ $db = null;
                         </tbody>
                     </table>
                 </div>
+                
+                <!-- Pagination -->
+                <?php if ($totalPages > 1): ?>
+                <div class="flex justify-center mt-8">
+                    <nav class="flex items-center space-x-2">
+                        <!-- Bouton Précédent -->
+                        <?php if ($page > 1): ?>
+                            <a href="?page=<?= $page - 1 ?>" class="px-4 py-2 border rounded-l-lg bg-white text-blue-600 hover:bg-blue-50">
+                                <i class="fas fa-chevron-left"></i> Précédent
+                            </a>
+                        <?php else: ?>
+                            <span class="px-4 py-2 border rounded-l-lg bg-gray-100 text-gray-400 cursor-not-allowed">
+                                <i class="fas fa-chevron-left"></i> Précédent
+                            </span>
+                        <?php endif; ?>
+
+                        <!-- Numéros de page -->
+                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                            <?php if ($i == $page): ?>
+                                <span class="px-4 py-2 border-t border-b border-blue-500 bg-blue-100 text-blue-600 font-medium">
+                                    <?= $i ?>
+                                </span>
+                            <?php else: ?>
+                                <a href="?page=<?= $i ?>" class="px-4 py-2 border-t border-b border-gray-200 bg-white text-gray-600 hover:bg-gray-50">
+                                    <?= $i ?>
+                                </a>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+
+                        <!-- Bouton Suivant -->
+                        <?php if ($page < $totalPages): ?>
+                            <a href="?page=<?= $page + 1 ?>" class="px-4 py-2 border rounded-r-lg bg-white text-blue-600 hover:bg-blue-50">
+                                Suivant <i class="fas fa-chevron-right"></i>
+                            </a>
+                        <?php else: ?>
+                            <span class="px-4 py-2 border rounded-r-lg bg-gray-100 text-gray-400 cursor-not-allowed">
+                                Suivant <i class="fas fa-chevron-right"></i>
+                            </span>
+                        <?php endif; ?>
+                    </nav>
+                </div>
+                <?php endif; ?>
             </div>
-        
+            
             <script>
                 function ouvrirModal(modalId) {
                     document.getElementById(modalId).classList.remove('hidden');
