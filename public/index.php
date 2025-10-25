@@ -323,6 +323,19 @@ ini_set('display_errors', 1);
 // Vérification des routes
 $match = $router->match();
 
+// Afficher les informations de débogage
+error_log("URL demandée: " . $_SERVER['REQUEST_URI']);
+error_log("Méthode HTTP: " . $_SERVER['REQUEST_METHOD']);
+
+// Afficher toutes les routes enregistrées pour le débogage
+error_log("Routes enregistrées:");
+foreach ($router->getRoutes() as $route) {
+    error_log("Route: " . $route[0] . ' ' . $route[1] . ' => ' . (is_string($route[2]) ? $route[2] : 'closure'));
+}
+
+// Afficher le résultat de la correspondance
+error_log("Résultat de la correspondance: " . print_r($match, true));
+
 // Vérifier si une route correspond
 // Rendre le routeur disponible globalement avant d'inclure le header
 $GLOBALS['router'] = $router;
